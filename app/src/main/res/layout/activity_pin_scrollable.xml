@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.duchen.template.usage.PinScrollable.ScrollableLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.duchen.template.usage.PinScrollable.PinScrollableActivity">
+    
+    <ImageView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/head_tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorBG"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</com.duchen.template.usage.PinScrollable.ScrollableLinearLayout>
