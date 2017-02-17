@@ -31,10 +31,10 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
 
     static final String USER_AGENT_KEY_IMEI = "imei";
 
-    public final static int TIMEOUT_1S = 1 * 1000;
-    public final static int TIMEOUT_3S = 3 * 1000;
-    public final static int TIMEOUT_10S = 10 * 1000;
-    public final static int TIMEOUT_15S = 15 * 1000;
+    public final static int TIMEOUT_1S = 1*1000;
+    public final static int TIMEOUT_3S = 3*1000;
+    public final static int TIMEOUT_10S = 10*1000;
+    public final static int TIMEOUT_15S = 15*1000;
 
     private final static int MAX_NUM_RETRY = 1;
 
@@ -55,7 +55,8 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
         this(url, listener, errorListener, timeout, MAX_NUM_RETRY);
     }
 
-    public StudyRequestBase(String url, Listener<T> listener, StudyErrorListener errorListener, int timeout, int maxNumRetry) {
+    public StudyRequestBase(String url, Listener<T> listener, StudyErrorListener errorListener, int timeout, int
+            maxNumRetry) {
         super(Method.POST, RequestUrl.getUrl(url), null);
         setRetryPolicy(new DefaultRetryPolicy(timeout, maxNumRetry, 1f));
         mParser = new LegalModelParser();
@@ -66,8 +67,7 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
     }
 
     @Override
-    protected Response<BaseResponseData> parseNetworkResponse(
-            NetworkResponse response) {
+    protected Response<BaseResponseData> parseNetworkResponse(NetworkResponse response) {
         String parsed;
         try {
             parsed = new String(response.data, "UTF-8");
@@ -91,7 +91,8 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
             }
 
             if (brd.code != 0) {
-                return Response.error(StudyErrorFactory.create(getSequence(), mUrl, brd.code, brd.message, brd.results));
+                return Response.error(StudyErrorFactory.create(getSequence(), mUrl, brd.code, brd.message, brd
+                        .results));
             } else {
                 if (brd.data == null && !mIsResultAllowNull) {
                     return Response.error(new VolleyError("服务器返回数据为空"));

@@ -1,4 +1,4 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.datahelper;
 
 import android.net.Uri;
 import android.text.TextUtils;

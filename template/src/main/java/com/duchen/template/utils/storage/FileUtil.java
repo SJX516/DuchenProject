@@ -1,9 +1,11 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.storage;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+
+import com.duchen.template.utils.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,7 +40,7 @@ import java.util.Locale;
  */
 public class FileUtil {
 
-    private final static String TAG = "FileUtils";
+    private final static String TAG = "FileUtil";
 
     /**
      * 获取文件大小

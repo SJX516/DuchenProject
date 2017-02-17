@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * 逻辑控制基类
- *
  */
 public abstract class LogicBase implements ILogic, IDataProvider {
 
@@ -77,7 +76,7 @@ public abstract class LogicBase implements ILogic, IDataProvider {
     }
 
     protected void removeId(int id) {
-		mReqIds.remove(id);
+        mReqIds.remove(id);
     }
 
     protected void addReqIds(List<Integer> ids) {
@@ -88,8 +87,8 @@ public abstract class LogicBase implements ILogic, IDataProvider {
     }
 
     protected void removeIds(List<Integer> ids) {
-		if (ids == null || ids.isEmpty()) return;
-		mReqIds.remove(ids);
+        if (ids == null || ids.isEmpty()) return;
+        mReqIds.remove(ids);
     }
 
     protected void removeMessages() {

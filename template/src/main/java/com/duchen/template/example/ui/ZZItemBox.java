@@ -6,12 +6,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.duchen.template.R;
 import com.duchen.template.concept.IBox;
-import com.duchen.template.concept.IViewModel;
-import com.duchen.template.example.ui.model.YYItemData;
 import com.duchen.template.example.ui.model.ZZItemData;
 
 public class ZZItemBox extends FrameLayout implements IBox<ZZItemData> {

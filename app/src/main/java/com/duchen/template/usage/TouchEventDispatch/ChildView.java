@@ -5,11 +5,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.duchen.template.usage.Util.LogUtil;
+import com.duchen.template.utils.LogUtil;
 
-/**
- * Created by netease on 17/1/17.
- */
+
 public class ChildView extends TextView {
 
     private static final int THRESHOLD = 2;
@@ -31,7 +29,7 @@ public class ChildView extends TextView {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         boolean returnVale = super.dispatchTouchEvent(ev);
-        LogUtil.LogD("CHILD dispatchTouchEvent return : " + returnVale);
+        LogUtil.d("CHILD dispatchTouchEvent return : " + returnVale);
         return returnVale;
     }
 
@@ -39,7 +37,7 @@ public class ChildView extends TextView {
     public boolean onTouchEvent(MotionEvent event) {
         boolean returnVale;
         returnVale = true;
-        LogUtil.LogD("CHILD onTouchEvent return : " + returnVale);
+        LogUtil.d("CHILD onTouchEvent return : " + returnVale);
         return returnVale;
     }
 

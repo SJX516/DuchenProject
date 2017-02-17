@@ -1,18 +1,13 @@
 package com.duchen.template.utils;
 
 import android.util.Log;
+import android.view.MotionEvent;
 
 public class LogUtil {
 
-    /**
-     * 数据模型检查TAG
-     */
     public final static String TAG_MODEL_CHECK = "LegalModelCheck";
 
-    /**
-     * 调试TAG
-     */
-    public final static String TAG_DEBUG = "Duchen";
+    public final static String TAG_QUICK = "Duchen";
 
     private static final int VERBOSE = 2; // Log.VERBOSE
     private static final int DEBUG = 3; // Log.DEBUG
@@ -22,6 +17,10 @@ public class LogUtil {
 
     public static void d(String tag, String msg) {
         log(tag, msg, DEBUG);
+    }
+
+    public static void d(String msg) {
+        log(TAG_QUICK, msg, DEBUG);
     }
 
     public static void v(String tag, String msg) {
@@ -65,6 +64,21 @@ public class LogUtil {
             case Log.ERROR:
                 Log.e(tag, msg);
                 break;
+        }
+    }
+
+    public static String eventToString(int action) {
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                return "ACTION_DOWN";
+            case MotionEvent.ACTION_MOVE:
+                return "ACTION_MOVE";
+            case MotionEvent.ACTION_UP:
+                return "ACTION_UP";
+            case MotionEvent.ACTION_CANCEL:
+                return "ACTION_CANCEL";
+            default:
+                return "";
         }
     }
 }

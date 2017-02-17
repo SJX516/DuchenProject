@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * 检查数据模型有效性的数据模型解析类
- *
  */
 public class LegalModelParser extends ModelParser {
 

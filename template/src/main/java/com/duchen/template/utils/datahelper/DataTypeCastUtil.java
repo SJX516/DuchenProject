@@ -1,4 +1,6 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.datahelper;
+
+import com.duchen.template.utils.LogUtil;
 
 /**
  * 数据类型转换帮助类

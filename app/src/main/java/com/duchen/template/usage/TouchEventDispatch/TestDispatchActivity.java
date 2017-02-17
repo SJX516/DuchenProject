@@ -5,8 +5,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.duchen.template.usage.ActivityBase;
-import com.duchen.template.usage.Util.LogUtil;
 import com.duchen.template.usage.R;
+import com.duchen.template.utils.LogUtil;
 
 public class TestDispatchActivity extends ActivityBase {
 
@@ -35,18 +35,18 @@ public class TestDispatchActivity extends ActivityBase {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.LogActivityD("-------------------ACTIVITY dispatchTouchEvent : " + LogUtil.eventToString(ev.getAction()));
+        LogUtil.d("-------------------ACTIVITY dispatchTouchEvent : " + LogUtil.eventToString(ev.getAction()));
         boolean returnVale = super.dispatchTouchEvent(ev);
-        LogUtil.LogActivityD("-------------------ACTIVITY dispatchTouchEvent return : " + returnVale);
-        LogUtil.LogActivityD("--");
-        LogUtil.LogActivityD("--");
+        LogUtil.d("-------------------ACTIVITY dispatchTouchEvent return : " + returnVale);
+        LogUtil.d("--");
+        LogUtil.d("--");
         return returnVale;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         boolean returnVale = true;
-        LogUtil.LogActivityD("ACTIVITY onTouchEvent : " + LogUtil.eventToString(event.getAction()) + "  return : " + returnVale);
+        LogUtil.d("ACTIVITY onTouchEvent : " + LogUtil.eventToString(event.getAction()) + "  return : " + returnVale);
         return returnVale;
     }
 }

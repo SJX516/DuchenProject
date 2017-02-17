@@ -5,7 +5,6 @@ import com.duchen.template.component.request.StudyRequestBase;
 import com.duchen.template.component.request.error.StudyErrorListener;
 import com.duchen.template.example.request.result.LoadDataResult;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LoadDataRequest extends StudyRequestBase<LoadDataResult> {

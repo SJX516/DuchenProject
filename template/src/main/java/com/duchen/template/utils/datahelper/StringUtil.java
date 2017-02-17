@@ -1,4 +1,4 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.datahelper;
 
 import android.text.TextUtils;
 
@@ -6,7 +6,6 @@ import java.util.Vector;
 
 /**
  * 字符串相关工具类
- * Created by hzniqun on 16/3/31.
  */
 public class StringUtil {
 

@@ -3,7 +3,7 @@ package com.duchen.template.example.ui.model;
 import com.duchen.template.concept.IViewModel;
 
 
-public class ZZItemData implements IViewModel{
+public class ZZItemData implements IViewModel {
 
     private String mImageUrl;
 

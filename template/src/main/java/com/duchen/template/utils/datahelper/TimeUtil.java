@@ -1,6 +1,8 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.datahelper;
 
 import android.text.TextUtils;
+
+import com.duchen.template.utils.LogUtil;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,6 +21,42 @@ public class TimeUtil {
 
     public static final long MS_DAY = 86400000l;
     public static final long MS_WEEK = 604800000l;
+
+    static final long DAY = 24*60*60;
+    static final long HOUR = 60*60;
+    static final long MINUTE = 60;
+
+    public static String formatTime(long timestamp) {
+        final long now = System.currentTimeMillis();
+        if (timestamp > 0 && now > timestamp) {
+            long timeGap = (now - timestamp)/1000;
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String[] stampStrs = sdf.format(new Date(timestamp)).split("-");
+            String[] nowStrs = sdf.format(new Date(now)).split("-");
+            boolean sameYear = stampStrs[0].equalsIgnoreCase(nowStrs[0]);
+            boolean sameDay = stampStrs[2].equalsIgnoreCase(nowStrs[2]);
+            timeGap = timeGap > 0 ? timeGap : 0;
+            if (timeGap < MINUTE) {
+                return timeGap + "秒前";
+            } else if (timeGap < HOUR) {
+                return timeGap/60 + "分钟前";
+            } else if (timeGap < DAY) {
+                if (sameDay) {
+                    sdf = new SimpleDateFormat("HH:mm");
+                } else {
+                    sdf = new SimpleDateFormat("昨天HH:mm");
+                }
+                return sdf.format(new Date(timestamp));
+            } else if (sameYear) {
+                sdf = new SimpleDateFormat("MM月dd日");
+                return sdf.format(new Date(timestamp));
+            } else {
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                return sdf.format(new Date(timestamp));
+            }
+        }
+        return "";
+    }
 
     private static DateFormat getInputDateFormat() {
         if (mInputDateFormat == null) {

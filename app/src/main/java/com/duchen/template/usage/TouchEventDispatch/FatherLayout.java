@@ -5,11 +5,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-import com.duchen.template.usage.Util.LogUtil;
+import com.duchen.template.utils.LogUtil;
 
-/**
- * Created by netease on 17/1/17.
- */
+
 public class FatherLayout extends FrameLayout {
 
     private static final int THRESHOLD = 3;
@@ -30,10 +28,10 @@ public class FatherLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.LogD("--------------FATHER dispatchTouchEvent : " + LogUtil.eventToString(ev.getAction()));
+        LogUtil.d("--------------FATHER dispatchTouchEvent : " + LogUtil.eventToString(ev.getAction()));
         boolean returnVale = super.dispatchTouchEvent(ev);
-        LogUtil.LogD("--------------FATHER dispatchTouchEvent return : " + returnVale);
-        LogUtil.LogD("--");
+        LogUtil.d("--------------FATHER dispatchTouchEvent return : " + returnVale);
+        LogUtil.d("--");
         return returnVale;
     }
 
@@ -46,7 +44,7 @@ public class FatherLayout extends FrameLayout {
         } else {
             returnVale = true;
         }
-        LogUtil.LogD("FATHER onInterceptTouchEvent return : " + returnVale);
+        LogUtil.d("FATHER onInterceptTouchEvent return : " + returnVale);
         return returnVale;
     }
 
@@ -54,7 +52,7 @@ public class FatherLayout extends FrameLayout {
     public boolean onTouchEvent(MotionEvent event) {
         boolean returnVale = false;
 
-        LogUtil.LogD("FATHER onTouchEvent return : " + returnVale);
+        LogUtil.d("FATHER onTouchEvent return : " + returnVale);
         return returnVale;
     }
 

@@ -75,7 +75,7 @@ public class SmartBarUtil {
     public static void setActionBarViewCollapsable(ActionBar actionbar, boolean collapsable) {
         try {
             Method method = Class.forName("android.app.ActionBar").getMethod("setActionBarViewCollapsable", new
-					Class[]{boolean.class});
+                    Class[]{boolean.class});
             try {
                 method.invoke(actionbar, collapsable);
             } catch (IllegalArgumentException e) {
@@ -110,7 +110,7 @@ public class SmartBarUtil {
     public static void setActionModeHeaderHidden(ActionBar actionbar, boolean hidden) {
         try {
             Method method = Class.forName("android.app.ActionBar").getMethod("setActionModeHeaderHidden", new
-					Class[]{boolean.class});
+                    Class[]{boolean.class});
             try {
                 method.invoke(actionbar, hidden);
             } catch (IllegalArgumentException e) {
@@ -195,9 +195,6 @@ public class SmartBarUtil {
      * 方法二：此方法需要配合requestWindowFeature(Window.FEATURE_NO_TITLE)使用
      * ，缺点是程序无法使用系统actionbar
      */
-//	public static void hide(Context context, Window window) {
-//		hide(context, window, 0);
-//	}
     private static int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -222,13 +219,11 @@ public class SmartBarUtil {
         window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
         int statusBarHeight = getStatusBarHeight(context);
 
-        window.getDecorView().setPadding(0, statusBarHeight, 0, -Util.dip2px(context, SMART_BAR_HEIGH_DIP));
+        window.getDecorView().setPadding(0, statusBarHeight, 0, -DensityUtil.dp2px(SMART_BAR_HEIGH_DIP));
     }
 
     /**
      * 新型号可用反射调用Build.hasSmartBar()来判断有无SmartBar
-     *
-     * @return
      */
     public static boolean hasSmartBar() {
         try {

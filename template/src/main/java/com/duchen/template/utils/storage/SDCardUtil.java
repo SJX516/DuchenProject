@@ -1,4 +1,4 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.storage;
 
 import android.Manifest;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
 import com.duchen.template.component.BaseApplication;
+import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.PermissionUtil;
+import com.duchen.template.utils.PlatformUtil;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;

@@ -29,6 +29,8 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
+import com.duchen.template.component.BaseApplication;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -277,9 +279,6 @@ public class PlatformUtil {
 
     /**
      * 获取app versionname
-     *
-     * @param context
-     * @return
      */
     public static String getAppVersionName(Context context) {
         try {
@@ -292,9 +291,6 @@ public class PlatformUtil {
 
     /**
      * 获取应用版本号
-     *
-     * @param context
-     * @return
      */
     public static String swSimpleVersionStr(Context context) {
         String str = "";
@@ -326,17 +322,10 @@ public class PlatformUtil {
         return -1;
     }
 
-    /**
-     * @return
-     */
     public static boolean hasStorage() {
         return hasStorage(null);
     }
 
-    /**
-     * @param testWritePath
-     * @return
-     */
     public static boolean hasStorage(String testWritePath) {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -346,18 +335,11 @@ public class PlatformUtil {
                 return true;
             }
         }
-//		else if (testWritePath == null
-//				&& Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-//			return true;
-//		}
         return false;
     }
 
     /**
      * 检查文件系统是否可写
-     *
-     * @param testWritePath
-     * @return
      */
     private static boolean checkFsWritable(String testWritePath) {
         File directory = new File(testWritePath);
@@ -372,8 +354,6 @@ public class PlatformUtil {
 
     /**
      * 会过滤不能写的分区
-     *
-     * @return
      */
     public static HashSet<String> getExternalMounts() {
         final HashSet<String> out = new HashSet<String>();
@@ -681,11 +661,14 @@ public class PlatformUtil {
         return pName.contains(packageName);// 判断pName中是否有目标程序的包名，有TRUE，没有FALSE
     }
 
+    public static boolean inMainProcess() {
+        String packageName = BaseApplication.getInstance().getPackageName();
+        String processName = getProcessName(BaseApplication.getInstance());
+        return packageName.equals(processName);
+    }
+
     /**
      * 获取当前进程名
-     *
-     * @param context
-     * @return 进程名
      */
     public static final String getProcessName(Context context) {
         String processName = null;

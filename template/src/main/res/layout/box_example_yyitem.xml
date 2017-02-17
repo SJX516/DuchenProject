@@ -18,6 +18,6 @@
     <View
         android:id="@+id/yyitem_something"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

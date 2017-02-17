@@ -5,41 +5,41 @@ import com.google.gson.JsonElement;
 
 public class BaseResponseData implements IRequest, LegalModel {
 
-	public static final int RESPONSE_SUCCESS_CODE = 0;
+    public static final int RESPONSE_SUCCESS_CODE = 0;
 
-	public JsonElement results;
-	public int code;
-	public String message;
+    public JsonElement results;
+    public int code;
+    public String message;
 
-	public Object data;
-		
+    public Object data;
 
-	private int mSequence = -1;
-	private String mUrl = "";
 
-	@Override
-	public int getSequence() {
-		return mSequence;
-	}
+    private int mSequence = -1;
+    private String mUrl = "";
 
-	@Override
-	public String getUrl() {
-		return mUrl;
-	}
+    @Override
+    public int getSequence() {
+        return mSequence;
+    }
 
-	@Override
-	public void setSequence(int sequence) {
-		mSequence = sequence;
-	}
+    @Override
+    public String getUrl() {
+        return mUrl;
+    }
 
-	@Override
-	public void setUrl(String url) {
-		mUrl = url;
-	}
+    @Override
+    public void setSequence(int sequence) {
+        mSequence = sequence;
+    }
 
-	@Override
-	public boolean check() {
-		return true;
-	}
+    @Override
+    public void setUrl(String url) {
+        mUrl = url;
+    }
+
+    @Override
+    public boolean check() {
+        return true;
+    }
 
 }

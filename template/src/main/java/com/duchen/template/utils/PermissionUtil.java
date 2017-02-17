@@ -273,8 +273,8 @@ public class PermissionUtil {
 
         if (!(isSupportFragment || isActivity || (isAppFragment && isMinSdkM))) {
             if (isAppFragment) {
-                throw new IllegalArgumentException("Target SDK needs to be greater than 23 if caller is android.app" +
-                        ".Fragment");
+                throw new IllegalArgumentException("Target SDK needs to be greater than 23 if caller is android.app"
+                        + ".Fragment");
             } else {
                 throw new IllegalArgumentException("Caller must be an Activity or a Fragment");
             }

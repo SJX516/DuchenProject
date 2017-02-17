@@ -1,7 +1,5 @@
 package com.duchen.template.example.ui.model;
 
-import android.text.TextUtils;
-
 import com.duchen.template.concept.IViewModel;
 
 public class YYItemData implements IViewModel {

@@ -9,7 +9,7 @@ import android.net.ConnectivityManager;
 import com.duchen.template.component.helper.ActivityLifecycle;
 import com.duchen.template.component.helper.NetworkHelper.NetworkChangeListener;
 import com.duchen.template.utils.LogUtil;
-import com.duchen.template.utils.Util;
+import com.duchen.template.utils.PlatformUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public abstract class BaseApplication extends Application {
         sBaseApp = this;
         mNetworkListeners = new ArrayList<WeakReference<NetworkChangeListener>>();
         registerActivityLifecycleCallbacks(mActivityLifecycle);
-        if (Util.inMainProcess()) {
+        if (PlatformUtil.inMainProcess()) {
             try {
                 listenToNetworkStatusChange();
             } catch (BaseException e) {

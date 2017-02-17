@@ -1,12 +1,9 @@
 package com.duchen.template.example.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.duchen.template.R;
@@ -14,7 +11,7 @@ import com.duchen.template.concept.IBox;
 import com.duchen.template.example.ui.model.YYItemData;
 
 
-public class YYItemBox extends FrameLayout implements IBox<YYItemData>,View.OnClickListener {
+public class YYItemBox extends FrameLayout implements IBox<YYItemData>, View.OnClickListener {
 
     public interface OnClickListener {
         void onClickInsideItem(YYItemData itemData);
@@ -72,7 +69,6 @@ public class YYItemBox extends FrameLayout implements IBox<YYItemData>,View.OnCl
             setBackgroundResource(mItemData.isSelected() ? R.color.color_item_selected_bg : R.color.color_item_bg);
         }
     }
-
 
 
     @Override

@@ -1,8 +1,9 @@
-package com.duchen.template.utils;
+package com.duchen.template.utils.datahelper;
 
 import android.support.annotation.NonNull;
 
 import com.duchen.template.concept.model.LegalModel;
+import com.duchen.template.utils.LogUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
