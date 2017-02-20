@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.duchen.template.usage.PinScrollable.PinScrollableActivity">
-    
+
     <ImageView
         android:id="@+id/head_view"
         android:layout_width="match_parent"

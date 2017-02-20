@@ -7,9 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
-/**
- * Created by netease on 17/1/18.
- */
 public abstract class ActivityBase extends AppCompatActivity implements View.OnClickListener{
 
     protected ActionBar mActionBar;

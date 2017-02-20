@@ -31,14 +31,12 @@ public class TestNotificationsActivity extends ActivityBase {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBr);
         unregisterReceiver(mBr);
     }
 
     private void registerReceiver() {
         mBr =  new MyBroadcastReceiver();
         IntentFilter filter = new IntentFilter(ACTION);
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mBr, filter);
         registerReceiver(mBr, filter);
     }
 
@@ -50,14 +48,12 @@ public class TestNotificationsActivity extends ActivityBase {
             intent.putExtra("type", 0);
             intent.putExtra("title", "normal");
             intent.putExtra("content", "content!!!");
-//            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             sendBroadcast(intent);
         } else if (id == R.id.send_broadcast_special) {
             intent.setAction(ACTION);
             intent.putExtra("type", 1);
             intent.putExtra("title", "special");
             intent.putExtra("content", "content!!!");
-//            LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             sendBroadcast(intent);
         }
     }
@@ -67,8 +63,10 @@ public class TestNotificationsActivity extends ActivityBase {
         @Override
         public void onReceive(Context context, Intent intent) {
             Intent resultIntent = new Intent(context, TestInvokeActivity.class);
-            PendingIntent resultPendingIntent = null;
+            PendingIntent resultPendingIntent;
 
+            //StudyPoint 通过构建一个 TaskStack ,当不存在主页面时,在子页面点击返回也可以返回到主页面,可以得到更良好的导航体验。
+            // 需要在 manifest 中 添加 activity 相应的 parentActivityName 属性配置
             if (intent.getIntExtra("type", 0) == 1) {
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
                 // Adds the back stack
@@ -76,18 +74,21 @@ public class TestNotificationsActivity extends ActivityBase {
                 // Adds the Intent to the top of the stack
                 stackBuilder.addNextIntent(resultIntent);
                 // Gets a PendingIntent containing the entire back stack
-                resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_CANCEL_CURRENT);
             } else {
-                resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_CANCEL_CURRENT);
             }
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
             builder.setSmallIcon(R.mipmap.photo);
             builder.setContentIntent(resultPendingIntent);
             builder.setContentTitle(intent.getStringExtra("title"));
-            builder.setSubText(intent.getStringExtra("content"));
+            builder.setContentText(intent.getStringExtra("content"));
             NotificationManager mNotificationManager =
                     (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(1, builder.build());
+
+            Intent startServiceIntent = new Intent(context, ReceiverIntentService.class);
+            context.startService(startServiceIntent);
         }
     }
 

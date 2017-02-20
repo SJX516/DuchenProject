@@ -13,7 +13,6 @@ public class TestDispatchActivity extends ActivityBase {
     private FatherLayout mFatherLayout;
     private ChildView mChildView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

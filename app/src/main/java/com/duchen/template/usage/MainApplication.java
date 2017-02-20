@@ -3,10 +3,11 @@ package com.duchen.template.usage;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.duchen.template.component.BaseApplication;
 import com.duchen.template.utils.LogUtil;
 
 
-public class MainApplication extends Application {
+public class MainApplication extends BaseApplication {
 
     @Override
     public void onTrimMemory(int level) {
@@ -30,6 +31,11 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LogUtil.d("onCreate");
+    }
+
+    @Override
+    protected void initNetworkStatusReceiver() {
+
     }
 
     @Override

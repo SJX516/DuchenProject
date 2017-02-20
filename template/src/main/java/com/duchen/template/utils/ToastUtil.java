@@ -1,5 +1,6 @@
 package com.duchen.template.utils;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.duchen.template.component.BaseApplication;
@@ -12,9 +13,9 @@ public class ToastUtil {
 
     private static final int TOAST_DURATION = Toast.LENGTH_SHORT;
 
-    public static Toast showToast(String message, boolean force) {
+    public static Toast showToast(Context context, String message, boolean force) {
         if (BaseApplication.getInstance() != null && (BaseApplication.getInstance().hasVisibleActivity() || force)) {
-            Toast t = Toast.makeText(BaseApplication.getInstance(), message, TOAST_DURATION);
+            Toast t = Toast.makeText(context, message, TOAST_DURATION);
             t.show();
 
             return t;
@@ -22,9 +23,9 @@ public class ToastUtil {
         return null;
     }
 
-    public static Toast showToast(int resId, boolean force) {
+    public static Toast showToast(Context context, int resId, boolean force) {
         if (BaseApplication.getInstance() != null && (BaseApplication.getInstance().hasVisibleActivity() || force)) {
-            Toast t = Toast.makeText(BaseApplication.getInstance(), resId, TOAST_DURATION);
+            Toast t = Toast.makeText(context, resId, TOAST_DURATION);
             t.show();
 
             return t;
@@ -52,11 +53,15 @@ public class ToastUtil {
         return null;
     }
 
+    public static Toast showToast(Context context, String message) {
+        return showToast(context, message, false);
+    }
+
     public static Toast showToast(String message) {
-        return showToast(message, false);
+        return showToast(BaseApplication.getInstance(), message, false);
     }
 
     public static Toast showToast(int resId) {
-        return showToast(resId, false);
+        return showToast(BaseApplication.getInstance(), resId, false);
     }
 }
