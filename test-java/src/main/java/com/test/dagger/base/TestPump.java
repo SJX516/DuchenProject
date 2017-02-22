@@ -1,6 +1,6 @@
-package com.test.base;
+package com.test.dagger.base;
 
-import com.test.CoffeeApp;
+import com.test.dagger.CoffeeApp;
 
 import javax.inject.Inject;
 

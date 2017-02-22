@@ -1,4 +1,4 @@
-package com.test.base;
+package com.test.dagger.base;
 
 import javax.inject.Inject;
 

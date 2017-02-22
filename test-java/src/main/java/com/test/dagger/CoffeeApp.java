@@ -1,6 +1,6 @@
-package com.test;
+package com.test.dagger;
 
-import com.test.base.TestPump;
+import com.test.dagger.base.TestPump;
 
 /**
  * Created by hzshangjiaxiong on 17/1/3.

@@ -1,7 +1,7 @@
-package com.test;
+package com.test.dagger;
 
-import com.test.base.CoffeeMaker;
-import com.test.base.TestPump;
+import com.test.dagger.base.CoffeeMaker;
+import com.test.dagger.base.TestPump;
 
 import java.util.Set;
 

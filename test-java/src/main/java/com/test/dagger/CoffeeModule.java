@@ -1,7 +1,7 @@
-package com.test;
+package com.test.dagger;
 
-import com.test.base.ElectricHeater;
-import com.test.base.Heater;
+import com.test.dagger.base.ElectricHeater;
+import com.test.dagger.base.Heater;
 
 import java.util.Arrays;
 import java.util.HashSet;

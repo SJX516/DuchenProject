@@ -1,4 +1,4 @@
-package com.test.base;
+package com.test.dagger.base;
 
 /**
  * Created by hzshangjiaxiong on 17/1/3.

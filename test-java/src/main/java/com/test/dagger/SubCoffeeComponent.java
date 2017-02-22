@@ -1,4 +1,4 @@
-package com.test;
+package com.test.dagger;
 
 import java.util.Set;
 

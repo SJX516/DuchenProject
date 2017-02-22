@@ -1,4 +1,4 @@
-package com.test.Study;
+package com.test.dagger.Study;
 
 import dagger.Module;
 import dagger.Provides;
