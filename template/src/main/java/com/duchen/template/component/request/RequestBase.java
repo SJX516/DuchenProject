@@ -9,8 +9,8 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.duchen.template.component.BaseApplication;
-import com.duchen.template.component.request.error.StudyErrorFactory;
-import com.duchen.template.component.request.error.StudyErrorListener;
+import com.duchen.template.component.request.error.ErrorFactory;
+import com.duchen.template.component.request.error.ErrorListener;
 import com.duchen.template.concept.model.LegalModelParser;
 import com.duchen.template.scope.TemplateScopeInstance;
 import com.duchen.template.utils.LogUtil;
@@ -23,12 +23,11 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
+public abstract class RequestBase<T> extends Request<BaseResponseData> {
 
     private final static String TAG = "StudyRequestBase";
 
     static final String USER_AGENT_VERSION = "app-version";
-
     static final String USER_AGENT_KEY_IMEI = "imei";
 
     public final static int TIMEOUT_1S = 1*1000;
@@ -44,18 +43,18 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
     public String mUrl;
     public LegalModelParser mParser;
     private Listener<T> mListener;
-    private StudyErrorListener mErrorListener;
+    private ErrorListener mErrorListener;
     private long mRequestStartTime = 0L;
 
-    public StudyRequestBase(String url, Listener<T> listener, StudyErrorListener errorListener) {
+    public RequestBase(String url, Listener<T> listener, ErrorListener errorListener) {
         this(url, listener, errorListener, TIMEOUT_10S);
     }
 
-    public StudyRequestBase(String url, Listener<T> listener, StudyErrorListener errorListener, int timeout) {
+    public RequestBase(String url, Listener<T> listener, ErrorListener errorListener, int timeout) {
         this(url, listener, errorListener, timeout, MAX_NUM_RETRY);
     }
 
-    public StudyRequestBase(String url, Listener<T> listener, StudyErrorListener errorListener, int timeout, int
+    public RequestBase(String url, Listener<T> listener, ErrorListener errorListener, int timeout, int
             maxNumRetry) {
         super(Method.POST, RequestUrl.getUrl(url), null);
         setRetryPolicy(new DefaultRetryPolicy(timeout, maxNumRetry, 1f));
@@ -91,7 +90,7 @@ public abstract class StudyRequestBase<T> extends Request<BaseResponseData> {
             }
 
             if (brd.code != 0) {
-                return Response.error(StudyErrorFactory.create(getSequence(), mUrl, brd.code, brd.message, brd
+                return Response.error(ErrorFactory.create(getSequence(), mUrl, brd.code, brd.message, brd
                         .results));
             } else {
                 if (brd.data == null && !mIsResultAllowNull) {

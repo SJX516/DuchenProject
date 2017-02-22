@@ -4,11 +4,11 @@ import com.android.volley.NetworkError;
 import com.android.volley.VolleyError;
 import com.duchen.template.utils.ToastUtil;
 
-public class StudyErrorListenerImp implements StudyErrorListener {
+public class ErrorListenerImp implements ErrorListener {
 
     private String TAG = "StudyErrorListenerImp";
 
-    public StudyErrorListenerImp(String tag) {
+    public ErrorListenerImp(String tag) {
         TAG = tag;
     }
 

@@ -4,23 +4,34 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
-public abstract class ActivityBase extends AppCompatActivity implements View.OnClickListener{
+import com.duchen.template.component.ActivityBase;
+import com.duchen.template.utils.ManifestUtil;
+import com.duchen.template.utils.datahelper.StringUtil;
 
-    protected ActionBar mActionBar;
+public abstract class AppActivityBase extends ActivityBase implements View.OnClickListener{
+
+    public static final String KEY_TITLE = "key_title";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initActionBar();
     }
 
+    @Override
     protected void initActionBar() {
-        mActionBar = getSupportActionBar();
+        super.initActionBar();
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.show();
+            String title = getIntent().getStringExtra(KEY_TITLE);
+            if (StringUtil.isStringEmpty(title)) {
+                title = ManifestUtil.getApplicationName(this);
+            }
+            mActionBar.setTitle(title);
         }
     }
 

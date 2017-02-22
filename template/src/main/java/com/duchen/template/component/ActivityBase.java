@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 import de.greenrobot.event.EventBus;
 
-public abstract class ActivityBase extends FragmentActivity implements IActivity, Handler.Callback {
+public abstract class ActivityBase extends AppCompatActivity implements IActivity, Handler.Callback {
 
     private static final String TAG = "ActivityBase";
 
@@ -35,7 +36,7 @@ public abstract class ActivityBase extends FragmentActivity implements IActivity
 
     protected LegalModelParser mParser;
 
-    protected ActionBar mActionBar;
+    protected android.support.v7.app.ActionBar mActionBar;
 
     protected boolean mIsResumeStatus = false;
     protected boolean mIsDestroyStatus = true;
@@ -56,7 +57,7 @@ public abstract class ActivityBase extends FragmentActivity implements IActivity
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mEventBus = EventBus.getDefault();
         mParser = new LegalModelParser();
-        mRequestIdList = new ArrayList<Integer>();
+        mRequestIdList = new ArrayList<>();
         initActionBar();
     }
 
@@ -67,8 +68,7 @@ public abstract class ActivityBase extends FragmentActivity implements IActivity
     }
 
     protected void initActionBar() {
-        mActionBar = getActionBar();
-        if (mActionBar == null) return;
+        mActionBar = getSupportActionBar();
     }
 
     protected void hideActionBar() {

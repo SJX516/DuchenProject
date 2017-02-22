@@ -11,10 +11,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.os.Bundle;
 import android.view.View;
 
-import com.duchen.template.usage.ActivityBase;
+import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 
-public class TestNotificationsActivity extends ActivityBase {
+public class TestNotificationsActivity extends AppActivityBase {
 
     public static final String ACTION = "com.duchen.action.test";
     private BroadcastReceiver mBr;

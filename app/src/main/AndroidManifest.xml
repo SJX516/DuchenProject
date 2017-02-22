@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".TestNotification.TestNotificationsActivity">
         </activity>
+        <activity android:name=".Kotlin.KotlinMainActivity">
+        </activity>
 
         <activity
             android:name=".TestNotification.TestInvokeActivity"
@@ -31,8 +33,8 @@
         </activity>
 
         <service
-            android:enabled="true"
-            android:name=".TestNotification.ReceiverIntentService"/>
+            android:name=".TestNotification.ReceiverIntentService"
+            android:enabled="true"/>
 
     </application>
 

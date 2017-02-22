@@ -4,7 +4,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.JsonElement;
 
 
-public class StudyErrorFactory {
+public class ErrorFactory {
 
     public static VolleyError create(final int sequence, final String url, final int code, final String message,
                                      JsonElement results) {

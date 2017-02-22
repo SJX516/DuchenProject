@@ -6,7 +6,7 @@ import android.os.Handler;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.duchen.template.component.LogicBase;
-import com.duchen.template.component.request.error.StudyErrorListenerImp;
+import com.duchen.template.component.request.error.ErrorListenerImp;
 import com.duchen.template.concept.IViewModel;
 import com.duchen.template.example.request.ExampleRequestManager;
 import com.duchen.template.example.request.result.DataDto;
@@ -36,7 +36,7 @@ public class XXLogic extends LogicBase implements XXListBox.ViewModel {
                 generateItems(loadDataResult);
                 notifyUi(MSG_VIEWMODEL_UPDATE);
             }
-        }, new StudyErrorListenerImp("XXLogic") {
+        }, new ErrorListenerImp("XXLogic") {
             @Override
             public void onErrorResponse(int sequence, String url, VolleyError error, boolean showToast) {
                 super.onErrorResponse(sequence, url, error, showToast);

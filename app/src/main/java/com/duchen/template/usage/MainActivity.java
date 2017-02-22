@@ -13,13 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.duchen.template.usage.Kotlin.KotlinMainActivity;
 import com.duchen.template.usage.TestNotification.TestNotificationsActivity;
 import com.duchen.template.usage.TouchEventDispatch.TestDispatchActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String[] TITLES = {"TouchEventDispatch", "TestNotifications"};
-    public static final Class[] CLASSES = {TestDispatchActivity.class, TestNotificationsActivity.class};
+    public static final String[] TITLES = {"TouchEventDispatch", "TestNotifications", "KotlinMain"};
+    public static final Class[] CLASSES = {TestDispatchActivity.class, TestNotificationsActivity.class,
+            KotlinMainActivity.class};
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View v) {
                         Intent i = new Intent(v.getContext(), CLASSES[getLayoutPosition()]);
+                        i.putExtra(AppActivityBase.KEY_TITLE, TITLES[getLayoutPosition()]);
                         v.getContext().startActivity(i);
                     }
                 });

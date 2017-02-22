@@ -3,7 +3,7 @@ package com.duchen.template.example.request;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.duchen.template.component.request.RequestManager;
-import com.duchen.template.component.request.error.StudyErrorListener;
+import com.duchen.template.component.request.error.ErrorListener;
 import com.duchen.template.example.request.result.LoadDataResult;
 
 public class ExampleRequestManager {
@@ -21,7 +21,7 @@ public class ExampleRequestManager {
         return RequestManager.getInstance().postRequest(request);
     }
 
-    public int doLoadData(Response.Listener<LoadDataResult> listener, StudyErrorListener errorListener) {
+    public int doLoadData(Response.Listener<LoadDataResult> listener, ErrorListener errorListener) {
         LoadDataRequest request = new LoadDataRequest(listener, errorListener);
         return postRequest(request);
     }

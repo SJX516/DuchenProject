@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.duchen.template.usage.ActivityBase;
+import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 import com.duchen.template.utils.LogUtil;
 
-public class TestDispatchActivity extends ActivityBase {
+public class TestDispatchActivity extends AppActivityBase {
 
     private FatherLayout mFatherLayout;
     private ChildView mChildView;
