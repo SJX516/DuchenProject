@@ -14,12 +14,16 @@ import com.duchen.template.utils.PlatformUtil;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public abstract class BaseApplication extends Application {
 
     private static final String TAG = "BaseApplication";
 
     protected static BaseApplication sBaseApp;
+    private static ExecutorService sThreadPool = null;
+
     private ActivityLifecycle mActivityLifecycle = new ActivityLifecycle();
 
     public static <T extends BaseApplication> T getInstance() {
@@ -27,6 +31,13 @@ public abstract class BaseApplication extends Application {
             LogUtil.e(TAG, "sBaseApp not create or be terminated!");
         }
         return (T) sBaseApp;
+    }
+
+    private static ExecutorService getThreadPool() {
+        if (null == sThreadPool) {
+            sThreadPool = Executors.newCachedThreadPool();
+        }
+        return sThreadPool;
     }
 
     public Activity getCurrentActivity() {
