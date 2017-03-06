@@ -58,6 +58,31 @@ public class TimeUtil {
         return "";
     }
 
+    private static int daysBetween(Date old, Date now) {
+        Calendar oldCalendar = Calendar.getInstance();
+        oldCalendar.setTime(old);
+        Calendar nowCalendar = Calendar.getInstance();
+        nowCalendar.setTime(now);
+
+        int oldDay = oldCalendar.get(Calendar.DAY_OF_YEAR);
+        int nowDay = nowCalendar.get(Calendar.DAY_OF_YEAR);
+        int oldYear = oldCalendar.get(Calendar.YEAR);
+        int nowYear = nowCalendar.get(Calendar.YEAR);
+        if (oldYear != nowYear) {
+            int dayDistance = 0;
+            for (int i = oldYear; i < nowYear; i++) {
+                if (i % 4 == 0 && i % 100 != 0 && i % 400 == 0) {
+                    dayDistance += 366;
+                } else {
+                    dayDistance += 365;
+                }
+            }
+            return dayDistance + nowDay - oldDay;
+        } else {
+            return nowDay - oldDay;
+        }
+    }
+
     private static DateFormat getInputDateFormat() {
         if (mInputDateFormat == null) {
             mInputDateFormat = new SimpleDateFormat(DATE_FORMAT_IN, Locale.US);
