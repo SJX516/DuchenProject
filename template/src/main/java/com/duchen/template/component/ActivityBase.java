@@ -48,7 +48,6 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
         mHandler = new Handler(this);
         handleIntent(getIntent());
         prepareLogic();
-
         super.onCreate(savedInstanceState);
         LogUtil.d(this.getClass().getSimpleName(), "onCreate task id = " + this.getTaskId());
         mIsDestroyStatus = false;

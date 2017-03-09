@@ -17,11 +17,6 @@ public abstract class AppActivityBase extends ActivityBase implements View.OnCli
     public static final String KEY_TITLE = "key_title";
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected void initActionBar() {
         super.initActionBar();
         if (mActionBar != null) {
