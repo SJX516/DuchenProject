@@ -48,13 +48,18 @@ public class DataCheckUtil {
         return true;
     }
 
-    public static <T> boolean checkListAnnotation(List<? extends LegalModel> list) {
-        if (list == null) return false;
-        for (LegalModel model : list) {
-            if (!model.check()) {
-                return false;
+    public static boolean checkListDataUseable(List<Object> list) {
+        if (list == null || list.size() == 0) {
+            return false;
+        } else {
+            for (Object object : list) {
+                if (object == null) {
+                    return false;
+                } else if (object instanceof LegalModel && !((LegalModel)object).check()) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
 }
