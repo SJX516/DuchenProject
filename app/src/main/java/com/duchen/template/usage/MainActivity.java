@@ -14,15 +14,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.duchen.template.usage.Kotlin.KotlinMainActivity;
+import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
 import com.duchen.template.usage.TestNotification.TestNotificationsActivity;
 import com.duchen.template.usage.TestViewPager.TestViewPagerActivity;
 import com.duchen.template.usage.TouchEventDispatch.TestDispatchActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager"};
+    public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
+            "PinScrollable"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, TestDispatchActivity.class,
-            TestNotificationsActivity.class, TestViewPagerActivity.class};
+            TestNotificationsActivity.class, TestViewPagerActivity.class, PinScrollableActivity.class};
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;

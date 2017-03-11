@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.duchen.template.usage.AppActivityBase;
@@ -18,20 +19,25 @@ import com.duchen.template.utils.ToastUtil;
 
 public class TestViewPagerActivity extends AppActivityBase implements ViewPager.OnPageChangeListener {
 
+    private View mRoot;
     private ViewPager mPager;
     private DemoCollectionPagerAdapter mPagerAdapter;
     private Button mButton;
+    private Button mButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_viewpager);
+        mRoot = findViewById(R.id.content);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.addOnPageChangeListener(this);
         mPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mButton = (Button) findViewById(R.id.button);
         mButton.setOnClickListener(this);
+        mButton2 = (Button) findViewById(R.id.button2);
+        mButton2.setOnClickListener(this);
     }
 
     @Override
@@ -98,9 +104,16 @@ public class TestViewPagerActivity extends AppActivityBase implements ViewPager.
 
     @Override
     public void handleClick(int id, View v) {
-        if (id == R.id.button) {
-            mButton.offsetLeftAndRight(-100);
-            ToastUtil.showToast("Click HA");
+        switch (id) {
+            case R.id.button:
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mButton.getLayoutParams();
+                params.rightMargin += 100;
+                mButton.setLayoutParams(params);
+                mButton2.setX(mButton2.getX() - 100);
+                break;
+            case R.id.button2:
+                mRoot.requestLayout();
+                break;
         }
     }
 }

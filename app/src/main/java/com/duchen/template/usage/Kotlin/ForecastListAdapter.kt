@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.duchen.template.usage.R
 import com.duchen.template.usage.Kotlin.extensions.ctx
+import com.duchen.template.usage.R
 import org.jetbrains.anko.find
 import kotlin.properties.Delegates
 
 
-class ForecastListAdapter(val items: ActualData, val itemClick: (Forecast) -> Unit ) :
+class ForecastListAdapter(val items: ActualData, val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,8 +31,8 @@ class ForecastListAdapter(val items: ActualData, val itemClick: (Forecast) -> Un
         private val highTemperatureView: TextView
         private val lowTemperatureView: TextView
 
-        val number = Delegates.vetoable(0){
-            d , old , new ->
+        val number = Delegates.vetoable(0) {
+            d, old, new ->
             new >= 0
         }
 

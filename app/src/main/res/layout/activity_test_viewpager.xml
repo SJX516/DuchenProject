@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/content"
     tools:context=".TouchEventDispatch.TestDispatchActivity">
 
     <android.support.v4.view.ViewPager
@@ -30,5 +31,13 @@
         android:text="HA"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:text="HA2"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/button"/>
 
 </RelativeLayout>

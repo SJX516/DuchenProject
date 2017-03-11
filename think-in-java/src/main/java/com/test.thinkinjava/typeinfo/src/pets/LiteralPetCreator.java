@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by 51619 on 2016/3/30 0030.
- */
 public class LiteralPetCreator extends PetCreator {
 
     public static final List<Class<? extends Pet>> allTypes = Collections.unmodifiableList(

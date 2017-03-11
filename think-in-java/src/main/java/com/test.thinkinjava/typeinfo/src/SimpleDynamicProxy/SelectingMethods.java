@@ -4,10 +4,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-/**
- * Created by 51619 on 2016/3/31 0031.
- */
-
 class MethodSelector implements InvocationHandler {
 
     private Object proxied;
@@ -28,7 +24,9 @@ class MethodSelector implements InvocationHandler {
 
 interface SomeMethods {
     void boring1();
+
     void boring2();
+
     void happy();
 }
 
@@ -54,8 +52,8 @@ public class SelectingMethods {
 
     public static void main(String[] args) throws Throwable {
 
-        SomeMethods methods = (SomeMethods) Proxy.newProxyInstance(SomeMethods.class.getClassLoader(), new Class[]{SomeMethods.class},
-                new MethodSelector(new DoMethods()));
+        SomeMethods methods = (SomeMethods) Proxy.newProxyInstance(SomeMethods.class.getClassLoader(), new
+                Class[]{SomeMethods.class}, new MethodSelector(new DoMethods()));
         methods.boring1();
         methods.boring2();
         methods.happy();

@@ -10,7 +10,6 @@ import android.view.animation.Transformation;
 /**
  * 这是一个用于在 viewGroup 的 dispatchTouchEvent 方法中,拦截触摸事件,并自己实现事件分发
  *
- * todo 提炼核心,使其更为通用!
  */
 public class HeaderViewDragger implements AnimationListener {
 	

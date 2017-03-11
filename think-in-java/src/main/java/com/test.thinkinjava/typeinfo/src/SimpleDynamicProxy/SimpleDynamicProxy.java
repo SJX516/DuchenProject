@@ -4,16 +4,13 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-/**
- * Created by 51619 on 2016/3/31 0031.
- */
-
 interface Interface {
     void doSomething();
+
     void someThingElse(String arg);
 }
 
-class RealObject implements Interface{
+class RealObject implements Interface {
 
     @Override
     public void doSomething() {
@@ -60,27 +57,27 @@ class DynamicProxyHandler implements InvocationHandler {
 //        这个 method 做的事包括运行 proxy object 的 toString method，那么...（接句首)。
 
         System.out.println("**** proxy: " + proxy.getClass() +
-                " , method: "+method + " , args: " + args);
-        if( args != null ) {
-            for( Object arg : args ) {
+                " , method: " + method + " , args: " + args);
+        if (args != null) {
+            for (Object arg : args) {
                 System.out.println("  " + arg);
             }
         }
-        return method.invoke(proxied , args);
+        return method.invoke(proxied, args);
     }
 }
 
 public class SimpleDynamicProxy {
-    public static void consumer(Interface iface){
+    public static void consumer(Interface iface) {
         iface.doSomething();
         iface.someThingElse("bonobo");
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         RealObject realObject = new RealObject();
         consumer(realObject);
-        Interface proxy = (Interface) Proxy.newProxyInstance(Interface.class.getClassLoader() ,
-                new Class[]{Interface.class}, new DynamicProxyHandler(realObject));
+        Interface proxy = (Interface) Proxy.newProxyInstance(Interface.class.getClassLoader(), new Class[]{Interface
+                .class}, new DynamicProxyHandler(realObject));
         consumer(proxy);
     }
 }

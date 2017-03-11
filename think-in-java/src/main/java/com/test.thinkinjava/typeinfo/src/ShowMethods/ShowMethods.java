@@ -1,7 +1,6 @@
 package com.test.thinkinjava.typeinfo.src.ShowMethods;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
@@ -11,18 +10,18 @@ public class ShowMethods {
 
     public static void main(String[] args) {
         int lines = 0;
-        try{
+        try {
             Class<?> c = Class.forName(args[0]);
             Method[] methods = c.getMethods();
             Constructor[] ctors = c.getConstructors();
-            for( Method method : methods ) {
+            for (Method method : methods) {
                 System.out.println(p.matcher(method.toString()).replaceAll(""));
             }
-            for( Constructor ctor:ctors){
+            for (Constructor ctor : ctors) {
                 System.out.println(p.matcher(ctor.toString()).replaceAll(""));
             }
             lines = methods.length + ctors.length;
-        }catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("no such class : " + e);
         }
     }
