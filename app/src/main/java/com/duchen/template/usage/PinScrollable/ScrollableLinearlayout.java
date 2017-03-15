@@ -82,15 +82,11 @@ public class ScrollableLinearLayout extends LinearLayout {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                mTouchStart = false;
-                mIsSkipTryScroll = false;
-                mIsHandleThisEventList = false;
+                resetStatus();
                 handled = false;
                 break;
             case MotionEvent.ACTION_CANCEL:
-                mTouchStart = false;
-                mIsHandleThisEventList = false;
-                mIsSkipTryScroll = false;
+                resetStatus();
                 handled = false;
             default:
                 break;
@@ -107,6 +103,12 @@ public class ScrollableLinearLayout extends LinearLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return true;
+    }
+
+    private void resetStatus() {
+        mTouchStart = false;
+        mIsHandleThisEventList = false;
+        mIsSkipTryScroll = false;
     }
 
     private void cancelEvent(MotionEvent ev, ViewGroup viewGroup) {

@@ -1,4 +1,4 @@
-package com.duchen.template.component;
+package com.duchen.template.concept;
 
 public class BaseException extends Exception {
 

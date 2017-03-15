@@ -12,6 +12,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -25,7 +26,11 @@
         </activity>
         <activity android:name=".TestViewPager.TestViewPagerActivity">
         </activity>
-
+        <activity
+            android:name=".TestBrowser.ActivityBrowser"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
         <activity
             android:name=".TestNotification.TestInvokeActivity"
             android:parentActivityName=".MainActivity">
@@ -38,6 +43,8 @@
             android:name=".TestNotification.ReceiverIntentService"
             android:enabled="true"/>
 
+        <activity android:name=".TestBrowser.TestBrowserActivity">
+        </activity>
     </application>
 
 </manifest>
