@@ -20,6 +20,8 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
 
     public interface ViewModel extends IViewModel {
         Collection<IViewModel> getItems();
+        boolean canLoadMore();
+        boolean canPullToRefresh();
     }
 
     public interface OnClickListener {

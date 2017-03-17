@@ -21,8 +21,8 @@ public class ExampleRequestManager {
         return RequestManager.getInstance().postRequest(request);
     }
 
-    public int doLoadData(Response.Listener<LoadDataResult> listener, ErrorListener errorListener) {
-        LoadDataRequest request = new LoadDataRequest(listener, errorListener);
+    public int doLoadData(int pageIndex, int pageSize, Response.Listener<LoadDataResult> listener, ErrorListener errorListener) {
+        LoadDataRequest request = new LoadDataRequest(pageIndex, pageSize, listener, errorListener);
         return postRequest(request);
     }
 }

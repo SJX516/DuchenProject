@@ -48,7 +48,7 @@ public class DataCheckUtil {
         return true;
     }
 
-    public static boolean checkListDataUseable(List<Object> list) {
+    public static boolean checkListDataUsable(List<?> list) {
         if (list == null || list.size() == 0) {
             return false;
         } else {

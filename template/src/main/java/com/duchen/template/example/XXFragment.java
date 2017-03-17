@@ -13,6 +13,7 @@ import com.duchen.template.concept.IViewModel;
 import com.duchen.template.example.ui.XXListBox;
 import com.duchen.template.example.ui.model.YYItemData;
 import com.duchen.template.example.ui.model.ZZItemData;
+import com.duchen.template.utils.ToastUtil;
 
 public class XXFragment extends FragmentBase {
 
@@ -66,14 +67,31 @@ public class XXFragment extends FragmentBase {
     @Override
     public void loadData() {
         super.loadData();
-        mLogic.loadData();
+        //loadingView start (show)
+        mLogic.loadData(true);
+    }
+
+    public void loadMore() {
+        mLogic.loadData(false);
     }
 
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case XXLogic.MSG_VIEWMODEL_UPDATE:
+            case XXLogic.MSG_LOAD_DATA_SUCCESS:
+                //loadingView complete (hide)
                 mListBox.update();
+                break;
+            case XXLogic.MSG_LOAD_MORE_FAILED:
+                ToastUtil.showToast("获取数据失败");
+                break;
+            case XXLogic.MSG_LOAD_DATA_NO_CONTENT:
+                //loadingView showNoContent
+                mListBox.setVisibility(View.INVISIBLE);
+                break;
+            case XXLogic.MSG_LOAD_DATA_ERROR:
+                //loadingView showError
+                mListBox.setVisibility(View.INVISIBLE);
                 break;
         }
         return true;
