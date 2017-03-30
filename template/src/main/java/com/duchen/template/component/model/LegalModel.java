@@ -1,4 +1,4 @@
-package com.duchen.template.concept.model;
+package com.duchen.template.component.model;
 
 import com.duchen.template.concept.NoProguard;
 
@@ -7,5 +7,5 @@ import com.duchen.template.concept.NoProguard;
  */
 public interface LegalModel extends NoProguard {
 
-    public boolean check();
+    boolean check();
 }

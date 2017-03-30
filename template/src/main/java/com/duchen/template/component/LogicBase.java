@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.duchen.template.component.request.RequestManager;
-import com.duchen.template.concept.IDataProvider;
+import com.duchen.template.concept.IDataSource;
 import com.duchen.template.concept.ILogic;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.ToastUtil;
@@ -17,14 +17,13 @@ import java.util.List;
 /**
  * 逻辑控制基类
  */
-public abstract class LogicBase implements ILogic, IDataProvider {
+public abstract class LogicBase implements ILogic {
 
     private final static String TAG = "LogicBase";
 
     // Handler的弱引用
     protected WeakReference<Handler> mHandlerHost;
     protected WeakReference<Context> mContextHost;
-    private HashSet<Integer> mReqIds = new HashSet<Integer>();
     private boolean mIsReleased = true;
 
     public LogicBase(Context context, Handler handler) {
@@ -64,33 +63,6 @@ public abstract class LogicBase implements ILogic, IDataProvider {
         return mIsReleased;
     }
 
-    protected void toastErrorMessage(String msg) {
-        if (mHandlerHost.get() == null) {
-            return;
-        }
-        ToastUtil.showToast(msg);
-    }
-
-    protected void addReqId(int id) {
-        mReqIds.add(id);
-    }
-
-    protected void removeId(int id) {
-        mReqIds.remove(id);
-    }
-
-    protected void addReqIds(List<Integer> ids) {
-        if (ids == null || ids.isEmpty()) {
-            return;
-        }
-        mReqIds.addAll(ids);
-    }
-
-    protected void removeIds(List<Integer> ids) {
-        if (ids == null || ids.isEmpty()) return;
-        mReqIds.remove(ids);
-    }
-
     protected void removeMessages() {
     }
 
@@ -103,14 +75,5 @@ public abstract class LogicBase implements ILogic, IDataProvider {
         removeMessages();
         LogUtil.d(TAG, "release");
         mHandlerHost.clear();
-        for (Integer id : mReqIds) {
-            RequestManager.getInstance().cancelRequest(id);
-        }
-    }
-
-    protected void cancelAllRequest() {
-        for (Integer id : mReqIds) {
-            RequestManager.getInstance().cancelRequest(id);
-        }
     }
 }

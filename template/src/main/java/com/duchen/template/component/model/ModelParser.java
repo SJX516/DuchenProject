@@ -1,4 +1,4 @@
-package com.duchen.template.concept.model;
+package com.duchen.template.component.model;
 
 import com.duchen.template.utils.LogUtil;
 import com.google.gson.Gson;
@@ -24,8 +24,6 @@ public class ModelParser {
         try {
             if (json == null) return null;
             t = mGson.fromJson(json, classOfT);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -36,8 +34,6 @@ public class ModelParser {
         T t = null;
         try {
             t = mGson.fromJson(json, typeOfT);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -48,8 +44,6 @@ public class ModelParser {
         T t = null;
         try {
             t = mGson.fromJson(jsonElement, type);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -60,8 +54,6 @@ public class ModelParser {
         String jsonString = null;
         try {
             jsonString = mGson.toJson(src);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -72,8 +64,6 @@ public class ModelParser {
         String jsonString = null;
         try {
             jsonString = mGson.toJson(src, typeOfSrc);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -84,8 +74,6 @@ public class ModelParser {
         String jsonString = null;
         try {
             jsonString = mGson.toJson(jsonElement);
-        } catch (IllegalModelException e) {
-            LogUtil.e(TAG, e.getMessage());
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }

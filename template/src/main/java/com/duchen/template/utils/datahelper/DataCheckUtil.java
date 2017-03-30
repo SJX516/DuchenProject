@@ -2,10 +2,11 @@ package com.duchen.template.utils.datahelper;
 
 import android.support.annotation.NonNull;
 
-import com.duchen.template.concept.model.LegalModel;
+import com.duchen.template.component.model.LegalModel;
 import com.duchen.template.utils.LogUtil;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,18 +49,33 @@ public class DataCheckUtil {
         return true;
     }
 
-    public static boolean checkListDataUsable(List<?> list) {
-        if (list == null || list.size() == 0) {
-            return false;
+    public static <T> boolean check(T model) {
+        if (model instanceof List) {
+            return checkList(model);
         } else {
-            for (Object object : list) {
-                if (object == null) {
-                    return false;
-                } else if (object instanceof LegalModel && !((LegalModel)object).check()) {
-                    return false;
-                }
-            }
-            return true;
+            return checkObject(model);
         }
     }
+
+    @SuppressWarnings("unchecked")
+    private static <T> boolean checkList(T model) {
+        List<Object> removed = new ArrayList<>();
+        List<?> list = (List<?>) model;
+        for (Object obj : list) {
+            if (!checkObject(obj)) {
+                removed.add(obj);
+            }
+        }
+        list.removeAll(removed);
+        return list.size() != 0;
+    }
+
+    private static <T> boolean checkObject(T obj) {
+        if (obj == null) return false;
+        if (obj instanceof LegalModel) {
+            return ((LegalModel) obj).check();
+        }
+        return true;
+    }
+
 }

@@ -2,7 +2,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.duchen.template.example.ui.XXListBox
+    <com.duchen.template.example.box.XXListBox
         android:id="@+id/xxframe_xxlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

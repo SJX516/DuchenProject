@@ -1,4 +1,4 @@
-package com.duchen.template.example.ui.model;
+package com.duchen.template.example.box.model;
 
 import com.duchen.template.concept.IViewModel;
 

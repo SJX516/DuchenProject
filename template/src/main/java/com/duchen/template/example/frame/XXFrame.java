@@ -1,4 +1,4 @@
-package com.duchen.template.example;
+package com.duchen.template.example.frame;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import com.duchen.template.R;
 import com.duchen.template.component.FragmentBase;
 import com.duchen.template.concept.IViewModel;
-import com.duchen.template.example.ui.XXListBox;
-import com.duchen.template.example.ui.model.YYItemData;
-import com.duchen.template.example.ui.model.ZZItemData;
+import com.duchen.template.example.logic.XXLogic;
+import com.duchen.template.example.logic.impl.XXLogicImpl;
+import com.duchen.template.example.box.XXListBox;
+import com.duchen.template.example.box.model.YYItemData;
+import com.duchen.template.example.box.model.ZZItemData;
 import com.duchen.template.utils.ToastUtil;
 
-public class XXFragment extends FragmentBase {
+public class XXFrame extends FragmentBase {
 
     private XXLogic mLogic;
     private XXListBox mListBox;
@@ -38,8 +40,8 @@ public class XXFragment extends FragmentBase {
         }
     };
 
-    public static XXFragment newInstance() {
-        return new XXFragment();
+    public static XXFrame newInstance() {
+        return new XXFrame();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class XXFragment extends FragmentBase {
 
     @Override
     public void prepareLogic() {
-        mLogic = new XXLogic(getActivity(), mHandler);
+        mLogic = new XXLogicImpl(getActivity(), mHandler);
     }
 
     @Override
@@ -78,18 +80,18 @@ public class XXFragment extends FragmentBase {
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
-            case XXLogic.MSG_LOAD_DATA_SUCCESS:
+            case XXLogicImpl.MSG_LOAD_DATA_SUCCESS:
                 //loadingView complete (hide)
                 mListBox.update();
                 break;
-            case XXLogic.MSG_LOAD_MORE_FAILED:
+            case XXLogicImpl.MSG_LOAD_MORE_FAILED:
                 ToastUtil.showToast("获取数据失败");
                 break;
-            case XXLogic.MSG_LOAD_DATA_NO_CONTENT:
+            case XXLogicImpl.MSG_LOAD_DATA_NO_CONTENT:
                 //loadingView showNoContent
                 mListBox.setVisibility(View.INVISIBLE);
                 break;
-            case XXLogic.MSG_LOAD_DATA_ERROR:
+            case XXLogicImpl.MSG_LOAD_DATA_ERROR:
                 //loadingView showError
                 mListBox.setVisibility(View.INVISIBLE);
                 break;

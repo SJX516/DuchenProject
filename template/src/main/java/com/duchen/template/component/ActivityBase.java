@@ -1,12 +1,10 @@
 package com.duchen.template.component;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,7 +12,7 @@ import android.view.MenuItem;
 
 import com.duchen.template.component.helper.FrameworkActivityManager;
 import com.duchen.template.concept.IActivity;
-import com.duchen.template.concept.model.LegalModelParser;
+import com.duchen.template.component.model.LegalModelParser;
 import com.duchen.template.scope.TemplateScopeInstance;
 import com.duchen.template.utils.LogUtil;
 

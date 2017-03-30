@@ -27,4 +27,9 @@ public class LoadDataRequest extends RequestBase<LoadDataResult> {
         return map;
     }
 
+    @Override
+    protected boolean isResultAllowNull() {
+        return true;
+    }
+
 }

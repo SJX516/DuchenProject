@@ -1,6 +1,6 @@
 package com.duchen.template.component.request;
 
-import com.duchen.template.concept.model.LegalModel;
+import com.duchen.template.component.model.LegalModel;
 import com.google.gson.JsonElement;
 
 public class BaseResponseData implements IRequest, LegalModel {

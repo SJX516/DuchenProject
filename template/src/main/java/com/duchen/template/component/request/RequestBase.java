@@ -11,8 +11,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.duchen.template.component.BaseApplication;
 import com.duchen.template.component.request.error.ErrorFactory;
 import com.duchen.template.component.request.error.ErrorListener;
-import com.duchen.template.concept.model.LegalModelParser;
-import com.duchen.template.scope.TemplateScopeInstance;
+import com.duchen.template.component.model.LegalModelParser;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.ManifestUtil;
 import com.duchen.template.utils.PlatformUtil;
@@ -36,9 +35,6 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
     public final static int TIMEOUT_15S = 15*1000;
 
     private final static int MAX_NUM_RETRY = 1;
-
-    //如果服务器返回的 results 可以没有数据的话,这个变量一定要设置为true,这样才能调用正确的回调
-    protected boolean mIsResultAllowNull = false;
 
     public String mUrl;
     public LegalModelParser mParser;
@@ -73,9 +69,7 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
         } catch (UnsupportedEncodingException e) {
             parsed = new String(response.data);
         }
-        if (TemplateScopeInstance.getInstance().isDebug()) {
-            LogUtil.d("response", parsed);
-        }
+        LogUtil.d("response", parsed);
         BaseResponseData brd = mParser.fromJson(parsed, BaseResponseData.class);
         if (brd != null) {
             brd.setSequence(getSequence());
@@ -93,7 +87,7 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
                 return Response.error(ErrorFactory.create(getSequence(), mUrl, brd.code, brd.message, brd
                         .results));
             } else {
-                if (brd.data == null && !mIsResultAllowNull) {
+                if (brd.data == null && !isResultAllowNull()) {
                     return Response.error(new VolleyError("服务器返回数据为空"));
                 } else {
                     return Response.success(brd, HttpHeaderParser.parseCacheHeaders(response));
@@ -150,5 +144,8 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
     }
 
     protected abstract Map<String, String> getStudyPostParams();
+
+    //如果服务器返回的 results 可以没有数据的话,这里一定要返回true,这样才能调用正确的回调
+    protected abstract boolean isResultAllowNull();
 
 }

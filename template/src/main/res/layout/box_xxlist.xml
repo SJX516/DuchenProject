@@ -4,12 +4,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <com.duchen.template.example.ui.YYItemBox
+    <com.duchen.template.example.box.YYItemBox
         android:id="@+id/xxlist_yyitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.duchen.template.example.ui.ZZItemBox
+    <com.duchen.template.example.box.ZZItemBox
         android:id="@+id/xxlist_zzitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

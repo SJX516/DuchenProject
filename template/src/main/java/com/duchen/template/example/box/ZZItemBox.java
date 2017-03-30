@@ -1,4 +1,4 @@
-package com.duchen.template.example.ui;
+package com.duchen.template.example.box;
 
 import android.content.Context;
 import android.net.Uri;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.duchen.template.R;
 import com.duchen.template.concept.IBox;
-import com.duchen.template.example.ui.model.ZZItemData;
+import com.duchen.template.example.box.model.ZZItemData;
 
 public class ZZItemBox extends FrameLayout implements IBox<ZZItemData> {
 

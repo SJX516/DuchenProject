@@ -1,4 +1,4 @@
-package com.duchen.template.example.ui;
+package com.duchen.template.example.box;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.duchen.template.R;
 import com.duchen.template.concept.IBox;
-import com.duchen.template.example.ui.model.YYItemData;
+import com.duchen.template.example.box.model.YYItemData;
 
 
 public class YYItemBox extends FrameLayout implements IBox<YYItemData>, View.OnClickListener {

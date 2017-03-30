@@ -1,4 +1,4 @@
-package com.duchen.template.example.ui;
+package com.duchen.template.example.box;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,8 +9,8 @@ import android.widget.ListView;
 import com.duchen.template.R;
 import com.duchen.template.concept.IBox;
 import com.duchen.template.concept.IViewModel;
-import com.duchen.template.example.ui.model.YYItemData;
-import com.duchen.template.example.ui.model.ZZItemData;
+import com.duchen.template.example.box.model.YYItemData;
+import com.duchen.template.example.box.model.ZZItemData;
 import com.duchen.template.ui.AdapterBase;
 
 import java.util.Collection;
