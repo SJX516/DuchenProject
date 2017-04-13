@@ -17,6 +17,9 @@ import com.duchen.template.usage.R;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.ToastUtil;
 
+/**
+ * 查看ViewPager的源码,验证View移动的几种方式,成果在笔记《View滑动》和《ViewPager源码笔记》中
+ */
 public class TestViewPagerActivity extends AppActivityBase implements ViewPager.OnPageChangeListener {
 
     private View mRoot;

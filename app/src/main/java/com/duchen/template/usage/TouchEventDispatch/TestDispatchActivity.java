@@ -8,6 +8,9 @@ import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 import com.duchen.template.utils.LogUtil;
 
+/**
+ * 验证touchEvent从activity到最底层view的分发机制,成果在笔记《View Touch事件分发机制》中
+ */
 public class TestDispatchActivity extends AppActivityBase {
 
     private FatherLayout mFatherLayout;

@@ -16,6 +16,7 @@ import android.widget.Button;
 import com.duchen.template.usage.Kotlin.KotlinMainActivity;
 import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
 import com.duchen.template.usage.TestBrowser.TestBrowserActivity;
+import com.duchen.template.usage.TestLifeCircle.TestLifeCircleActivityA;
 import com.duchen.template.usage.TestNotification.TestNotificationsActivity;
 import com.duchen.template.usage.TestViewPager.TestViewPagerActivity;
 import com.duchen.template.usage.TouchEventDispatch.TestDispatchActivity;
@@ -23,10 +24,10 @@ import com.duchen.template.usage.TouchEventDispatch.TestDispatchActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
-            "PinScrollable", "TestBrowser"};
+            "PinScrollable", "TestBrowser", "TestLifeCircle"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, TestDispatchActivity.class,
             TestNotificationsActivity.class, TestViewPagerActivity.class, PinScrollableActivity.class,
-            TestBrowserActivity.class};
+            TestBrowserActivity.class, TestLifeCircleActivityA.class};
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;

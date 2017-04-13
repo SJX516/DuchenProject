@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -54,6 +55,9 @@ public class ZZItemBox extends FrameLayout implements IBox<ZZItemData> {
 
     protected void initViews() {
         inflate(this.getContext(), R.layout.box_example_zzitem, this);
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        setLayoutParams(lp);
         vImage = (ImageView) findViewById(R.id.zzitem_image);
     }
 }

@@ -3,6 +3,7 @@ package com.duchen.template.example.box;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,10 @@ public class YYItemBox extends FrameLayout implements IBox<YYItemData>, View.OnC
 
     protected void initViews() {
         inflate(this.getContext(), R.layout.box_example_yyitem, this);
+        //在 recyclerView 中直接使用 new Box 的形式,无法为该 View 的 width 设置正确的值,所以这里需要手动设置
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        setLayoutParams(lp);
         vTitle = (TextView) findViewById(R.id.yyitem_title);
         vDescription = (TextView) findViewById(R.id.yyitem_description);
         vSomething = findViewById(R.id.yyitem_something);

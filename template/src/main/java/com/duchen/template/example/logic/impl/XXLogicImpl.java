@@ -70,7 +70,7 @@ public class XXLogicImpl extends LogicBase implements XXLogic, XXListBox.ViewMod
     }
 
     @Override
-    public Collection<IViewModel> getItems() {
+    public List<IViewModel> getItems() {
         return mItems;
     }
 

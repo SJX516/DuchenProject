@@ -79,8 +79,8 @@ public class StringUtil {
      *
      * @param v 字符串
      */
-    public static boolean isStringEmpty(String v) {
-        return v == null || v.length() == 0;
+    public static boolean isEmpty(String v) {
+        return TextUtils.isEmpty(v);
     }
 
     /**

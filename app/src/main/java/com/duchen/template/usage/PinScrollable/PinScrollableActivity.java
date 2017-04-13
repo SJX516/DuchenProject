@@ -15,6 +15,9 @@ import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 import com.duchen.template.utils.ToastUtil;
 
+/**
+ * 测试滑动冲突的解决方案,成果在《View滑动》笔记中
+ */
 public class PinScrollableActivity extends AppActivityBase implements ScrollableLinearLayout.Callback {
 
     private ScrollableLinearLayout mScrollableLinearLayout;

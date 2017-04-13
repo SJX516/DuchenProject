@@ -1,6 +1,8 @@
 package com.duchen.template.example.box;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +13,13 @@ import com.duchen.template.concept.IBox;
 import com.duchen.template.concept.IViewModel;
 import com.duchen.template.example.box.model.YYItemData;
 import com.duchen.template.example.box.model.ZZItemData;
-import com.duchen.template.ui.AdapterBase;
-
-import java.util.Collection;
+import java.util.List;
 
 
-public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
+public class XXListBox extends RecyclerView implements IBox<XXListBox.ViewModel> {
 
     public interface ViewModel extends IViewModel {
-        Collection<IViewModel> getItems();
+        List<IViewModel> getItems();
         boolean canLoadMore();
         boolean canPullToRefresh();
     }
@@ -34,7 +34,7 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
     }
 
     private ViewModel mModel;
-    private CoursewareAdapter mAdapter;
+    private ListBoxAdapter mAdapter;
     private XXListBox.OnClickListener mOnClickListener;
     private YYItemBox.OnClickListener mInsideItemClickListener;
 
@@ -59,8 +59,12 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
     @Override
     public void bindViewModel(ViewModel viewModel) {
         mModel = viewModel;
-        mAdapter = new CoursewareAdapter(this.getContext(), mModel);
-        this.setAdapter(mAdapter);
+        if (mAdapter == null) {
+            mAdapter = new ListBoxAdapter(mModel.getItems());
+            this.setAdapter(mAdapter);
+        } else {
+            mAdapter.updateData(mModel.getItems());
+        }
     }
 
     @Override
@@ -73,6 +77,8 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
     }
 
     private void init() {
+        setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new ListBoxAdapter(null);
         mInsideItemClickListener = new YYItemBox.OnClickListener() {
             @Override
             public void onClickInsideItem(YYItemData itemData) {
@@ -83,22 +89,74 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
         };
     }
 
-    class CoursewareAdapter extends AdapterBase<ViewModel> implements View.OnClickListener {
+    private class ListBoxAdapter extends RecyclerView.Adapter<ListBoxAdapter.BoxViewHolder> implements View
+            .OnClickListener {
 
-        public CoursewareAdapter(Context context, ViewModel dataProvider) {
-            super(context, dataProvider);
+        public static final int TYPE_VOID = 0;
+        public static final int TYPE_YY = 1;
+        public static final int TYPE_ZZ = 2;
+
+        private List<IViewModel> mItems;
+
+
+        public ListBoxAdapter(List<IViewModel> items) {
+            mItems = items;
+        }
+
+        public void updateData(List<IViewModel> items) {
+            mItems = items;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            IViewModel itemData = (IViewModel) mItems.get(position);
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.box_xxlist, null);
+        public BoxViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemBox = null;
+            switch (viewType) {
+                case TYPE_YY:
+                    itemBox = new YYItemBox(getContext());
+                    ((YYItemBox)itemBox).setInsideItemClickListener(mInsideItemClickListener);
+                    break;
+                case TYPE_ZZ:
+                    itemBox = new ZZItemBox(getContext());
+                    break;
             }
-            convertView.setTag(itemData);
-            convertView.setOnClickListener(this);
-            updateItemBox(convertView, itemData);
-            return convertView;
+            if (itemBox != null) {
+                itemBox.setOnClickListener(this);
+                return new BoxViewHolder(itemBox);
+            }
+            return null;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (mItems == null || mItems.size() <= position || mItems.get(position) == null) {
+                return TYPE_VOID;
+            }
+            IViewModel viewModel = mItems.get(position);
+            if (viewModel instanceof YYItemData) {
+                return TYPE_YY;
+            } else if (viewModel instanceof ZZItemData) {
+                return TYPE_ZZ;
+            }
+            return TYPE_VOID;
+        }
+
+        @Override
+        public void onBindViewHolder(BoxViewHolder holder, int position) {
+            if (holder == null || mItems == null || mItems.size() <= position) {
+                return;
+            }
+            holder.mBox.bindViewModel(mItems.get(position));
+            ((View)holder.mBox).setTag(mItems.get(position));
+            holder.mBox.update();
+        }
+
+        @Override
+        public int getItemCount() {
+            if (mItems == null) {
+                return 0;
+            } else {
+                return mItems.size();
+            }
         }
 
         @Override
@@ -119,42 +177,12 @@ public class XXListBox extends ListView implements IBox<XXListBox.ViewModel> {
             }
         }
 
-        @Override
-        protected void buildItem() {
-            for (IViewModel itemData : mDataProvider.getItems()) {
-                if (isItemNeedShow(itemData)) {
-                    mItems.add(itemData);
-                }
-            }
-        }
+        class BoxViewHolder extends RecyclerView.ViewHolder {
 
-        private boolean isItemNeedShow(IViewModel itemData) {
-            return true;
-        }
-
-        private void updateItemBox(final View convertView, final IViewModel itemData) {
-            if (convertView == null || itemData == null) {
-                return;
-            }
-            IBox itemBox = null;
-
-            YYItemBox YYItemBox = (YYItemBox) convertView.findViewById(R.id.xxlist_yyitem);
-            ZZItemBox ZZItemBox = (ZZItemBox) convertView.findViewById(R.id.xxlist_zzitem);
-
-            if (itemData instanceof YYItemData) {
-                YYItemBox.setVisibility(View.VISIBLE);
-                ZZItemBox.setVisibility(View.GONE);
-                YYItemBox.setInsideItemClickListener(mInsideItemClickListener);
-                itemBox = YYItemBox;
-            } else if (itemData instanceof ZZItemData) {
-                ZZItemBox.setVisibility(View.VISIBLE);
-                YYItemBox.setVisibility(View.GONE);
-                itemBox = YYItemBox;
-            }
-
-            if (itemBox != null) {
-                itemBox.bindViewModel(itemData);
-                itemBox.update();
+            IBox mBox;
+            public BoxViewHolder(View itemView) {
+                super(itemView);
+                mBox = (IBox) itemView;
             }
         }
     }

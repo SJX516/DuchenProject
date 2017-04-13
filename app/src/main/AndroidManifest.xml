@@ -9,30 +9,40 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TouchEventDispatch.TestDispatchActivity">
-        </activity>
-        <activity android:name=".PinScrollable.PinScrollableActivity">
-        </activity>
-        <activity android:name=".TestNotification.TestNotificationsActivity">
-        </activity>
-        <activity android:name=".Kotlin.KotlinMainActivity">
-        </activity>
-        <activity android:name=".TestViewPager.TestViewPagerActivity">
-        </activity>
+        <activity android:name=".TouchEventDispatch.TestDispatchActivity"
+                  android:label="TestDispatchActivity"/>
+        <activity android:name=".PinScrollable.PinScrollableActivity"
+                  android:label="PinScrollableActivity"/>
+        <activity android:name=".TestNotification.TestNotificationsActivity"
+                  android:label="TestNotificationsActivity"/>
+        <activity android:name=".Kotlin.KotlinMainActivity"
+                  android:label="KotlinMainActivity"/>
+        <activity android:name=".TestViewPager.TestViewPagerActivity"
+                  android:label="TestViewPagerActivity"/>
+
+        <activity android:name=".TestLifeCircle.TestLifeCircleActivityA"
+                  android:launchMode="standard"
+                  android:label="TestLifeCircleActivityA"/>
+        <activity android:name=".TestLifeCircle.TestLifeCircleActivityB"
+                  android:launchMode="standard"
+                  android:label="TestLifeCircleActivityB"/>
+
         <activity
             android:name=".TestBrowser.ActivityBrowser"
+            android:label="ActivityBrowser"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name=".TestNotification.TestInvokeActivity"
+            android:label="TestInvokeActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,8 +53,8 @@
             android:name=".TestNotification.ReceiverIntentService"
             android:enabled="true"/>
 
-        <activity android:name=".TestBrowser.TestBrowserActivity">
-        </activity>
+        <activity android:name=".TestBrowser.TestBrowserActivity"
+                  android:label="TestBrowserActivity"/>
     </application>
 
 </manifest>

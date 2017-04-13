@@ -1,11 +1,5 @@
 package com.duchen.template.usage;
 
-import android.database.Observable;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,8 +17,8 @@ public abstract class AppActivityBase extends ActivityBase implements View.OnCli
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mActionBar.show();
-            String title = getIntent().getStringExtra(KEY_TITLE);
-            if (StringUtil.isStringEmpty(title)) {
+            String title = (String) getTitle();
+            if (StringUtil.isEmpty(title)) {
                 title = ManifestUtil.getApplicationName(this);
             }
             mActionBar.setTitle(title);

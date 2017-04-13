@@ -14,6 +14,9 @@ import android.view.View;
 import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 
+/**
+ * 测试notification唤起app的情况 (可以唤起子Activity并关联父Activity)
+ */
 public class TestNotificationsActivity extends AppActivityBase {
 
     public static final String ACTION = "com.duchen.action.test";
