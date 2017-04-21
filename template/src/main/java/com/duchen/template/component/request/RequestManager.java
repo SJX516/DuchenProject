@@ -2,12 +2,17 @@ package com.duchen.template.component.request;
 
 import android.content.Context;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.RequestQueue.RequestFilter;
+import com.android.volley.Response;
+import com.android.volley.toolbox.FileRequest;
 import com.android.volley.toolbox.Volley;
 import com.duchen.template.component.BaseApplication;
 import com.duchen.template.utils.LogUtil;
+
+import java.io.File;
 
 public class RequestManager {
 
@@ -64,6 +69,13 @@ public class RequestManager {
                 return request.getSequence() == id;
             }
         });
+    }
+
+    public int downloadFile(String url, String filePath, Response.Listener<File> listener, Response.ErrorListener errorListener) {
+        FileRequest request = new FileRequest(url, filePath, listener, errorListener);
+        request.setRetryPolicy(new DefaultRetryPolicy(10000, 1, 1.0F));
+        request.setShouldCache(false);
+        return postRequest(request);
     }
 
     public void cancelAll() {

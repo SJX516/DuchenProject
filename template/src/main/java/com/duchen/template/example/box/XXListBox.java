@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.duchen.template.R;
 import com.duchen.template.concept.IBox;
 import com.duchen.template.concept.IViewModel;
+import com.duchen.template.example.box.helper.XXItemDecoration;
 import com.duchen.template.example.box.model.YYItemData;
 import com.duchen.template.example.box.model.ZZItemData;
 import java.util.List;
@@ -78,6 +79,7 @@ public class XXListBox extends RecyclerView implements IBox<XXListBox.ViewModel>
 
     private void init() {
         setLayoutManager(new LinearLayoutManager(getContext()));
+        addItemDecoration(new XXItemDecoration(getResources()));
         mAdapter = new ListBoxAdapter(null);
         mInsideItemClickListener = new YYItemBox.OnClickListener() {
             @Override
@@ -89,7 +91,7 @@ public class XXListBox extends RecyclerView implements IBox<XXListBox.ViewModel>
         };
     }
 
-    private class ListBoxAdapter extends RecyclerView.Adapter<ListBoxAdapter.BoxViewHolder> implements View
+    public class ListBoxAdapter extends RecyclerView.Adapter<ListBoxAdapter.BoxViewHolder> implements View
             .OnClickListener {
 
         public static final int TYPE_VOID = 0;

@@ -10,6 +10,8 @@
 
     <color name="color_item_selected_bg">#aaaaaa</color>
 
+    <color name="color_divider">#f2f4f7</color>
+
     <color name="color_item_bg">#ffffff</color>
 
 </resources>

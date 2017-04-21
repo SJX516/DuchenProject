@@ -5,6 +5,7 @@ import com.duchen.template.utils.LogUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -67,5 +68,43 @@ public class MD5 {
             }
         }
         return value;
+    }
+
+    public static String getMD5_32L(File file) {
+        InputStream input = null;
+        try {
+            input = new FileInputStream(file);
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] buf = new byte[16384];
+            int len = input.read(buf);
+            while (len > 0) {
+                md5.update(buf, 0, len);
+                len = input.read(buf);
+            }
+            return toHexString(md5.digest());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != input) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "";
+    }
+
+    private static String toHexString(byte[] bytes) {
+        StringBuffer hexValue = new StringBuffer();
+        for (int i = 0; i < bytes.length; i++) {
+            int val = ((int) bytes[i]) & 0xff;
+            if (val < 16) {
+                hexValue.append("0");
+            }
+            hexValue.append(Integer.toHexString(val));
+        }
+        return hexValue.toString();
     }
 }

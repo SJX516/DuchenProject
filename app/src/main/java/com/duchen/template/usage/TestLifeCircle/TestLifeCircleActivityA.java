@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class TestLifeCircleActivityA extends AppActivityBase {
 
     private ArrayList<Long> mLongs;
+    private Object nullObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class TestLifeCircleActivityA extends AppActivityBase {
 
     @Override
     public void handleClick(int id, View v) {
+        nullObject.toString();
         Intent intent = new Intent(this, TestLifeCircleActivityB.class);
         startActivity(intent);
     }
