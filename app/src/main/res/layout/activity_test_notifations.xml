@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".TestNotification.TestNotificationsActivity">
+    tools:context=".TestNotification.NotificationsActivity">
 
     <Button
         android:id="@+id/send_broadcast_special"

@@ -11,7 +11,7 @@ import com.duchen.template.utils.LogUtil;
 /**
  * 验证touchEvent从activity到最底层view的分发机制,成果在笔记《View Touch事件分发机制》中
  */
-public class TestDispatchActivity extends AppActivityBase {
+public class EventDispatchActivity extends AppActivityBase {
 
     private FatherLayout mFatherLayout;
     private ChildView mChildView;

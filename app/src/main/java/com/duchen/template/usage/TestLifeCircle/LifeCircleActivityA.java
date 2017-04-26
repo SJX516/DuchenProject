@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * 试验发现launchMode为standard,然后反复启动这个activity的话,GC并不会去主动调用onDestroy方法,
  * 而是在调用了onDestroy之后,这个activity才有可能被GC回收!!!
  */
-public class TestLifeCircleActivityA extends AppActivityBase {
+public class LifeCircleActivityA extends AppActivityBase {
 
     private ArrayList<Long> mLongs;
     private Object nullObject;
@@ -31,7 +31,7 @@ public class TestLifeCircleActivityA extends AppActivityBase {
     @Override
     public void handleClick(int id, View v) {
         nullObject.toString();
-        Intent intent = new Intent(this, TestLifeCircleActivityB.class);
+        Intent intent = new Intent(this, LifeCircleActivityB.class);
         startActivity(intent);
     }
 

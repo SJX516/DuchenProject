@@ -10,7 +10,7 @@ import com.duchen.template.utils.LogUtil;
 
 import java.util.ArrayList;
 
-public class TestLifeCircleActivityB extends AppActivityBase {
+public class LifeCircleActivityB extends AppActivityBase {
 
     private ArrayList<Long> mLongs;
 
@@ -26,7 +26,7 @@ public class TestLifeCircleActivityB extends AppActivityBase {
 
     @Override
     public void handleClick(int id, View v) {
-        Intent intent = new Intent(this, TestLifeCircleActivityA.class);
+        Intent intent = new Intent(this, LifeCircleActivityA.class);
         startActivity(intent);
     }
 

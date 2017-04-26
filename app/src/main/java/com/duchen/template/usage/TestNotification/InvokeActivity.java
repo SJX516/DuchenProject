@@ -6,7 +6,7 @@ import android.view.View;
 import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 
-public class TestInvokeActivity extends AppActivityBase {
+public class InvokeActivity extends AppActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

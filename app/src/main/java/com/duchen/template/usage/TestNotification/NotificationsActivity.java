@@ -17,7 +17,7 @@ import com.duchen.template.usage.R;
 /**
  * 测试notification唤起app的情况 (可以唤起子Activity并关联父Activity)
  */
-public class TestNotificationsActivity extends AppActivityBase {
+public class NotificationsActivity extends AppActivityBase {
 
     public static final String ACTION = "com.duchen.action.test";
     private BroadcastReceiver mBr;
@@ -65,7 +65,7 @@ public class TestNotificationsActivity extends AppActivityBase {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Intent resultIntent = new Intent(context, TestInvokeActivity.class);
+            Intent resultIntent = new Intent(context, InvokeActivity.class);
             PendingIntent resultPendingIntent;
 
             //StudyPoint 通过构建一个 TaskStack ,当不存在主页面时,在子页面点击返回也可以返回到主页面,可以得到更良好的导航体验。
@@ -73,7 +73,7 @@ public class TestNotificationsActivity extends AppActivityBase {
             if (intent.getIntExtra("type", 0) == 1) {
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
                 // Adds the back stack
-                stackBuilder.addParentStack(TestInvokeActivity.class);
+                stackBuilder.addParentStack(InvokeActivity.class);
                 // Adds the Intent to the top of the stack
                 stackBuilder.addNextIntent(resultIntent);
                 // Gets a PendingIntent containing the entire back stack

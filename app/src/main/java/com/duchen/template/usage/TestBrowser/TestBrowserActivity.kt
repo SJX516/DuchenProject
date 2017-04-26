@@ -23,7 +23,7 @@ class TestBrowserActivity : AppActivityBase() {
 
     override fun handleClick(id: Int, v: View?) {
         if (id == R.id.launch_btn) {
-            ActivityBrowser.launch(this, mEditText?.text.toString())
+            BrowserActivity.launch(this, mEditText?.text.toString())
         }
     }
 }

@@ -15,19 +15,20 @@ import android.widget.Button;
 
 import com.duchen.template.usage.Kotlin.KotlinMainActivity;
 import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
+import com.duchen.template.usage.TestAutoLoopViewPager.AutoLoopViewPagerActivity;
 import com.duchen.template.usage.TestBrowser.TestBrowserActivity;
-import com.duchen.template.usage.TestLifeCircle.TestLifeCircleActivityA;
-import com.duchen.template.usage.TestNotification.TestNotificationsActivity;
-import com.duchen.template.usage.TestViewPager.TestViewPagerActivity;
-import com.duchen.template.usage.TouchEventDispatch.TestDispatchActivity;
+import com.duchen.template.usage.TestLifeCircle.LifeCircleActivityA;
+import com.duchen.template.usage.TestNotification.NotificationsActivity;
+import com.duchen.template.usage.TestViewPager.NormalViewPagerActivity;
+import com.duchen.template.usage.TouchEventDispatch.EventDispatchActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
-            "PinScrollable", "TestBrowser", "TestLifeCircle"};
-    public static final Class[] CLASSES = {KotlinMainActivity.class, TestDispatchActivity.class,
-            TestNotificationsActivity.class, TestViewPagerActivity.class, PinScrollableActivity.class,
-            TestBrowserActivity.class, TestLifeCircleActivityA.class};
+            "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager"};
+    public static final Class[] CLASSES = {KotlinMainActivity.class, EventDispatchActivity.class,
+            NotificationsActivity.class, NormalViewPagerActivity.class, PinScrollableActivity.class,
+            TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class};
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
