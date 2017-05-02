@@ -6,14 +6,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.duchen.template.component.helper.FrameworkActivityManager;
-import com.duchen.template.concept.IActivity;
 import com.duchen.template.component.model.LegalModelParser;
-import com.duchen.template.scope.TemplateScopeInstance;
+import com.duchen.template.concept.IActivity;
+import com.duchen.template.module.TemplateInstance;
 import com.duchen.template.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -130,31 +129,6 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean mbBackKeyDown = false;
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mbBackKeyDown = true;
-            return true;
-        }
-        mbBackKeyDown = false;
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mbBackKeyDown) {
-                onBackPressed();
-            }
-            mbBackKeyDown = false;
-            return true;
-        }
-        mbBackKeyDown = false;
-        return super.onKeyUp(keyCode, event);
-    }
-
     @Override
     public void handleIntent(Intent intent) {
 
@@ -185,8 +159,8 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
     public void finish() {
         super.finish();
         if (launchMainActivityOnFinish()) {
-            if (TemplateScopeInstance.getInstance().isMainActivityDestroyed()) {
-                TemplateScopeInstance.getInstance().launchNewMainActivity(this);
+            if (TemplateInstance.getInstance().getScope().isMainActivityDestroyed()) {
+                TemplateInstance.getInstance().getScope().launchNewMainActivity(this);
             }
         }
     }

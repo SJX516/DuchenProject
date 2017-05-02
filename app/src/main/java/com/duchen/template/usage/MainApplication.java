@@ -3,10 +3,22 @@ package com.duchen.template.usage;
 import android.content.res.Configuration;
 
 import com.duchen.template.component.ApplicationBase;
+import com.duchen.template.module.impl.TemplateModuleImpl;
+import com.duchen.template.usage.UseModule.ModuleFactory;
+import com.duchen.template.module.TemplateScope;
+import com.duchen.template.usage.UseModule.TemplateConfigImpl;
+import com.duchen.template.usage.UseModule.TemplateScopeImpl;
 import com.duchen.template.utils.LogUtil;
 
 
 public class MainApplication extends ApplicationBase {
+
+    private TemplateScope mTemplateScope;
+    private boolean mIsMainActivityDestroyed = true;
+
+    public static MainApplication getInstance() {
+        return ApplicationBase.getInstance();
+    }
 
     @Override
     public void onTrimMemory(int level) {
@@ -30,6 +42,21 @@ public class MainApplication extends ApplicationBase {
     public void onCreate() {
         super.onCreate();
         LogUtil.d("onCreate");
+        initModuleConfigs();
+        initModuleFactory();
+    }
+
+
+    private void initModuleConfigs() {
+        mTemplateScope = new TemplateScopeImpl(new TemplateConfigImpl());
+    }
+
+    private void initModuleFactory() {
+        ModuleFactory.getInstance().registerModule(ModuleFactory.ModuleType.TEMPLATE, new TemplateModuleImpl(mTemplateScope));
+    }
+
+    public void templateDoSomeThing() {
+        ModuleFactory.getInstance().getTemplateModule().doSomeThing();
     }
 
     @Override
@@ -41,5 +68,13 @@ public class MainApplication extends ApplicationBase {
     public void onTerminate() {
         super.onTerminate();
         LogUtil.d("onTerminate");
+    }
+
+    public boolean isMainActivityDestroyed() {
+        return mIsMainActivityDestroyed;
+    }
+
+    public void setMainActivityDestroyed(boolean isMainActivityDestroyed) {
+        this.mIsMainActivityDestroyed = isMainActivityDestroyed;
     }
 }

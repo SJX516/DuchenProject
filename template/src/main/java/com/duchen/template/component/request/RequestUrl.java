@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Pair;
 
-import com.duchen.template.scope.TemplateScopeInstance;
+import com.duchen.template.module.TemplateInstance;
 
 public class RequestUrl {
 
@@ -21,14 +21,14 @@ public class RequestUrl {
             return url;
         }
 
-        Pair<String, String> hostAndPath = TemplateScopeInstance.getInstance().getHostAndRequestPath();
+        Pair<String, String> hostAndPath = TemplateInstance.getInstance().getScope().getConfig().getHostAndRequestPath();
         String host = hostAndPath.first;
         host += "/" + hostAndPath.second;
         return getUrl(url, host);
     }
 
     public static String getUrl(String url, String host) {
-        String returnUrl = (TemplateScopeInstance.getInstance().isUseHttps() ? PROTOCOL_HTTPS : PROTOCOL_HTTP);
+        String returnUrl = (TemplateInstance.getInstance().getScope().getConfig().isUseHttps() ? PROTOCOL_HTTPS : PROTOCOL_HTTP);
         returnUrl += "://";
         returnUrl += host;
         returnUrl += url;

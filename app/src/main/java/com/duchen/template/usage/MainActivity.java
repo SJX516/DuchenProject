@@ -2,12 +2,11 @@ package com.duchen.template.usage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +20,9 @@ import com.duchen.template.usage.TestLifeCircle.LifeCircleActivityA;
 import com.duchen.template.usage.TestNotification.NotificationsActivity;
 import com.duchen.template.usage.TestViewPager.NormalViewPagerActivity;
 import com.duchen.template.usage.TouchEventDispatch.EventDispatchActivity;
+import com.duchen.template.utils.ToastUtil;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppActivityBase implements View.OnClickListener {
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
             "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager"};
@@ -33,22 +33,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
 
+    public static void launchNewTask(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        MainApplication.getInstance().setMainActivityDestroyed(false);
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void setContentView() {
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void findViews() {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         mAdapter = new RecycleAdapter(this);
+    }
+
+    @Override
+    public void initViews() {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示
 //        类似于瀑布流
+    }
 
+    // 使用点击两次back，退出应用
+    private long mLastTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long now = System.currentTimeMillis();
+            if (now - mLastTime > 1500) {
+                ToastUtil.showToast("再按一次退出");
+                mLastTime = now;
+                return true;
+            }
+        }
+        MainApplication.getInstance().resetActivityLifecyle();
+        MainApplication.getInstance().setMainActivityDestroyed(true);
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
-    public void onClick(View v) {
+    public void handleClick(int id, View v) {
 
     }
 
