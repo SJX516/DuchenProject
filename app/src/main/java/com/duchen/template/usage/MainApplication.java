@@ -1,13 +1,12 @@
 package com.duchen.template.usage;
 
-import android.app.Application;
 import android.content.res.Configuration;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.utils.LogUtil;
 
 
-public class MainApplication extends BaseApplication {
+public class MainApplication extends ApplicationBase {
 
     @Override
     public void onTrimMemory(int level) {

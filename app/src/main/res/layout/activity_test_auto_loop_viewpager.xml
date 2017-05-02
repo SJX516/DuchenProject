@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/content"
-    android:background="@color/color_half_black"
+    android:background="@color/color_low_black"
     tools:context=".TestAutoLoopViewPager.AutoLoopViewPagerActivity">
 
     <com.duchen.template.usage.TestAutoLoopViewPager.TestIndicator
@@ -23,6 +23,7 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         android:layout_above="@id/indicator"
         android:background="@color/colorPrimary"/>
 

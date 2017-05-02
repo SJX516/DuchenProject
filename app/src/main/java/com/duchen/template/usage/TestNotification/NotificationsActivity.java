@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.os.Bundle;
 import android.view.View;
 
 import com.duchen.template.usage.AppActivityBase;
@@ -23,18 +22,25 @@ public class NotificationsActivity extends AppActivityBase {
     private BroadcastReceiver mBr;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_notifations);
-        findViewById(R.id.send_broadcast_special).setOnClickListener(this);
-        findViewById(R.id.send_broadcast_normal).setOnClickListener(this);
-        registerReceiver();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mBr);
+    }
+
+    @Override
+    public void setContentView() {
+        setContentView(R.layout.activity_test_notifations);
+    }
+
+    @Override
+    public void findViews() {
+        findViewById(R.id.send_broadcast_special).setOnClickListener(this);
+        findViewById(R.id.send_broadcast_normal).setOnClickListener(this);
+    }
+
+    @Override
+    public void initViews() {
+        registerReceiver();
     }
 
     private void registerReceiver() {

@@ -16,7 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.ui.dialog.AppSettingsDialog;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class PermissionUtil {
 
         boolean granted = false;
         try {
-            granted = ContextCompat.checkSelfPermission(BaseApplication.getInstance(), permission) == PackageManager
+            granted = ContextCompat.checkSelfPermission(ApplicationBase.getInstance(), permission) == PackageManager
                     .PERMISSION_GRANTED;
         } catch (Exception e) {
             e.printStackTrace();

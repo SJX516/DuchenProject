@@ -1,16 +1,12 @@
 package com.duchen.template.usage.PinScrollable;
 
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
-import com.duchen.template.ui.AdapterBase;
 import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
 import com.duchen.template.utils.ToastUtil;
@@ -30,14 +26,20 @@ public class PinScrollableActivity extends AppActivityBase implements Scrollable
     private boolean mIsFirstListItemVisible = true;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setContentView() {
         setContentView(R.layout.activity_pin_scrollable);
+    }
+
+    @Override
+    public void findViews() {
         mScrollableLinearLayout = (ScrollableLinearLayout) findViewById(R.id.scrollview);
         mHeaderView = findViewById(R.id.head_view);
         mHeaderTab = findViewById(R.id.head_tab);
         mListView = (ListView) findViewById(R.id.list);
+    }
 
+    @Override
+    public void initViews() {
         mScrollableLinearLayout.setCallback(this);
         mListView.setAdapter(new BaseAdapter() {
             @Override

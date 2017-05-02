@@ -14,7 +14,9 @@
 
     <color name="color_white">#ffffff</color>
 
-    <color name="color_half_black">#4c000000</color>
+    <color name="color_low_black">#22000000</color>
+
+    <color name="color_middle_black">#4c000000</color>
 
     <color name="color_black">#000000</color>
 

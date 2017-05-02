@@ -3,19 +3,21 @@ package com.duchen.template.component;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.duchen.template.concept.IFragment;
+import com.duchen.template.concept.IFrame;
 
 import de.greenrobot.event.EventBus;
 
-public abstract class FragmentBase extends Fragment implements Handler.Callback, IFragment {
+public abstract class FragmentBase extends Fragment implements Handler.Callback, IFrame {
 
     private static final String TAG = FragmentBase.class.getCanonicalName();
 
     private boolean mIsLoaded = false;
-    protected LayoutInflater mInflater;
     protected Handler mHandler;
     protected EventBus mEventBus;
 
@@ -27,6 +29,26 @@ public abstract class FragmentBase extends Fragment implements Handler.Callback,
         prepareLogic();
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+        View root = getContentView(inflater, container, savedInstanceState);
+        findViews(root);
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews();
+    }
+
+    public abstract View getContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    public abstract void findViews(View root);
+
+    public abstract void initViews();
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

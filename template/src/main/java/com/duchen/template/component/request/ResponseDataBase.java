@@ -3,7 +3,7 @@ package com.duchen.template.component.request;
 import com.duchen.template.component.model.LegalModel;
 import com.google.gson.JsonElement;
 
-public class BaseResponseData implements IRequest, LegalModel {
+public class ResponseDataBase implements IRequest, LegalModel {
 
     public static final int RESPONSE_SUCCESS_CODE = 0;
 

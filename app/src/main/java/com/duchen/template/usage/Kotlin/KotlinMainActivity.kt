@@ -22,16 +22,27 @@ class KotlinMainActivity : AppActivityBase() {
             "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
             "Sun 6/29 - Sunny - 20/7")
 
+    private var mForecastList : RecyclerView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+    override fun setContentView() {
         setContentView(R.layout.activity_kotlin)
-        val forecastList = findViewById(R.id.forecast_list) as RecyclerView
-        forecastList.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun findViews() {
+        mForecastList = findViewById(R.id.forecast_list) as RecyclerView
+    }
+
+    override fun initViews() {
+        mForecastList?.layoutManager = LinearLayoutManager(this)
 
         async() {
             val result = Request("杭州").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result.data) { forecast -> toast(forecast.date) }
+                mForecastList?.adapter = ForecastListAdapter(result.data) { forecast -> toast(forecast.date) }
 //                forecastList.adapter = ForecastListAdapter( result.data ){ toast(it.date) }
             }
 

@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 
 
 public class NetworkHelper {
@@ -33,7 +33,7 @@ public class NetworkHelper {
     // 获取当前的网络信息：2g/3g/4g/wifi
     public NetworkInfo getCurNetworkInfo() {
         if (cm == null) {
-            cm = (ConnectivityManager) BaseApplication.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+            cm = (ConnectivityManager) ApplicationBase.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         }
         return cm.getActiveNetworkInfo();
     }
@@ -90,7 +90,7 @@ public class NetworkHelper {
     }
 
     private int getNetworkType() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) BaseApplication.getInstance()
+        ConnectivityManager connectivityManager = (ConnectivityManager) ApplicationBase.getInstance()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();

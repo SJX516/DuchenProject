@@ -2,7 +2,6 @@ package com.duchen.template.usage.TestBrowser;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.duchen.template.usage.AppActivityBase;
@@ -22,10 +21,17 @@ public class BrowserActivity extends AppActivityBase {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setContentView() {
         setContentView(R.layout.activity_browser);
+    }
+
+    @Override
+    public void findViews() {
         mWebView = (WebView) findViewById(R.id.webview);
+    }
+
+    @Override
+    public void initViews() {
         String url = getIntent().getStringExtra(KEY_URL);
         mWebView.loadUrl(url);
     }

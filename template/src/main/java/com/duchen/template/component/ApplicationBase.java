@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 
 import com.duchen.template.component.helper.ActivityLifecycle;
 import com.duchen.template.component.helper.NetworkHelper.NetworkChangeListener;
-import com.duchen.template.concept.BaseException;
+import com.duchen.template.concept.ExceptionBase;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.PlatformUtil;
 import com.tencent.smtt.sdk.QbSdk;
@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class BaseApplication extends Application {
+public abstract class ApplicationBase extends Application {
 
     private static final String TAG = "BaseApplication";
 
-    protected static BaseApplication sBaseApp;
+    protected static ApplicationBase sBaseApp;
     private static ExecutorService sThreadPool = null;
 
     private ActivityLifecycle mActivityLifecycle = new ActivityLifecycle();
 
-    public static <T extends BaseApplication> T getInstance() {
+    public static <T extends ApplicationBase> T getInstance() {
         if (sBaseApp == null) {
             LogUtil.e(TAG, "sBaseApp not create or be terminated!");
         }
@@ -73,7 +73,7 @@ public abstract class BaseApplication extends Application {
                 QbSdk.initX5Environment(this, null);
 
                 listenToNetworkStatusChange();
-            } catch (BaseException e) {
+            } catch (ExceptionBase e) {
                 LogUtil.e(TAG, e.getMessage());
             }
         }
@@ -83,10 +83,10 @@ public abstract class BaseApplication extends Application {
     protected BroadcastReceiver mNetworkStatusReceiver;
     protected List<WeakReference<NetworkChangeListener>> mNetworkListeners;
 
-    private void listenToNetworkStatusChange() throws BaseException {
+    private void listenToNetworkStatusChange() throws ExceptionBase {
         initNetworkStatusReceiver();
         if (mNetworkStatusReceiver == null) {
-            throw new BaseException("mNetworkStatusReceiver is null!");
+            throw new ExceptionBase("mNetworkStatusReceiver is null!");
         }
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);

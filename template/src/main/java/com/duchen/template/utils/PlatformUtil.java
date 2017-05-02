@@ -29,7 +29,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -662,8 +662,8 @@ public class PlatformUtil {
     }
 
     public static boolean inMainProcess() {
-        String packageName = BaseApplication.getInstance().getPackageName();
-        String processName = getProcessName(BaseApplication.getInstance());
+        String packageName = ApplicationBase.getInstance().getPackageName();
+        String processName = getProcessName(ApplicationBase.getInstance());
         return packageName.equals(processName);
     }
 

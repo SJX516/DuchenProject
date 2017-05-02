@@ -2,7 +2,7 @@ package com.duchen.template.concept;
 
 import android.os.Bundle;
 
-public interface IFragment {
+public interface IFrame {
 
     /**
      * 解析setArgument()数据

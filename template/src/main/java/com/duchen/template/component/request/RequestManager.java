@@ -9,7 +9,7 @@ import com.android.volley.RequestQueue.RequestFilter;
 import com.android.volley.Response;
 import com.android.volley.toolbox.FileRequest;
 import com.android.volley.toolbox.Volley;
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.utils.LogUtil;
 
 import java.io.File;
@@ -45,7 +45,7 @@ public class RequestManager {
     private RequestQueue mRequestQueue = null;
 
     private RequestManager() {
-        mRequestQueue = Volley.newRequestQueue(BaseApplication.getInstance());
+        mRequestQueue = Volley.newRequestQueue(ApplicationBase.getInstance());
         mRequestQueue.start();
         mIsQueueStopped = false;
     }

@@ -4,9 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
-import com.duchen.template.component.BaseApplication;
 import com.duchen.template.utils.ToastUtil;
 
 public class ReceiverIntentService extends IntentService{

@@ -2,7 +2,6 @@ package com.duchen.template.example.frame;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,11 @@ import android.view.ViewGroup;
 import com.duchen.template.R;
 import com.duchen.template.component.FragmentBase;
 import com.duchen.template.concept.IViewModel;
-import com.duchen.template.example.logic.XXLogic;
-import com.duchen.template.example.logic.impl.XXLogicImpl;
 import com.duchen.template.example.box.XXListBox;
 import com.duchen.template.example.box.model.YYItemData;
 import com.duchen.template.example.box.model.ZZItemData;
+import com.duchen.template.example.logic.XXLogic;
+import com.duchen.template.example.logic.impl.XXLogicImpl;
 import com.duchen.template.utils.ToastUtil;
 
 public class XXFrame extends FragmentBase {
@@ -45,26 +44,27 @@ public class XXFrame extends FragmentBase {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
-            savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.frame_xxlist, null);
-        findViews((ViewGroup) rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (mLogic == null) {
-            return;
-        }
-        initViews();
-    }
-
-    @Override
     public void prepareLogic() {
         mLogic = new XXLogicImpl(getActivity(), mHandler);
     }
+
+    @Override
+    public View getContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.frame_xxlist, null);
+    }
+
+    @Override
+    public void findViews(View rootView) {
+        mListBox = (XXListBox) rootView.findViewById(R.id.xxframe_xxlist);
+    }
+
+    @Override
+    public void initViews() {
+        mListBox.setOnClickListener(mOnClickListener);
+        mListBox.bindViewModel(mLogic.getViewModel());
+        mListBox.update();
+    }
+
 
     @Override
     public void loadData() {
@@ -97,16 +97,6 @@ public class XXFrame extends FragmentBase {
                 break;
         }
         return true;
-    }
-
-    private void findViews(ViewGroup rootView) {
-        mListBox = (XXListBox) rootView.findViewById(R.id.xxframe_xxlist);
-    }
-
-    private void initViews() {
-        mListBox.setOnClickListener(mOnClickListener);
-        mListBox.bindViewModel(mLogic.getViewModel());
-        mListBox.update();
     }
 
     @Override

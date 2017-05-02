@@ -28,17 +28,24 @@ public class NormalViewPagerActivity extends AppActivityBase implements ViewPage
     private Button mButton2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setContentView() {
         setContentView(R.layout.activity_test_viewpager);
+    }
+
+    @Override
+    public void findViews() {
         mRoot = findViewById(R.id.content);
         mPager = (ViewPager) findViewById(R.id.pager);
+        mButton = (Button) findViewById(R.id.button);
+        mButton2 = (Button) findViewById(R.id.button2);
+    }
+
+    @Override
+    public void initViews() {
         mPager.addOnPageChangeListener(this);
         mPagerAdapter = new DemoCollectionPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-        mButton = (Button) findViewById(R.id.button);
         mButton.setOnClickListener(this);
-        mButton2 = (Button) findViewById(R.id.button2);
         mButton2.setOnClickListener(this);
     }
 
@@ -97,7 +104,7 @@ public class NormalViewPagerActivity extends AppActivityBase implements ViewPage
             // The last two arguments ensure LayoutParams are inflated
             // properly.
             View rootView = inflater.inflate(
-                    R.layout.fragment_test_viewpager, container, false);
+                    R.layout.frame_test_viewpager, container, false);
             Bundle args = getArguments();
             ((TextView) rootView.findViewById(R.id.text)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
             return rootView;

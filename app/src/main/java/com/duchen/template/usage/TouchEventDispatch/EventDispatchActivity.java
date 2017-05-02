@@ -1,6 +1,5 @@
 package com.duchen.template.usage.TouchEventDispatch;
 
-import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,12 +16,20 @@ public class EventDispatchActivity extends AppActivityBase {
     private ChildView mChildView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setContentView() {
         setContentView(R.layout.activity_test_dispatch);
+    }
+
+    @Override
+    public void findViews() {
         findViewById(R.id.reset).setOnClickListener(this);
         mFatherLayout = (FatherLayout) findViewById(R.id.father);
         mChildView = (ChildView) findViewById(R.id.child);
+    }
+
+    @Override
+    public void initViews() {
+
     }
 
     @Override

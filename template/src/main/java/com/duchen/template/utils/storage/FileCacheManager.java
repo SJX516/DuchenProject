@@ -2,7 +2,7 @@ package com.duchen.template.utils.storage;
 
 import android.text.TextUtils;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ public class FileCacheManager {
     private static final String BASE_CACHE_FOLDER = "BaseSimpleCache";
     private static final String DEFAULT_CACHE_SUBFOLDER = "default";
     // 过期时间30天
-    private static long EXPIRE_TIME = 30*24*60*60*1000L;
+    private static long EXPIRE_TIME = 30 * 24 * 60 * 60 * 1000L;
     private String mSubCacheFolder = DEFAULT_CACHE_SUBFOLDER;
 
     private ExecutorService mExecutorService;
@@ -189,10 +189,10 @@ public class FileCacheManager {
 
     private String getPath() {
         String fileCachePath;
-        if (BaseApplication.getInstance().getExternalFilesDir(null) != null) {
-            fileCachePath = BaseApplication.getInstance().getExternalFilesDir(null).getAbsolutePath();
+        if (ApplicationBase.getInstance().getExternalFilesDir(null) != null) {
+            fileCachePath = ApplicationBase.getInstance().getExternalFilesDir(null).getAbsolutePath();
         } else {
-            fileCachePath = BaseApplication.getInstance().getFilesDir().getAbsolutePath();
+            fileCachePath = ApplicationBase.getInstance().getFilesDir().getAbsolutePath();
         }
         return fileCachePath + File.separator + BASE_CACHE_FOLDER + File.separator + mSubCacheFolder;
     }

@@ -22,9 +22,21 @@ public class LifeCircleActivityA extends AppActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_lifecircle_a);
-        findViewById(R.id.btn_jump).setOnClickListener(this);
         LogUtil.d(this.toString() + "  onCreate()");
+    }
+
+    @Override
+    public void setContentView() {
+        setContentView(R.layout.activity_test_lifecircle_a);
+    }
+
+    @Override
+    public void findViews() {
+        findViewById(R.id.btn_jump).setOnClickListener(this);
+    }
+
+    @Override
+    public void initViews() {
         mLongs = new ArrayList<>(3000000);
     }
 
@@ -52,4 +64,5 @@ public class LifeCircleActivityA extends AppActivityBase {
         super.onDestroy();
         LogUtil.d(this.toString() + "  onDestroy()");
     }
+
 }

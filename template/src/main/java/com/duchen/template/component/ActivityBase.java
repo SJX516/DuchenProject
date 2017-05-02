@@ -38,7 +38,6 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
 
     protected boolean mIsResumeStatus = false;
     protected boolean mIsDestroyStatus = true;
-    protected ArrayList<Integer> mRequestIdList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +53,15 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
         mInflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         mEventBus = EventBus.getDefault();
         mParser = new LegalModelParser();
-        mRequestIdList = new ArrayList<>();
         initActionBar();
+
+        setContentView();
+        findViews();
+        initViews();
     }
 
     @Override
     protected void onStart() {
-        LogUtil.d(TAG, "onStart");
         super.onStart();
     }
 
@@ -74,6 +75,7 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
         }
     }
 
+    @Override
     public void onAttachFragment(Fragment fragment) {
         if (null != mFragmentList) {
             if (mFragmentList.contains(fragment)) {
@@ -167,6 +169,12 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
     public void prepareLogic() {
 
     }
+
+    public abstract void setContentView();
+
+    public abstract void findViews();
+
+    public abstract void initViews();
 
     @Override
     public boolean launchMainActivityOnFinish() {

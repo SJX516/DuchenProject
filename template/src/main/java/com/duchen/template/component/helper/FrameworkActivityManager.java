@@ -13,8 +13,8 @@ import java.util.Stack;
  */
 public class FrameworkActivityManager {
 
-    private Stack<Activity> mActivityStack = new Stack<Activity>();
-    private Map<Activity, String> mActivityTagMap = new HashMap<Activity, String>();
+    private Stack<Activity> mActivityStack = new Stack<>();
+    private Map<Activity, String> mActivityTagMap = new HashMap<>();
 
     private static FrameworkActivityManager instance;
 

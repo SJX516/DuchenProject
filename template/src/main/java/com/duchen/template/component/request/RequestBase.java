@@ -8,7 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.component.request.error.ErrorFactory;
 import com.duchen.template.component.request.error.ErrorListener;
 import com.duchen.template.component.model.LegalModelParser;
@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class RequestBase<T> extends Request<BaseResponseData> {
+public abstract class RequestBase<T> extends Request<ResponseDataBase> {
 
     private final static String TAG = "StudyRequestBase";
 
@@ -62,7 +62,7 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
     }
 
     @Override
-    protected Response<BaseResponseData> parseNetworkResponse(NetworkResponse response) {
+    protected Response<ResponseDataBase> parseNetworkResponse(NetworkResponse response) {
         String parsed;
         try {
             parsed = new String(response.data, "UTF-8");
@@ -70,7 +70,7 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
             parsed = new String(response.data);
         }
         LogUtil.d("response", parsed);
-        BaseResponseData brd = mParser.fromJson(parsed, BaseResponseData.class);
+        ResponseDataBase brd = mParser.fromJson(parsed, ResponseDataBase.class);
         if (brd != null) {
             brd.setSequence(getSequence());
             brd.setUrl(mUrl);
@@ -100,7 +100,7 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void deliverResponse(BaseResponseData response) {
+    protected void deliverResponse(ResponseDataBase response) {
 
         if (mListener != null) {
             mListener.onResponse((T) response.data);
@@ -121,8 +121,8 @@ public abstract class RequestBase<T> extends Request<BaseResponseData> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<>();
-        headers.put(USER_AGENT_VERSION, ManifestUtil.getApplicationVersionName(BaseApplication.getInstance()));
-        headers.put(USER_AGENT_KEY_IMEI, PlatformUtil.getPhoneIMEI(BaseApplication.getInstance()));
+        headers.put(USER_AGENT_VERSION, ManifestUtil.getApplicationVersionName(ApplicationBase.getInstance()));
+        headers.put(USER_AGENT_KEY_IMEI, PlatformUtil.getPhoneIMEI(ApplicationBase.getInstance()));
         return headers;
     }
 

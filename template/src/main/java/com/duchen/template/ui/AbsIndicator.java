@@ -87,7 +87,7 @@ public abstract class AbsIndicator extends View {
             canvas.translate(mCellWidth + mGapWidth, 0);
         }
         canvas.restore();
-    };
+    }
 
     private void drawCell(Canvas canvas, Drawable cell) {
         canvas.save();

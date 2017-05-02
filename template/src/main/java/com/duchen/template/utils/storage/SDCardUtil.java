@@ -7,7 +7,7 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.PermissionUtil;
 import com.duchen.template.utils.PlatformUtil;
@@ -56,7 +56,7 @@ public class SDCardUtil {
      * @return
      */
     public static String getDefaultSDCardRootPath() {
-        File file = BaseApplication.getInstance().getExternalCacheDir();
+        File file = ApplicationBase.getInstance().getExternalCacheDir();
         if (file != null) {
             List<String> pathList = getWritableVolumePaths();
             String path = file.getAbsolutePath();
@@ -83,7 +83,7 @@ public class SDCardUtil {
     private static List<String> getWritableVolumePaths() {
         String[] paths = null;
         try {
-            StorageManager sm = (StorageManager) BaseApplication.getInstance().getSystemService(Context
+            StorageManager sm = (StorageManager) ApplicationBase.getInstance().getSystemService(Context
                     .STORAGE_SERVICE);
             paths = (String[]) sm.getClass().getMethod("getVolumePaths", new Class[0]).invoke(sm, new Object[]{});
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException |

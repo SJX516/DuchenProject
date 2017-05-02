@@ -1,6 +1,6 @@
 package com.duchen.template.utils;
 
-import com.duchen.template.component.BaseApplication;
+import com.duchen.template.component.ApplicationBase;
 
 public class DensityUtil {
 
@@ -10,11 +10,11 @@ public class DensityUtil {
      * @return 屏幕密度
      */
     public static float getDensity() {
-        return BaseApplication.getInstance().getResources().getDisplayMetrics().density;
+        return ApplicationBase.getInstance().getResources().getDisplayMetrics().density;
     }
 
     public static float getScaledDensity() {
-        return BaseApplication.getInstance().getResources().getDisplayMetrics().scaledDensity;
+        return ApplicationBase.getInstance().getResources().getDisplayMetrics().scaledDensity;
     }
 
     /**
@@ -23,7 +23,7 @@ public class DensityUtil {
      * @return 屏幕宽度
      */
     public static int getScreenWidth() {
-        return BaseApplication.getInstance().getResources().getDisplayMetrics().widthPixels;
+        return ApplicationBase.getInstance().getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -32,7 +32,7 @@ public class DensityUtil {
      * @return 屏幕高度
      */
     public static int getScreenHeight() {
-        return BaseApplication.getInstance().getResources().getDisplayMetrics().heightPixels;
+        return ApplicationBase.getInstance().getResources().getDisplayMetrics().heightPixels;
     }
 
     public static int dp2px(float density, int dp) {

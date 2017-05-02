@@ -1,6 +1,5 @@
 package com.duchen.template.usage.TestBrowser
 
-import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -13,11 +12,16 @@ class TestBrowserActivity : AppActivityBase() {
     var mEditText : EditText? = null
     var mLaunchBtn : Button? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun setContentView() {
         setContentView(R.layout.activity_test_browser)
+    }
+
+    override fun findViews() {
         mEditText = find(R.id.input_text)
         mLaunchBtn = find(R.id.launch_btn)
+    }
+
+    override fun initViews() {
         (mLaunchBtn as Button).setOnClickListener(this)
     }
 

@@ -1,4 +1,4 @@
-package com.duchen.template.ui;
+package com.duchen.template.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

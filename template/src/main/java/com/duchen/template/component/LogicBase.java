@@ -4,15 +4,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.duchen.template.component.request.RequestManager;
-import com.duchen.template.concept.IDataSource;
 import com.duchen.template.concept.ILogic;
 import com.duchen.template.utils.LogUtil;
-import com.duchen.template.utils.ToastUtil;
 
 import java.lang.ref.WeakReference;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * 逻辑控制基类
@@ -28,8 +23,8 @@ public abstract class LogicBase implements ILogic {
 
     public LogicBase(Context context, Handler handler) {
         mIsReleased = false;
-        mContextHost = new WeakReference<Context>(context);
-        mHandlerHost = new WeakReference<Handler>(handler);
+        mContextHost = new WeakReference<>(context);
+        mHandlerHost = new WeakReference<>(handler);
     }
 
     protected void notifyUi(int what) {
