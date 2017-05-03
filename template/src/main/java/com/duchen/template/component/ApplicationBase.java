@@ -11,7 +11,6 @@ import com.duchen.template.component.helper.NetworkHelper.NetworkChangeListener;
 import com.duchen.template.concept.ExceptionBase;
 import com.duchen.template.utils.LogUtil;
 import com.duchen.template.utils.PlatformUtil;
-import com.tencent.smtt.sdk.QbSdk;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public abstract class ApplicationBase extends Application {
         return null;
     }
 
-    public void resetActivityLifecyle() {
+    public void resetActivityLifecycle() {
         if (mActivityLifecycle != null) {
             mActivityLifecycle.reset();
         }
@@ -70,8 +69,6 @@ public abstract class ApplicationBase extends Application {
         registerActivityLifecycleCallbacks(mActivityLifecycle);
         if (PlatformUtil.inMainProcess()) {
             try {
-                QbSdk.initX5Environment(this, null);
-
                 listenToNetworkStatusChange();
             } catch (ExceptionBase e) {
                 LogUtil.e(TAG, e.getMessage());

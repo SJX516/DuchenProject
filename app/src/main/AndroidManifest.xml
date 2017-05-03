@@ -33,13 +33,6 @@
         <activity android:name=".TestLifeCircle.LifeCircleActivityB"
                   android:launchMode="standard"
                   android:label="TestLifeCircleActivityB"/>
-
-        <activity
-            android:name=".TestBrowser.BrowserActivity"
-            android:label="ActivityBrowser"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
         <activity
             android:name=".TestNotification.InvokeActivity"
             android:label="TestInvokeActivity"

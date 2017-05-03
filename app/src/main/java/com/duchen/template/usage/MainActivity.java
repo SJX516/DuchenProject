@@ -79,7 +79,7 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
                 return true;
             }
         }
-        MainApplication.getInstance().resetActivityLifecyle();
+        MainApplication.getInstance().resetActivityLifecycle();
         MainApplication.getInstance().setMainActivityDestroyed(true);
         return super.onKeyDown(keyCode, event);
     }
