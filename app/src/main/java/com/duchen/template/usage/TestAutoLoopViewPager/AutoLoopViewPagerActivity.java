@@ -36,8 +36,8 @@ public class AutoLoopViewPagerActivity extends AppActivityBase implements ViewPa
 
     @Override
     public void findViews() {
-        mViewPager = (CustomViewPager) findViewById(R.id.view_pager);
-        mIndicator = (TestIndicator) findViewById(R.id.indicator);
+        mViewPager = (CustomViewPager) findViewById(R.id.pager_content);
+        mIndicator = (TestIndicator) findViewById(R.id.indicator_bottom);
         mAdapter = new TestPageAdapter(this, new ArrayList<>(Arrays.asList(R.color.red, R.color.blue, R.color.green)));
     }
 
@@ -112,7 +112,7 @@ public class AutoLoopViewPagerActivity extends AppActivityBase implements ViewPa
         @Override
         public View getView(ViewGroup container, int position) {
             View root = mInflater.inflate(R.layout.item_test, container, false);
-            ((ImageView) root.findViewById(R.id.img)).setBackgroundResource(mDataList.get(convertToRealPosition(position)));
+            ((ImageView) root.findViewById(R.id.img_item)).setBackgroundResource(mDataList.get(convertToRealPosition(position)));
             return root;
         }
 

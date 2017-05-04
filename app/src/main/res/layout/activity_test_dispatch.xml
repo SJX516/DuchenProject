@@ -11,20 +11,20 @@
     tools:context=".TouchEventDispatch.EventDispatchActivity">
 
     <Button
-        android:id="@+id/reset"
+        android:id="@+id/btn_reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RESET"/>
 
     <com.duchen.template.usage.TouchEventDispatch.FatherLayout
-        android:id="@+id/father"
-        android:layout_below="@id/reset"
+        android:id="@+id/father_view"
+        android:layout_below="@id/btn_reset"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBG">
 
         <com.duchen.template.usage.TouchEventDispatch.ChildView
-            android:id="@+id/child"
+            android:id="@+id/child_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@color/colorAccent"

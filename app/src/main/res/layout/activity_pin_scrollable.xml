@@ -9,19 +9,19 @@
     tools:context="com.duchen.template.usage.PinScrollable.PinScrollableActivity">
 
     <ImageView
-        android:id="@+id/head_view"
+        android:id="@+id/img_head"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:background="@color/colorAccent"/>
 
     <TextView
-        android:id="@+id/head_tab"
+        android:id="@+id/text_tab"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/colorBG"/>
 
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/list_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

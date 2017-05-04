@@ -37,10 +37,10 @@ class ForecastListAdapter(val items: ActualData, val itemClick: (Forecast) -> Un
         }
 
         init {
-            dateView = view.find(R.id.date)
-            typeView = view.find(R.id.description)
-            highTemperatureView = view.find(R.id.maxTemperature)
-            lowTemperatureView = view.find(R.id.minTemperature)
+            dateView = view.find(R.id.text_date)
+            typeView = view.find(R.id.text_desc)
+            highTemperatureView = view.find(R.id.text_max_temperature)
+            lowTemperatureView = view.find(R.id.text_min_temperature)
         }
 
         fun bindForecast(forecast: Forecast) {

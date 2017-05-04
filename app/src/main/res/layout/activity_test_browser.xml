@@ -7,7 +7,7 @@
     tools:context="com.duchen.template.usage.TestBrowser.TestBrowserActivity">
 
     <Button
-        android:id="@+id/launch_btn"
+        android:id="@+id/btn_launch"
         android:layout_width="50dp"
         android:layout_height="50dp"
         style="@style/ButtonStyle"
@@ -16,18 +16,18 @@
 
 
     <EditText
-        android:id="@+id/input_text"
+        android:id="@+id/edit_input"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:maxLines="1"
         android:text="http://www.baidu.com"
-        android:layout_toLeftOf="@id/launch_btn"/>
+        android:layout_toLeftOf="@id/btn_launch"/>
 
     <WebView
-        android:id="@+id/webview"
+        android:id="@+id/webview_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/launch_btn">
+        android:layout_below="@id/btn_launch">
     </WebView>
 
 

@@ -22,9 +22,9 @@ public class EventDispatchActivity extends AppActivityBase {
 
     @Override
     public void findViews() {
-        findViewById(R.id.reset).setOnClickListener(this);
-        mFatherLayout = (FatherLayout) findViewById(R.id.father);
-        mChildView = (ChildView) findViewById(R.id.child);
+        findViewById(R.id.btn_reset).setOnClickListener(this);
+        mFatherLayout = (FatherLayout) findViewById(R.id.father_view);
+        mChildView = (ChildView) findViewById(R.id.child_view);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class EventDispatchActivity extends AppActivityBase {
     @Override
     public void handleClick(int id, View v) {
         switch (id) {
-            case R.id.reset:
+            case R.id.btn_reset:
                 mFatherLayout.reset();
                 mChildView.reset();
                 break;

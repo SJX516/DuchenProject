@@ -33,7 +33,7 @@ class KotlinMainActivity : AppActivityBase() {
     }
 
     override fun findViews() {
-        mForecastList = findViewById(R.id.forecast_list) as RecyclerView
+        mForecastList = findViewById(R.id.list_forecast) as RecyclerView
     }
 
     override fun initViews() {

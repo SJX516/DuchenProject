@@ -12,12 +12,12 @@
     tools:context=".TestNotification.NotificationsActivity">
 
     <Button
-        android:id="@+id/send_broadcast_special"
+        android:id="@+id/btn_send_broadcast_special"
         android:text="SendBroadcastSpecial"
         style="@style/ButtonStyle"/>
 
     <Button
-        android:id="@+id/send_broadcast_normal"
+        android:id="@+id/btn_send_broadcast_normal"
         android:text="SendBroadcastNormal"
         style="@style/ButtonStyle"/>
 

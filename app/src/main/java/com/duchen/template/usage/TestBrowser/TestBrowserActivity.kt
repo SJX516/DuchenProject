@@ -21,9 +21,9 @@ class TestBrowserActivity : AppActivityBase() {
     }
 
     override fun findViews() {
-        mEditText = find(R.id.input_text)
-        mLaunchBtn = find(R.id.launch_btn)
-        mWebView = find(R.id.webview)
+        mEditText = find(R.id.edit_input)
+        mLaunchBtn = find(R.id.btn_launch)
+        mWebView = find(R.id.webview_main)
     }
 
     override fun initViews() {
@@ -32,7 +32,7 @@ class TestBrowserActivity : AppActivityBase() {
     }
 
     override fun handleClick(id: Int, v: View?) {
-        if (id == R.id.launch_btn) {
+        if (id == R.id.btn_launch) {
             mWebView?.loadUrl(mEditText?.text.toString())
         }
     }

@@ -33,9 +33,9 @@ public class PinScrollableActivity extends AppActivityBase implements Scrollable
     @Override
     public void findViews() {
         mScrollableLinearLayout = (ScrollableLinearLayout) findViewById(R.id.scrollview);
-        mHeaderView = findViewById(R.id.head_view);
-        mHeaderTab = findViewById(R.id.head_tab);
-        mListView = (ListView) findViewById(R.id.list);
+        mHeaderView = findViewById(R.id.img_head);
+        mHeaderTab = findViewById(R.id.text_tab);
+        mListView = (ListView) findViewById(R.id.list_content);
     }
 
     @Override

@@ -9,7 +9,7 @@
     tools:context=".TestAutoLoopViewPager.AutoLoopViewPagerActivity">
 
     <com.duchen.template.usage.TestAutoLoopViewPager.TestIndicator
-        android:id="@+id/indicator"
+        android:id="@+id/indicator_bottom"
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,11 +20,11 @@
 
 
     <com.duchen.template.ui.CustomViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/pager_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
-        android:layout_above="@id/indicator"
+        android:layout_above="@id/indicator_bottom"
         android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

@@ -4,8 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +21,17 @@ import com.duchen.template.usage.TestLifeCircle.LifeCircleActivityA;
 import com.duchen.template.usage.TestNotification.NotificationsActivity;
 import com.duchen.template.usage.TestViewPager.NormalViewPagerActivity;
 import com.duchen.template.usage.TouchEventDispatch.EventDispatchActivity;
+import com.duchen.template.usage.ViewEventBus.ViewEventBusActivity;
 import com.duchen.template.utils.ToastUtil;
 
 public class MainActivity extends AppActivityBase implements View.OnClickListener {
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
-            "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager"};
+            "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager", "ViewEventBus"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, EventDispatchActivity.class,
             NotificationsActivity.class, NormalViewPagerActivity.class, PinScrollableActivity.class,
-            TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class};
+            TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class,
+            ViewEventBusActivity.class};
 
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
@@ -53,17 +56,18 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
     @Override
     public void findViews() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.list_main);
         mAdapter = new RecycleAdapter(this);
     }
 
     @Override
     public void initViews() {
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示
-//        类似于瀑布流
+
+        //这里用线性宫格显示类似于瀑布流
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));
     }
 
     // 使用点击两次back，退出应用
@@ -120,7 +124,7 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
             public DefaultViewHolder(View itemView) {
                 super(itemView);
-                mButton = (Button) itemView.findViewById(R.id.item_button);
+                mButton = (Button) itemView.findViewById(R.id.btn_item);
                 mButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

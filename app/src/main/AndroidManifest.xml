@@ -9,30 +9,36 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TouchEventDispatch.EventDispatchActivity"
-                  android:label="TestDispatchActivity"/>
-        <activity android:name=".PinScrollable.PinScrollableActivity"
-                  android:label="PinScrollableActivity"/>
-        <activity android:name=".TestNotification.NotificationsActivity"
-                  android:label="TestNotificationsActivity"/>
-        <activity android:name=".Kotlin.KotlinMainActivity"
-                  android:label="KotlinMainActivity"/>
-        <activity android:name=".TestViewPager.NormalViewPagerActivity"
-                  android:label="TestViewPagerActivity"/>
-
-        <activity android:name=".TestLifeCircle.LifeCircleActivityA"
-                  android:launchMode="standard"
-                  android:label="TestLifeCircleActivityA"/>
-        <activity android:name=".TestLifeCircle.LifeCircleActivityB"
-                  android:launchMode="standard"
-                  android:label="TestLifeCircleActivityB"/>
+        <activity
+            android:name=".TouchEventDispatch.EventDispatchActivity"
+            android:label="TestDispatchActivity"/>
+        <activity
+            android:name=".PinScrollable.PinScrollableActivity"
+            android:label="PinScrollableActivity"/>
+        <activity
+            android:name=".TestNotification.NotificationsActivity"
+            android:label="TestNotificationsActivity"/>
+        <activity
+            android:name=".Kotlin.KotlinMainActivity"
+            android:label="KotlinMainActivity"/>
+        <activity
+            android:name=".TestViewPager.NormalViewPagerActivity"
+            android:label="TestViewPagerActivity"/>
+        <activity
+            android:name=".TestLifeCircle.LifeCircleActivityA"
+            android:label="TestLifeCircleActivityA"
+            android:launchMode="standard"/>
+        <activity
+            android:name=".TestLifeCircle.LifeCircleActivityB"
+            android:label="TestLifeCircleActivityB"
+            android:launchMode="standard"/>
         <activity
             android:name=".TestNotification.InvokeActivity"
             android:label="TestInvokeActivity"
@@ -46,11 +52,16 @@
             android:name=".TestNotification.ReceiverIntentService"
             android:enabled="true"/>
 
-        <activity android:name=".TestBrowser.TestBrowserActivity"
-                  android:label="TestBrowserActivity"/>
+        <activity
+            android:name=".TestBrowser.TestBrowserActivity"
+            android:label="TestBrowser"/>
 
-        <activity android:name=".TestAutoLoopViewPager.AutoLoopViewPagerActivity"
-                  android:label="TestAutoLoopViewPager"/>
+        <activity
+            android:name=".TestAutoLoopViewPager.AutoLoopViewPagerActivity"
+            android:label="TestAutoLoopViewPager"/>
+
+        <activity android:name=".ViewEventBus.ViewEventBusActivity"
+                  android:label="ViewEventBus" />
     </application>
 
 </manifest>

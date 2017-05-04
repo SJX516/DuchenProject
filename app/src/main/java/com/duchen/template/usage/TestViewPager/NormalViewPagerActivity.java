@@ -35,9 +35,9 @@ public class NormalViewPagerActivity extends AppActivityBase implements ViewPage
     @Override
     public void findViews() {
         mRoot = findViewById(R.id.content);
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mButton = (Button) findViewById(R.id.button);
-        mButton2 = (Button) findViewById(R.id.button2);
+        mPager = (ViewPager) findViewById(R.id.pager_content);
+        mButton = (Button) findViewById(R.id.btn_one);
+        mButton2 = (Button) findViewById(R.id.btn_two);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class NormalViewPagerActivity extends AppActivityBase implements ViewPage
             View rootView = inflater.inflate(
                     R.layout.frame_test_viewpager, container, false);
             Bundle args = getArguments();
-            ((TextView) rootView.findViewById(R.id.text)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
+            ((TextView) rootView.findViewById(R.id.text_content)).setText(Integer.toString(args.getInt(ARG_OBJECT)));
             return rootView;
         }
     }
@@ -114,13 +114,13 @@ public class NormalViewPagerActivity extends AppActivityBase implements ViewPage
     @Override
     public void handleClick(int id, View v) {
         switch (id) {
-            case R.id.button:
+            case R.id.btn_one:
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mButton.getLayoutParams();
                 params.rightMargin += 100;
                 mButton.setLayoutParams(params);
                 mButton2.setX(mButton2.getX() - 100);
                 break;
-            case R.id.button2:
+            case R.id.btn_two:
                 mRoot.requestLayout();
                 break;
         }

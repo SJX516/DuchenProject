@@ -34,8 +34,8 @@ public class NotificationsActivity extends AppActivityBase {
 
     @Override
     public void findViews() {
-        findViewById(R.id.send_broadcast_special).setOnClickListener(this);
-        findViewById(R.id.send_broadcast_normal).setOnClickListener(this);
+        findViewById(R.id.btn_send_broadcast_special).setOnClickListener(this);
+        findViewById(R.id.btn_send_broadcast_normal).setOnClickListener(this);
     }
 
     @Override
@@ -52,13 +52,13 @@ public class NotificationsActivity extends AppActivityBase {
     @Override
     public void handleClick(int id, View v) {
         Intent intent = new Intent();
-        if (id == R.id.send_broadcast_normal) {
+        if (id == R.id.btn_send_broadcast_normal) {
             intent.setAction(ACTION);
             intent.putExtra("type", 0);
             intent.putExtra("title", "normal");
             intent.putExtra("content", "content!!!");
             sendBroadcast(intent);
-        } else if (id == R.id.send_broadcast_special) {
+        } else if (id == R.id.btn_send_broadcast_special) {
             intent.setAction(ACTION);
             intent.putExtra("type", 1);
             intent.putExtra("title", "special");
