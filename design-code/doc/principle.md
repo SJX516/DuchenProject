@@ -19,7 +19,13 @@
     - 所有的工厂都是用来封装对象的创建,以便将代码从具体类解耦
 
 - **单例模式** 确保一个类只有一个实例,并提供一个全局访问点
-![单例模式](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCE193d5f5faa6f3dba521899b39f804a70/1728)
+![singleton](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCE193d5f5faa6f3dba521899b39f804a70/1728)
+
+- **命令模式** 将"请求"封装成对象,以便使用不同的请求、队列或者日志来参数化其他对象。命令模式也支持可撤销的操作。
+![command](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCEeba73f358486584a40d43099d3db9443/1730)
+
+    - 命令模式将发出请求的对象和执行请求的对象解耦
+    - 被解耦的两者之间通过命令对象进行沟通,命令对象封装了接受者和一个或一组动作
 
 ## 设计原则
 

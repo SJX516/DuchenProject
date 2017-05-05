@@ -1,6 +1,15 @@
 package com.duchen.design;
 
 import com.duchen.design.absFactory.DCPizzaStore;
+import com.duchen.design.command.RemoteControl;
+import com.duchen.design.command.command.Command;
+import com.duchen.design.command.command.impl.CeilingFanHighCommand;
+import com.duchen.design.command.command.impl.CeilingFanLowCommand;
+import com.duchen.design.command.command.impl.LightOffCommand;
+import com.duchen.design.command.command.impl.LightOnCommand;
+import com.duchen.design.command.command.impl.ListCommand;
+import com.duchen.design.command.receiver.CeilingFan;
+import com.duchen.design.command.receiver.Light;
 import com.duchen.design.decorator.beverage.Beverage;
 import com.duchen.design.decorator.beverage.impl.Espresso;
 import com.duchen.design.decorator.beverage.impl.HouseBlend;
@@ -20,11 +29,11 @@ import com.duchen.design.strategy.behavior.impl.FlyWithWings;
 public class DesignMain {
 
     enum DesignPattern {
-        STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY
+        STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY, COMMAND
     }
 
     public static void main(String[] args) {
-        runTestCode(DesignPattern.ABS_FACTORY);
+        runTestCode(DesignPattern.COMMAND);
     }
 
     private static void runTestCode(DesignPattern pattern) {
@@ -71,6 +80,35 @@ public class DesignMain {
                 PizzaStore dcPizzaStore = new DCPizzaStore();
                 pizza = dcPizzaStore.orderPizza("cheese");
                 System.out.println("Duchen ordered a " + pizza.getName() + "\n");
+                break;
+            case COMMAND:
+                RemoteControl remoteControl = new RemoteControl();
+                Light light = new Light();
+                LightOnCommand lightOnCommand = new LightOnCommand(light);
+                LightOffCommand lightOffCommand = new LightOffCommand(light);
+                remoteControl.setCommand(0, lightOnCommand, lightOffCommand);
+
+                CeilingFan fan = new CeilingFan();
+                CeilingFanHighCommand highCommand = new CeilingFanHighCommand(fan);
+                CeilingFanLowCommand lowCommand = new CeilingFanLowCommand(fan);
+                remoteControl.setCommand(1, highCommand, lowCommand);
+                System.out.println(remoteControl);
+
+                Command[] onCommands = {lightOnCommand, highCommand};
+                Command[] offCommands = {lightOffCommand, lowCommand};
+                ListCommand openAllCommand = new ListCommand(onCommands);
+                ListCommand closeAllCommand = new ListCommand(offCommands);
+
+                remoteControl.setCommand(2, openAllCommand, closeAllCommand);
+
+                remoteControl.onButtonPushed(2);
+                remoteControl.offButtonPushed(2);
+                remoteControl.undoButtonPushed();
+
+                remoteControl.onButtonPushed(0);
+                remoteControl.offButtonPushed(0);
+                remoteControl.undoButtonPushed();
+
                 break;
             default:
                 break;
