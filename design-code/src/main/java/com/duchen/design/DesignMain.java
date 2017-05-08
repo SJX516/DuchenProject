@@ -1,6 +1,9 @@
 package com.duchen.design;
 
 import com.duchen.design.absFactory.DCPizzaStore;
+import com.duchen.design.adapter.TurkeyAdapter;
+import com.duchen.design.adapter.duck.SimpleDuck;
+import com.duchen.design.adapter.turkey.impl.WildTurkey;
 import com.duchen.design.command.RemoteControl;
 import com.duchen.design.command.command.Command;
 import com.duchen.design.command.command.impl.CeilingFanHighCommand;
@@ -11,29 +14,33 @@ import com.duchen.design.command.command.impl.ListCommand;
 import com.duchen.design.command.receiver.CeilingFan;
 import com.duchen.design.command.receiver.Light;
 import com.duchen.design.decorator.beverage.Beverage;
-import com.duchen.design.decorator.beverage.impl.Espresso;
-import com.duchen.design.decorator.beverage.impl.HouseBlend;
 import com.duchen.design.decorator.beverage.condiment.impl.Mocha;
 import com.duchen.design.decorator.beverage.condiment.impl.Soy;
 import com.duchen.design.decorator.beverage.condiment.impl.Whip;
+import com.duchen.design.decorator.beverage.impl.Espresso;
+import com.duchen.design.decorator.beverage.impl.HouseBlend;
+import com.duchen.design.facade.HomeTheaterFacade;
 import com.duchen.design.factoryMethod.pizza.Pizza;
 import com.duchen.design.factoryMethod.pizzaStore.PizzaStore;
 import com.duchen.design.factoryMethod.pizzaStore.impl.ChicagoPizzaStore;
 import com.duchen.design.factoryMethod.pizzaStore.impl.NYPizzaStore;
 import com.duchen.design.observer.observer.impl.CurrentConditionsDisplay;
 import com.duchen.design.observer.subject.impl.WeatherDataSubject;
+import com.duchen.design.strategy.behavior.impl.FlyWithWings;
 import com.duchen.design.strategy.duck.Duck;
 import com.duchen.design.strategy.duck.impl.ModelDuck;
-import com.duchen.design.strategy.behavior.impl.FlyWithWings;
+import com.duchen.design.templateMethod.impl.Coffee;
+import com.duchen.design.templateMethod.impl.CoffeeWithHook;
+import com.duchen.design.templateMethod.impl.Tea;
 
 public class DesignMain {
 
     enum DesignPattern {
-        STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY, COMMAND
+        STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY, SINGLETON, COMMAND, ADAPTER, FACADE, TEMPLATE_METHOD
     }
 
     public static void main(String[] args) {
-        runTestCode(DesignPattern.COMMAND);
+        runTestCode(DesignPattern.TEMPLATE_METHOD);
     }
 
     private static void runTestCode(DesignPattern pattern) {
@@ -108,7 +115,32 @@ public class DesignMain {
                 remoteControl.onButtonPushed(0);
                 remoteControl.offButtonPushed(0);
                 remoteControl.undoButtonPushed();
-
+                break;
+            case ADAPTER:
+                WildTurkey wildTurkey = new WildTurkey();
+                SimpleDuck turkeyAdapter = new TurkeyAdapter(wildTurkey);
+                System.out.println("\nThe Turkey says...");
+                wildTurkey.gobble();
+                wildTurkey.fly();
+                System.out.println("\nThe Duck says...");
+                turkeyAdapter.quack();
+                turkeyAdapter.fly();
+                break;
+            case FACADE:
+                HomeTheaterFacade homeTheaterFacade = new HomeTheaterFacade();
+                homeTheaterFacade.watchMovie("Star Wars");
+                homeTheaterFacade.endMovie();
+                break;
+            case TEMPLATE_METHOD:
+                Tea tea = new Tea();
+                System.out.println("\nMaking tea...");
+                tea.prepareRecipe();
+                Coffee coffee = new Coffee();
+                System.out.println("\nMaking coffee...");
+                coffee.prepareRecipe();
+                System.out.println("\nMaking coffee with hook...");
+                Coffee coffeeWithHook = new CoffeeWithHook();
+                coffeeWithHook.prepareRecipe();
                 break;
             default:
                 break;
