@@ -48,6 +48,14 @@
 
     ![templateMethod](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCEcad1527160fb6f53c04943a5500c6402/1736)
 
+- **迭代器模式** 提供一种方法顺序访问一个聚合对象中的各个元素,而又不暴露其内部的表示。
+
+    ![iterator](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCE889bae7dee730a718a0cda75a540fbf7/1740)
+
+- **组合模式** 允许你将对象组合成树形结构来表现 "整体/部分" 层次结构。组合能让客户以一致的方式处理个别对象以及对象组合。
+
+    ![composite](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCEd542f114f1dc45a834230cf3fdeeae41/1739)
+
 ## 设计原则
 
 - 找出应用中可能需要变化之处，把他们独立出来，不需要和那些不需要变化的代码混在一起
@@ -67,3 +75,13 @@
 
 - 好莱坞原则: 别调用(打电话给)我们,我们会调用(打电话给)你
     - 允许低层组件将自己的部分细节挂钩到系统上,但是高层组件会决定什么时候和怎样使用这些低层组件
+
+- 一个类应该只有一个引起变化的原因
+
+
+
+
+
+
+
+
