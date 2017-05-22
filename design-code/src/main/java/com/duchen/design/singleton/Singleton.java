@@ -22,7 +22,7 @@ public class Singleton {
         return uniqueInstance;
     }
 
-    //双重检查,只在第一次执行同步,能在多线程保持良好的执行效率
+    //双重检查(Double Check),只在第一次执行同步,能在多线程保持良好的执行效率
     public static Singleton getInstance3() {
         if (uniqueInstance == null) {
             synchronized (Singleton.class) {

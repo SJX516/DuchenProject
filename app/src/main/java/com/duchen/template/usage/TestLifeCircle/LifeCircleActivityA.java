@@ -38,6 +38,7 @@ public class LifeCircleActivityA extends AppActivityBase {
     @Override
     public void initViews() {
         mLongs = new ArrayList<>(3000000);
+        mLongs = null;
     }
 
     @Override

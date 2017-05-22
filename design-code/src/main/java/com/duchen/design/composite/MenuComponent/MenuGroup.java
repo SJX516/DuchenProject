@@ -1,6 +1,9 @@
 package com.duchen.design.composite.MenuComponent;
 
+import com.duchen.design.composite.iterator.CompositeIterator;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MenuGroup extends MenuComponent {
 
@@ -46,5 +49,10 @@ public class MenuGroup extends MenuComponent {
         for (MenuComponent menuComponent : mMenuComponents) {
             menuComponent.print();
         }
+    }
+
+    @Override
+    public Iterator createIterator() {
+        return new CompositeIterator(mMenuComponents.iterator());
     }
 }

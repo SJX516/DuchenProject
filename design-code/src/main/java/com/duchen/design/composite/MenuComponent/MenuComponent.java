@@ -1,5 +1,9 @@
 package com.duchen.design.composite.MenuComponent;
 
+import com.duchen.design.composite.iterator.NullIterator;
+
+import java.util.Iterator;
+
 public abstract class MenuComponent {
 
     public void add(MenuComponent menuComponent) {
@@ -32,5 +36,9 @@ public abstract class MenuComponent {
 
     public void print() {
         throw new UnsupportedOperationException("print");
+    }
+
+    public Iterator createIterator() {
+        return new NullIterator();
     }
 }

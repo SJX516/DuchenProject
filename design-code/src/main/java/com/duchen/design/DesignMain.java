@@ -34,6 +34,7 @@ import com.duchen.design.iterator.menu.Menu;
 import com.duchen.design.iterator.menu.PancakeHouseMenu;
 import com.duchen.design.observer.observer.impl.CurrentConditionsDisplay;
 import com.duchen.design.observer.subject.impl.WeatherDataSubject;
+import com.duchen.design.state.GumballMachine;
 import com.duchen.design.strategy.behavior.impl.FlyWithWings;
 import com.duchen.design.strategy.duck.Duck;
 import com.duchen.design.strategy.duck.impl.ModelDuck;
@@ -45,11 +46,11 @@ public class DesignMain {
 
     enum DesignPattern {
         STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY, SINGLETON, COMMAND, ADAPTER, FACADE,
-        TEMPLATE_METHOD, ITERATOR, COMPOSITE
+        TEMPLATE_METHOD, ITERATOR, COMPOSITE, STATE
     }
 
     public static void main(String[] args) {
-        runTestCode(DesignPattern.COMPOSITE);
+        runTestCode(DesignPattern.STATE);
     }
 
     private static void runTestCode(DesignPattern pattern) {
@@ -187,8 +188,21 @@ public class DesignMain {
                 dinerMenu.add(dessertMenu);
 
                 WaitressComposite waitressComposite = new WaitressComposite(allMenu);
-                waitressComposite.printMenu();
+                waitressComposite.printVegetarianMenu();
 
+                break;
+            case STATE:
+                GumballMachine gumballMachine = new GumballMachine(1);
+                System.out.println(gumballMachine);
+                gumballMachine.insertQuarter();
+                gumballMachine.turnCrank();
+                System.out.println(gumballMachine);
+                gumballMachine.insertQuarter();
+                gumballMachine.turnCrank();
+                gumballMachine.refill(2);
+                gumballMachine.insertQuarter();
+                gumballMachine.turnCrank();
+                System.out.println(gumballMachine);
                 break;
             default:
                 break;

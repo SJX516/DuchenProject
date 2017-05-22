@@ -56,6 +56,10 @@
 
     ![composite](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCEd542f114f1dc45a834230cf3fdeeae41/1739)
 
+- **状态模式** 允许对象在内部状态改变时改变它的行为,对象看起来好像修改了它的类。
+
+    ![state](http://note.youdao.com/yws/public/resource/d5272cb82a3d24975b3a1798e08f0c43/xmlnote/WEBRESOURCE947ba275f82dc77884e86f5497d4cefa/1791)
+
 ## 设计原则
 
 - 找出应用中可能需要变化之处，把他们独立出来，不需要和那些不需要变化的代码混在一起

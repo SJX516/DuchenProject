@@ -1,5 +1,9 @@
 package com.duchen.design.composite.MenuComponent;
 
+import com.duchen.design.composite.iterator.NullIterator;
+
+import java.util.Iterator;
+
 public class MenuItem extends MenuComponent {
 
     String mName;
@@ -42,5 +46,10 @@ public class MenuItem extends MenuComponent {
         }
         System.out.println(", " + getPrice());
         System.out.println("    --" + getDesc());
+    }
+
+    @Override
+    public Iterator createIterator() {
+        return new NullIterator();
     }
 }
