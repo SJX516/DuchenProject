@@ -7,7 +7,7 @@ import com.duchen.design.state.state.impl.SoldOutState;
 import com.duchen.design.state.state.impl.SoldState;
 import com.duchen.design.state.state.impl.WinnerState;
 
-public class GumballMachine {
+public class GumballMachine implements GumballMachineRemote {
 
     private State soldOutState;
     private State noQuarterState;
@@ -17,9 +17,11 @@ public class GumballMachine {
 
     private State mState = soldOutState;
     private int mCount;
+    private String mLocation;
 
-    public GumballMachine(int count) {
+    public GumballMachine(String location, int count) {
         mCount = count;
+        mLocation = location;
         soldOutState = new SoldOutState(this);
         noQuarterState = new NoQuarterState(this);
         hasQuarterState = new HasQuarterState(this);
@@ -90,6 +92,15 @@ public class GumballMachine {
 
     @Override
     public String toString() {
-        return "Current State: " + mState + "    Gumball Count: " + mCount;
+        return "Location: " + mLocation +"    Current State: " + mState + "    Gumball Count: " + mCount;
+    }
+
+    public String getLocation() {
+        return mLocation;
+    }
+
+    @Override
+    public String getDesc() {
+        return toString();
     }
 }

@@ -34,6 +34,11 @@ import com.duchen.design.iterator.menu.Menu;
 import com.duchen.design.iterator.menu.PancakeHouseMenu;
 import com.duchen.design.observer.observer.impl.CurrentConditionsDisplay;
 import com.duchen.design.observer.subject.impl.WeatherDataSubject;
+import com.duchen.design.proxy.protect.Person;
+import com.duchen.design.proxy.protect.PersonImpl;
+import com.duchen.design.proxy.remote.GumballMonitor;
+import com.duchen.design.proxy.remote.proxy.Naming;
+import com.duchen.design.proxy.virtual.TextProxy;
 import com.duchen.design.state.GumballMachine;
 import com.duchen.design.strategy.behavior.impl.FlyWithWings;
 import com.duchen.design.strategy.duck.Duck;
@@ -46,11 +51,11 @@ public class DesignMain {
 
     enum DesignPattern {
         STRATEGY, OBSERVER, DECORATOR, FACTORY_METHOD, ABS_FACTORY, SINGLETON, COMMAND, ADAPTER, FACADE,
-        TEMPLATE_METHOD, ITERATOR, COMPOSITE, STATE
+        TEMPLATE_METHOD, ITERATOR, COMPOSITE, STATE, PROXY
     }
 
     public static void main(String[] args) {
-        runTestCode(DesignPattern.STATE);
+        runTestCode(DesignPattern.PROXY);
     }
 
     private static void runTestCode(DesignPattern pattern) {
@@ -192,7 +197,7 @@ public class DesignMain {
 
                 break;
             case STATE:
-                GumballMachine gumballMachine = new GumballMachine(1);
+                GumballMachine gumballMachine = new GumballMachine("test1", 1);
                 System.out.println(gumballMachine);
                 gumballMachine.insertQuarter();
                 gumballMachine.turnCrank();
@@ -203,6 +208,47 @@ public class DesignMain {
                 gumballMachine.insertQuarter();
                 gumballMachine.turnCrank();
                 System.out.println(gumballMachine);
+                break;
+            case PROXY:
+                System.out.println("--------REMOTE PROXY--------");
+                GumballMachine machine1 = new GumballMachine("num1", 20);
+                GumballMachine machine2 = new GumballMachine("num2", 10);
+                GumballMachine machine3 = new GumballMachine("num3", 40);
+                Naming.rebind(machine1.getLocation(), machine1);
+                Naming.rebind(machine2.getLocation(), machine2);
+                Naming.rebind(machine3.getLocation(), machine3);
+                GumballMonitor monitor1 = new GumballMonitor(Naming.lookup("num1"));
+                GumballMonitor monitor2 = new GumballMonitor(Naming.lookup("num2"));
+                GumballMonitor monitor3 = new GumballMonitor(Naming.lookup("num3"));
+                monitor1.report();
+                monitor2.report();
+                monitor3.report();
+
+                System.out.println("\n--------DYNAMIC PROXY--------");
+                Person joe = new PersonImpl("Joe", "bowling, Go");
+                Person ownerProxy = PersonImpl.getOwnerProxy(joe);
+                System.out.println(ownerProxy);
+                try {
+                    ownerProxy.setInterests("no bowling");
+                    ownerProxy.addRating(10);
+                } catch (Exception e) {
+                    System.out.println("Can't set rating from owner proxy");
+                }
+                System.out.println(ownerProxy);
+
+                Person nonOwnerProxy = PersonImpl.getNonOwnerProxy(joe);
+                System.out.println(nonOwnerProxy);
+                try {
+                    nonOwnerProxy.addRating(8);
+                    nonOwnerProxy.setInterests("bowling, Go");
+                } catch (Exception e) {
+                    System.out.println("Can't set interests from non owner proxy");
+                }
+                System.out.println(nonOwnerProxy);
+
+                System.out.println("\n--------VIRTUAL PROXY--------");
+                TextProxy textProxy = new TextProxy();
+                textProxy.print();
                 break;
             default:
                 break;
