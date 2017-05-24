@@ -2,9 +2,9 @@ package com.duchen.design.proxy.remote;
 
 public class GumballMonitor {
 
-    private com.duchen.design.proxy.remote.GumballMachineRemote mGumballMachineRemote;
+    private GumballMachineRemote mGumballMachineRemote;
 
-    public GumballMonitor(com.duchen.design.proxy.remote.GumballMachineRemote gumballMachineRemote) {
+    public GumballMonitor(GumballMachineRemote gumballMachineRemote) {
         mGumballMachineRemote = gumballMachineRemote;
     }
 
