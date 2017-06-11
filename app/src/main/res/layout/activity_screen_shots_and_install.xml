@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.duchen.template.usage.ScreenShotsAndInstallAPK.ScreenShotsAndInstallActivity">
+
+    <Button
+        android:id="@+id/btn_screen_shots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="截屏"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:id="@+id/btn_install_apk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/btn_screen_shots"
+        android:text="安装"/>
+
+    <Button
+        android:id="@+id/btn_uninstall_apk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/btn_install_apk"
+        android:text="卸载"/>
+
+    <Button
+        android:id="@+id/btn_run_command"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="执行"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/btn_uninstall_apk"/>
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/btn_run_command"
+        android:text="清空"/>
+
+    <EditText
+        android:id="@+id/edt_command"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入执行命令"
+        android:layout_below="@id/btn_run_command"/>
+
+    <ImageView
+        android:id="@+id/img_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:background="@color/blue"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/edt_command"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/txt_command_result"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/color_white"
+        android:layout_below="@+id/edt_command"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

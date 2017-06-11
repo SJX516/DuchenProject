@@ -9,3 +9,4 @@ bin/
 /build
 /captures
 gradle/
+*.apk

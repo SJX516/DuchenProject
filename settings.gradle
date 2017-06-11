@@ -1,1 +1,1 @@
-include ':app', ':test-java', ':template', ':think-in-java', ':design-code'
+include ':app', ':test-java', ':template', ':think-in-java', ':design-code', ':sign-system'

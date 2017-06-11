@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.duchen.template.usage.MainActivity">
 
+    <TextView
+        android:id="@+id/txt_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="1.0"
+        android:textColor="#aaaaaa"
+        android:layout_alignParentBottom="true"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_main"
@@ -13,6 +21,5 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-
 
 </RelativeLayout>

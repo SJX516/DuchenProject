@@ -1,7 +1,5 @@
 package com.test.thinkinjava.generics.src;
 
-import com.sun.beans.util.Cache;
-
 /**
  * Created by 51619 on 2016/4/26 0026.
  */

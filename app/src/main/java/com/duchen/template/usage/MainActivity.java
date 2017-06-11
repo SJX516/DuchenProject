@@ -12,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.duchen.template.usage.Kotlin.KotlinMainActivity;
 import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
+import com.duchen.template.usage.ScreenShotsAndInstallAPK.ScreenShotsAndInstallActivity;
 import com.duchen.template.usage.TestAutoLoopViewPager.AutoLoopViewPagerActivity;
 import com.duchen.template.usage.TestBrowser.TestBrowserActivity;
 import com.duchen.template.usage.TestLifeCircle.LifeCircleActivityA;
@@ -22,17 +24,20 @@ import com.duchen.template.usage.TestNotification.NotificationsActivity;
 import com.duchen.template.usage.TestViewPager.NormalViewPagerActivity;
 import com.duchen.template.usage.TouchEventDispatch.EventDispatchActivity;
 import com.duchen.template.usage.ViewEventBus.ViewEventBusActivity;
+import com.duchen.template.utils.ManifestUtil;
 import com.duchen.template.utils.ToastUtil;
 
 public class MainActivity extends AppActivityBase implements View.OnClickListener {
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
-            "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager", "ViewEventBus"};
+            "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager", "ViewEventBus",
+            "ScreenShotsAndInstallApk"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, EventDispatchActivity.class,
             NotificationsActivity.class, NormalViewPagerActivity.class, PinScrollableActivity.class,
             TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class,
-            ViewEventBusActivity.class};
+            ViewEventBusActivity.class, ScreenShotsAndInstallActivity.class};
 
+    private TextView mInfoText;
     private RecyclerView mRecyclerView;
     private RecycleAdapter mAdapter;
 
@@ -56,6 +61,7 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
     @Override
     public void findViews() {
+        mInfoText = (TextView) findViewById(R.id.txt_info);
         mRecyclerView = (RecyclerView) findViewById(R.id.list_main);
         mAdapter = new RecycleAdapter(this);
     }
@@ -68,6 +74,7 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
         //这里用线性宫格显示类似于瀑布流
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));
+        mInfoText.setText("Version : " + ManifestUtil.getApplicationVersionName(this));
     }
 
     // 使用点击两次back，退出应用
