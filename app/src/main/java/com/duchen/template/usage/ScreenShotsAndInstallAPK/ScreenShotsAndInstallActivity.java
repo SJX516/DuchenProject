@@ -72,11 +72,9 @@ public class ScreenShotsAndInstallActivity extends AppActivityBase implements Ca
         switch (id) {
             case R.id.btn_screen_shots:
                 CommandManager.getInstance().ScreenCapture(para);
-//                CaptureScreenUtil.getInstance().startScreenShot(this);
                 break;
             case R.id.btn_install_apk:
                 CommandManager.getInstance().installApk(this, para);
-//                startInstall();
                 break;
             case R.id.btn_uninstall_apk:
                 CommandManager.getInstance().uninstallApk(this, para);
@@ -116,6 +114,28 @@ public class ScreenShotsAndInstallActivity extends AppActivityBase implements Ca
                 });
             }
         }).start();
+    }
+
+    @Override
+    public void onInstallResult(boolean isSuccess, String packageName) {
+        if (isSuccess) {
+            ToastUtil.showToast(packageName + "安装成功");
+            PackageUtil.launchApp(this, packageName);
+        }
+    }
+
+    @Override
+    public void onUnInstallResult(boolean isSuccess, String packageName) {
+        if (isSuccess) {
+            ToastUtil.showToast(packageName + "卸载成功");
+        }
+    }
+
+    @Override
+    public void onScreenCaptureResult(boolean isSuccess, String filePath) {
+        if (isSuccess) {
+            ToastUtil.showToast("截图成功，In " + filePath);
+        }
     }
 
     public static final int REQUEST_ACCESSIBILITY_SERVICES = 11;
@@ -170,27 +190,5 @@ public class ScreenShotsAndInstallActivity extends AppActivityBase implements Ca
 
     private String getBaseDir() {
         return "/storage/emulated/0";
-    }
-
-    @Override
-    public void onInstallResult(boolean isSuccess, String packageName) {
-        if (isSuccess) {
-            ToastUtil.showToast(packageName + "安装成功");
-            PackageUtil.launchApp(this, packageName);
-        }
-    }
-
-    @Override
-    public void onUnInstallResult(boolean isSuccess, String packageName) {
-        if (isSuccess) {
-            ToastUtil.showToast(packageName + "卸载成功");
-        }
-    }
-
-    @Override
-    public void onScreenCaptureResult(boolean isSuccess, String filePath) {
-        if (isSuccess) {
-            ToastUtil.showToast("截图成功，In " + filePath);
-        }
     }
 }

@@ -1,11 +1,15 @@
 package com.duchen.template.usage.ScreenShotsAndInstallAPK.shell;
 
+import android.annotation.TargetApi;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.TextUtils;
 
 import com.duchen.template.usage.ScreenShotsAndInstallAPK.PackageUtil;
-import com.duchen.template.usage.ScreenShotsAndInstallAPK.systemapp.AIDLCommand;
 import com.duchen.template.utils.LogUtil;
 
 public class CommandManager {
@@ -38,6 +42,10 @@ public class CommandManager {
         mResultListener = resultListener;
     }
 
+    public CommandResultListener getResultListener() {
+        return mResultListener;
+    }
+
     public void installApk(Context context, String filePath) {
         if (TextUtils.isEmpty(filePath) || PackageUtil.getPackageInfoFromFile(context, filePath) == null) {
             return;
@@ -56,7 +64,7 @@ public class CommandManager {
 //            CommandTask commandTask = new CommandTask();
 //            commandTask.setPackageName(packageName);
 //            commandTask.execute(UnInstallCommandPrefix + packageName);
-            AIDLCommand.onUnInstall(packageName);
+            uninstallIntent(context, packageName);
         }
     }
 
@@ -68,6 +76,18 @@ public class CommandManager {
             commandTask.setFilePath(filePath);
             commandTask.execute(ScreenCaptureCommandPrefix + filePath);
         }
+    }
+
+    public static final String UNINSTALL_ACTION = "com.duchen.test.uninstall";
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void uninstallIntent(Context context, String packageName) {
+        Intent intent = new Intent();
+        intent.setAction(UNINSTALL_ACTION);
+        intent.putExtra("packageName", packageName);
+        PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+        PackageInstaller packageInstaller = context.getPackageManager().getPackageInstaller();
+        packageInstaller.uninstall(packageName, sender.getIntentSender());
     }
 
     private class CommandTask extends AsyncTask<String, Void, CommandResult> {
