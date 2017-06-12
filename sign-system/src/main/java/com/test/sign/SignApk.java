@@ -68,6 +68,8 @@ import sun.security.x509.X500Name;
 /**
  * Command line tool to sign JAR files (including APKs and OTA updates) in a way
  * compatible with the mincrypt verifier, using SHA1 and RSA keys.
+ *
+ * Program args: sign-system/key/platform.x509.pem sign-system/key/platform.pk8 app/build/outputs/apk/app-debug.apk sign_finish.apk
  */
 class SignApk
 {

@@ -62,7 +62,7 @@ public class ScreenShotsAndInstallActivity extends AppActivityBase implements Ca
         mUnInstallAPKBtn.setOnClickListener(this);
         mRunCommandBtn.setOnClickListener(this);
         mClearBtn.setOnClickListener(this);
-        requestCapturePermission();
+//        requestCapturePermission();
         CommandManager.getInstance().setResultListener(this);
     }
 
