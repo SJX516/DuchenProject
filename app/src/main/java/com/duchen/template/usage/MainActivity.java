@@ -3,6 +3,7 @@ package com.duchen.template.usage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.duchen.template.usage.Kotlin.KotlinMainActivity;
+import com.duchen.template.usage.MutilProcessConnect.ProcessConnectActivity;
 import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
 import com.duchen.template.usage.ScreenShotsAndInstallAPK.ScreenShotsAndInstallActivity;
 import com.duchen.template.usage.TestAutoLoopViewPager.AutoLoopViewPagerActivity;
@@ -31,11 +33,11 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
             "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager", "ViewEventBus",
-            "ScreenShotsAndInstallApk"};
+            "ScreenShotsAndInstallApk", "TestMultiProcess"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, EventDispatchActivity.class,
             NotificationsActivity.class, NormalViewPagerActivity.class, PinScrollableActivity.class,
             TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class,
-            ViewEventBusActivity.class, ScreenShotsAndInstallActivity.class};
+            ViewEventBusActivity.class, ScreenShotsAndInstallActivity.class, ProcessConnectActivity.class};
 
     private TextView mInfoText;
     private RecyclerView mRecyclerView;
