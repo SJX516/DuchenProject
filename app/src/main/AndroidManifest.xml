@@ -112,6 +112,19 @@
                 <action android:name="action.process2"/>
             </intent-filter>
         </service>
+
+        <service android:name=".MutilProcessConnect.intent.MsgDistributeService"
+                 android:exported="true">
+            <intent-filter>
+                <action android:name="com.wudaokou.hdm.intent.action.RECEIVE"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".MutilProcessConnect.intent.MyReceiver">
+            <intent-filter>
+                <action android:name="com.wudaokou.hdm.intent.action.RECEIVE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
