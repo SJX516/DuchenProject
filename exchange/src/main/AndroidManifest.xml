@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.duchen.exchange">
+
+    <application android:label="@string/app_name">
+        <service android:name=".ReceiverService"
+                 android:exported="true">
+            <intent-filter>
+                <action android:name="com.duchen.exchange.action.RECEIVE"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
