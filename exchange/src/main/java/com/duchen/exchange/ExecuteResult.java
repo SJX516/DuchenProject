@@ -63,9 +63,9 @@ public class ExecuteResult {
         protected Builder json(String resultString) {
             try {
                 JSONObject jsonObject = new JSONObject(resultString);
-                this.mCode = jsonObject.getInt("code");
-                this.mMsg = jsonObject.getString("msg");
-                this.mData = jsonObject.getString("data");
+                this.mCode = jsonObject.optInt("code");
+                this.mMsg = jsonObject.optString("msg");
+                this.mData = jsonObject.optString("data");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

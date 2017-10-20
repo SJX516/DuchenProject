@@ -99,11 +99,11 @@ public class ExchangeRequest {
                 JSONObject jsonObject = new JSONObject(requestJson);
                 JSONObject args = jsonObject.getJSONObject("args");
                 if (args != null) {
-                    this.sender = args.getString("sender");
-                    this.receiver = args.getString("receiver");
-                    this.action = args.getInt("action");
-                    this.params = args.getString("params");
-                    this.extra = args.getString("extra");
+                    this.sender = args.optString("sender");
+                    this.receiver = args.optString("receiver");
+                    this.action = args.optInt("action");
+                    this.params = args.optString("params");
+                    this.extra = args.optString("extra");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

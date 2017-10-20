@@ -50,9 +50,9 @@ public class ExchangeResponse {
         if (!mHasGet) {
             try {
                 JSONObject jsonObject = new JSONObject(mResultString);
-                this.mCode = jsonObject.getInt("code");
-                this.mMessage = jsonObject.getString("msg");
-                this.mData = jsonObject.getString("data");
+                this.mCode = jsonObject.optInt("code");
+                this.mMessage = jsonObject.optString("msg");
+                this.mData = jsonObject.optString("data");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
