@@ -19,6 +19,7 @@ import com.duchen.template.usage.Kotlin.KotlinMainActivity;
 import com.duchen.template.usage.MutilProcessConnect.ProcessConnectActivity;
 import com.duchen.template.usage.PinScrollable.PinScrollableActivity;
 import com.duchen.template.usage.ScreenShotsAndInstallAPK.ScreenShotsAndInstallActivity;
+import com.duchen.template.usage.TestAnnotation.AnnotationActivity;
 import com.duchen.template.usage.TestAutoLoopViewPager.AutoLoopViewPagerActivity;
 import com.duchen.template.usage.TestBrowser.TestBrowserActivity;
 import com.duchen.template.usage.TestLifeCircle.LifeCircleActivityA;
@@ -33,11 +34,12 @@ public class MainActivity extends AppActivityBase implements View.OnClickListene
 
     public static final String[] TITLES = {"KotlinMain", "TouchEventDispatch", "TestNotifications", "TestViewPager",
             "PinScrollable", "TestBrowser", "TestLifeCircle", "TestAutoLoopViewPager", "ViewEventBus",
-            "ScreenShotsAndInstallApk", "TestMultiProcess"};
+            "ScreenShotsAndInstallApk", "TestMultiProcess", "TestAnnotation"};
     public static final Class[] CLASSES = {KotlinMainActivity.class, EventDispatchActivity.class,
             NotificationsActivity.class, NormalViewPagerActivity.class, PinScrollableActivity.class,
             TestBrowserActivity.class, LifeCircleActivityA.class, AutoLoopViewPagerActivity.class,
-            ViewEventBusActivity.class, ScreenShotsAndInstallActivity.class, ProcessConnectActivity.class};
+            ViewEventBusActivity.class, ScreenShotsAndInstallActivity.class, ProcessConnectActivity.class,
+            AnnotationActivity.class};
 
     private TextView mInfoText;
     private RecyclerView mRecyclerView;

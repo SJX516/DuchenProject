@@ -1,4 +1,4 @@
-package com.duchen.template.usage.TestAnnotation;
+package com.duchen.annotation;
 
 public interface ViewInject<T> {
     void inject(T target, Object source);

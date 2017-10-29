@@ -1,18 +1,15 @@
-package com.duchen.template.usage.TestAnnotation;
-
-import android.app.Activity;
-import android.view.View;
+package com.duchen.annotation;
 
 public class ViewInjector {
 
     private static final String SUFFIX = "$$ViewInject";
 
-    public static void injectView(Activity activity) {
+    public static void injectView(Object activity) {
         ViewInject proxyActivity = findProxyObject(activity);
         proxyActivity.inject(activity, activity);
     }
 
-    public static void injectView(Object object, View view) {
+    public static void injectView(Object object, Object view) {
         ViewInject proxy = findProxyObject(object);
         proxy.inject(object, view);
     }

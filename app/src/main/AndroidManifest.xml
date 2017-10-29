@@ -42,6 +42,9 @@
             android:name=".TestViewPager.NormalViewPagerActivity"
             android:label="TestViewPagerActivity"/>
         <activity
+            android:name=".TestAnnotation.AnnotationActivity"
+            android:label="TestAnnotationActivity"/>
+        <activity
             android:name=".TestLifeCircle.LifeCircleActivityA"
             android:label="TestLifeCircleActivityA"
             android:launchMode="standard"/>
