@@ -1,7 +1,6 @@
 package com.test.thinkinjava.typeinfo.src.pets;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by 51619 on 2016/3/29 0029.

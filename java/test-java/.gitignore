@@ -1,4 +1,4 @@
-*.iml
+test-java.iml
 .gradle
 gen/
 bin/
