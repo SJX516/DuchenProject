@@ -1,1 +1,17 @@
-include ':app', ':test-java', ':template', ':think-in-java', ':design-code', ':sign-system', ':exchange', ':annotation-processer', ':annotation', ':poker'
+include ':app'
+include ':template'
+include ':exchange'
+include ':annotation-processer'
+include ':annotation'
+
+include ':test-java'
+include ':think-in-java'
+include ':design-code'
+include ':sign-system'
+include ':poker'
+
+project(':test-java').projectDir = new File('./java/test-java')
+project(':think-in-java').projectDir = new File('./java/think-in-java')
+project(':design-code').projectDir = new File('./java/design-code')
+project(':sign-system').projectDir = new File('./java/sign-system')
+project(':poker').projectDir = new File('./java/poker')

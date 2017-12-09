@@ -19,14 +19,14 @@ android {
         release {
             keyAlias 'system'
             keyPassword 'a123456'
-            storeFile file("../sign-system/key/system.keystore")
+            storeFile file("../keystore/system.keystore")
             storePassword 'a123456'
         }
 
         debug {
             keyAlias 'system'
             keyPassword 'a123456'
-            storeFile file("../sign-system/key/system.keystore")
+            storeFile file("../keystore/system.keystore")
             storePassword 'a123456'
         }
     }

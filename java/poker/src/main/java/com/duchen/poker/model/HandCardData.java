@@ -10,28 +10,33 @@ public class HandCardData {
     }
 
     List<Integer> mHandCardList = new ArrayList<>();
-    int mHandCardCount = 0;
     Role mRole;
     HandCardValue mHandCardValue;
-    List<Integer> mPutCardList = new ArrayList<>();
     CardGroup mPutCardGroup;
 
-    boolean putCards() {
-        for (int i = 0; i < mPutCardList.size(); i++) {
-            if (!putOneCard(mPutCardList.get(i))) {
-                return false;
-            }
-        }
-        mHandCardCount = mHandCardList.size();
-        return true;
+    public boolean noMoreCard() {
+        return mHandCardList.isEmpty();
     }
 
-    boolean putOneCard(int value) {
-        if (!mHandCardList.contains(value)) {
-            return false;
-        } else {
-            mHandCardList.remove(mHandCardList.indexOf(value));
-            return true;
-        }
+    public void setPutCardGroup(CardGroup putCardGroup) {
+        mPutCardGroup = putCardGroup;
+    }
+
+    public List<Integer> getHandCardList() {
+        return mHandCardList;
+    }
+
+    public void putCards() {
+        putCards(mPutCardGroup);
+    }
+
+    public void putCards(CardGroup cardGroup) {
+        List<Integer> putCardList = cardGroup.getCardList();
+        mHandCardList.removeAll(putCardList);
+    }
+
+    public void addCards(CardGroup cardGroup) {
+        List<Integer> cardList = cardGroup.getCardList();
+        mHandCardList.addAll(cardList);
     }
 }
