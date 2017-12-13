@@ -3,16 +3,16 @@ package com.duchen.poker.model.type;
 import java.util.Arrays;
 import java.util.List;
 
-public class DoublelLineTypeChecker implements TypeChecker {
+public class SingleLineTypeChecker implements TypeChecker {
 
     @Override
     public CardGroupType getType() {
-        return CardGroupType.DOUBLE_LINE;
+        return CardGroupType.SINGLE_LINE;
     }
 
     @Override
     public List<Integer> getMyPossibleCardCount() {
-        return Arrays.asList(6, 8, 10, 12, 14, 16, 18, 20);
+        return Arrays.asList(5, 6, 7, 8, 9, 10, 11, 12);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class DoublelLineTypeChecker implements TypeChecker {
         int lineCount = 0;
         int i = 3;
         for (; i < 15; i++) {
-            if (cardCountArray[i] == 2) {
+            if (cardCountArray[i] == 1) {
                 lineCount++;
             } else {
                 if (lineCount != 0) {
@@ -33,7 +33,7 @@ public class DoublelLineTypeChecker implements TypeChecker {
                 }
             }
         }
-        if (lineCount * 2 == cards.size()) {
+        if (lineCount == cards.size()) {
             return i - 1;
         } else {
             return -1;

@@ -24,7 +24,7 @@ public class TypeHelper {
         mCheckers.add(new SingleTypeChecker());
         mCheckers.add(new DoubleTypeChecker());
         mCheckers.add(new ThreeTypeChecker());
-        mCheckers.add(new SingelLineTypeChecker());
+        mCheckers.add(new SingleLineTypeChecker());
         mCheckers.add(new DoublelLineTypeChecker());
         mCheckers.add(new ThreeLineTypeChecker());
         mCheckers.add(new ThreeTakeOneTypeChecker());

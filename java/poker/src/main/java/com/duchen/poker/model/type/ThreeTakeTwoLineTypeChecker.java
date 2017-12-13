@@ -19,56 +19,32 @@ public class ThreeTakeTwoLineTypeChecker implements TypeChecker {
 
     @Override
     public int getMaxCardIfIsMyType(List<Integer> cards) {
-        Integer[] cardNums = (Integer[]) cards.toArray();
-        Arrays.sort(cardNums);
+        int[] cardCountArray = new int[18];
+        for (int card : cards) {
+            cardCountArray[card]++;
+        }
 
-        TwoValue<Integer, Integer> threeCard = new TwoValue<>(0, 0);
-        int currentCard = 0;
         int lineCount = 0;
-        for (int i = 0; i < cardNums.length;) {
-            if (lineCount != 0) {
-                int leftCard = cardNums.length - i;
-                if (leftCard == -1) {
-                    return -1;
-                } else if (leftCard == 2) {
-                    int shouldLineCount = cardNums.length / 5;
-                    if (lineCount < shouldLineCount) {
-                        return -1;
-                    } else {
-                        if (cardNums[i].intValue() == cardNums[i+1]) {
-                            return currentCard;
-                        } else {
-                            return -1;
-                        }
-                    }
-                } else {
-                    //todo 对子全在后面造成进入这里的情况
-                    if (cardNums[i] != currentCard || cardNums[i+1] != currentCard || cardNums[i+2] != currentCard) {
-                        return -1;
-                    } else {
-                        currentCard += 1;
-                        lineCount++;
-                        i += 3;
-                    }
-                }
+        int doubleCount = 0;
+        int i = 3, j = 3;
+        for (; i < 15; i++) {
+            if (cardCountArray[i] == 3) {
+                lineCount++;
             } else {
-                if (threeCard.getKey().intValue() == cardNums[i]) {
-                    threeCard.setValue(threeCard.getValue() + 1);
-                    if (threeCard.getValue() == 3) {
-                        currentCard = threeCard.getKey() + 1;
-                        lineCount++;
-                    }
-                } else {
-                    if (threeCard.getKey() != 0 && threeCard.getValue() < 2) {
-                        return -1;
-                    } else {
-                        threeCard.setKey(cardNums[i]);
-                        threeCard.setValue(1);
-                    }
+                if (lineCount != 0) {
+                    break;
                 }
-                i++;
             }
         }
-        return -1;
+        for (; j < 16; j++) {
+            if (cardCountArray[j] == 2 || cardCountArray[j] == 4) {
+                doubleCount += cardCountArray[i] / 2;
+            }
+        }
+        if (lineCount == doubleCount && lineCount * 5 == cards.size()) {
+            return i - 1;
+        } else {
+            return -1;
+        }
     }
 }

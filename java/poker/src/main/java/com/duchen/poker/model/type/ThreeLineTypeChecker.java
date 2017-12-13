@@ -17,27 +17,27 @@ public class ThreeLineTypeChecker implements TypeChecker {
 
     @Override
     public int getMaxCardIfIsMyType(List<Integer> cards) {
-        Integer[] cardNums = (Integer[]) cards.toArray();
-        Arrays.sort(cardNums);
-        int currentCard = 0;
-        for (int i = 0; i < cardNums.length; i++) {
-            if (i % 3 == 0) {
-                int newCard = cardNums[i];
-                if (currentCard == 0) {
-                    currentCard = newCard;
-                } else {
-                    if (newCard != currentCard + 1) {
-                        return -1;
-                    } else {
-                        currentCard = newCard;
-                    }
-                }
+        int[] cardCountArray = new int[18];
+        for (int card : cards) {
+            cardCountArray[card]++;
+        }
+
+        int lineCount = 0;
+        int i = 3;
+        for (; i < 15; i++) {
+            if (cardCountArray[i] == 3) {
+                lineCount++;
             } else {
-                if (cardNums[i] != currentCard) {
-                    return -1;
+                if (lineCount != 0) {
+                    break;
                 }
             }
         }
-        return currentCard;
+        if (lineCount * 3 == cards.size()) {
+            return i - 1;
+        } else {
+            return -1;
+        }
+
     }
 }

@@ -17,7 +17,7 @@ public class Test {
         System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 4, 4, 4, 6, 6, 6, 5, 5, 5)));
         System.out.println(logic.isOneCardGroup(Arrays.asList(11, 11, 3, 11)));
         System.out.println(logic.isOneCardGroup(Arrays.asList(8, 3, 3, 8, 8)));
-        System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 2, 4, 4, 2, 4, 5, 6, 5, 8, 5, 6, 8)));
+        System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 11, 4, 4, 11, 4, 5, 6, 5, 8, 5, 6, 8)));
         System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 4, 4, 2, 4, 5, 6, 5, 8, 5)));
         System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 3)));
         System.out.println(logic.isOneCardGroup(Arrays.asList(3, 3, 3, 5, 3)));
