@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="193dp">
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#CCCCCC"/>
+
+    <com.duchen.template.ui.keyboard.CustomKeyBoardView
+        android:id="@+id/keyboard_view_4_qwert"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider"
+        android:background="#CCCCCC"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyBackground="@drawable/selector_bg_keyboard_key_white"
+        android:keyTextColor="#333333"
+        android:keyTextSize="24sp"
+        android:labelTextSize="15sp"
+        android:shadowRadius="0.0"/>
+
+    <com.duchen.template.ui.keyboard.CustomKeyBoardView
+        android:id="@+id/keyboard_view_4_punctuation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider"
+        android:background="#CCCCCC"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:keyBackground="@drawable/selector_bg_keyboard_key_white"
+        android:keyTextColor="#333333"
+        android:keyTextSize="24sp"
+        android:labelTextSize="15sp"
+        android:shadowRadius="0.0"
+        android:visibility="gone"/>
+
+</RelativeLayout>
