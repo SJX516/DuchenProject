@@ -1,7 +1,7 @@
-package com.duchen.poker.model
+package poker.model
 
-import com.duchen.poker.CardLibrary
-import com.duchen.poker.model.type.CardGroupType
+import poker.CardLibrary
+import poker.model.type.CardGroupType
 
 import java.util.ArrayList
 

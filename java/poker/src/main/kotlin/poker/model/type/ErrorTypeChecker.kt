@@ -1,4 +1,4 @@
-package com.duchen.poker.model.type
+package poker.model.type
 
 import java.util.Arrays
 

@@ -1,9 +1,11 @@
-package com.duchen.poker.model
+package poker.model
+
+import java.util.*
 
 class Player {
 
     var role : Role
-    internal var mHandCardData: HandCardData
+    internal var handCardData: HandCardData
 
     enum class Role {
         BOSS, FARMER_NEXT, FARMER_PRE
@@ -11,7 +13,7 @@ class Player {
 
     init {
         role = Role.BOSS
-        mHandCardData = HandCardData()
+        handCardData = HandCardData()
     }
 
     fun askToBeBoss(): Boolean {
@@ -19,14 +21,18 @@ class Player {
     }
 
     fun setCards(cards: MutableList<Int>) {
-        mHandCardData.handCardList = cards
+        handCardData.handCardList = cards
     }
 
-    fun becomeBoss(threeCards: List<Int>) {
-        mHandCardData.addCards(threeCards)
+    fun addCard(card: Int) {
+        handCardData.addCards(Arrays.asList(card))
+    }
+
+    fun addCards(threeCards: List<Int>) {
+        handCardData.addCards(threeCards)
     }
 
     override fun toString(): String {
-        return "Player{mRole=$role, mHandCardData=$mHandCardData}"
+        return "Player{mRole=$role, handCardData=$handCardData}"
     }
 }

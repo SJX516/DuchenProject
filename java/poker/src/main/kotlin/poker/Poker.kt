@@ -1,14 +1,15 @@
-package com.duchen.poker
+package poker
 
-import com.duchen.poker.model.Player
+import poker.model.Player
 
 import java.util.Random
 
 class Poker {
 
-    internal var mPlayers = arrayOfNulls<Player>(PLAYER_NUM)
-    internal var mCardLibrary = CardLibrary()
-    internal var mStartIndex = 0
+    var mPlayers = arrayOfNulls<Player>(PLAYER_NUM)
+    var mCardLibrary = CardLibrary()
+    var mStartIndex = 0
+    var mBossIndex = 0
 
     fun startNewGame() {
         mCardLibrary = CardLibrary()
@@ -16,15 +17,21 @@ class Poker {
 
         for (i in 0 until PLAYER_NUM) {
             mPlayers[getActualIndex(i + mStartIndex)] = Player()
-            mPlayers[getActualIndex(i + mStartIndex)]!!.setCards(mCardLibrary.roundOneCard)
+        }
+
+        for (i in 0 until 17) {
+            for (j in 0 until PLAYER_NUM) {
+                mPlayers[getActualIndex(j + mStartIndex)]!!.addCard(mCardLibrary.oneCard)
+            }
         }
 
         for (i in 0 until PLAYER_NUM) {
             if (mPlayers[getActualIndex(i + mStartIndex)]!!.askToBeBoss()) {
-                mPlayers[getActualIndex(i + mStartIndex)]!!.role = Player.Role.BOSS
-                mPlayers[getActualIndex(i + mStartIndex)]!!.becomeBoss(mCardLibrary.roundTwoCard)
-                mPlayers[getActualIndex(i + 1 + mStartIndex)]!!.role = Player.Role.FARMER_NEXT
-                mPlayers[getActualIndex(i - 1 + mStartIndex)]!!.role = Player.Role.FARMER_PRE
+                mBossIndex = getActualIndex(i + mStartIndex)
+                mPlayers[mBossIndex]!!.role = Player.Role.BOSS
+                mPlayers[mBossIndex]!!.addCards(mCardLibrary.roundTwoCard)
+                mPlayers[getActualIndex(mBossIndex + 1)]!!.role = Player.Role.FARMER_NEXT
+                mPlayers[getActualIndex(mBossIndex - 1)]!!.role = Player.Role.FARMER_PRE
                 break
             }
         }
@@ -32,9 +39,10 @@ class Poker {
         for (i in 0 until PLAYER_NUM) {
             println(mPlayers[i].toString())
         }
+
     }
 
-    internal fun getActualIndex(i: Int): Int {
+    private fun getActualIndex(i: Int): Int {
         if (i < 0) {
             return 0
         }

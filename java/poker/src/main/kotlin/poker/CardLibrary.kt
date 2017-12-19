@@ -1,4 +1,4 @@
-package com.duchen.poker
+package poker
 
 import java.util.ArrayList
 import java.util.Random
@@ -33,10 +33,9 @@ class CardLibrary {
                 start = 3
             }
             for (i in mCards.indices) {
-                var actualIndex: Int
-                actualIndex = i + start
+                var actualIndex = i + start
                 if (actualIndex >= mCards.size) {
-                    actualIndex = actualIndex % mCards.size
+                    actualIndex %= mCards.size
                 }
 
                 if (mCards[actualIndex] > 0) {
@@ -61,6 +60,11 @@ class CardLibrary {
     }
 
     companion object {
+        val CARD_ARR_SIZE = 18
+        val JOKER1 = 16
+        val JOKER2 = 17
+        val CARD_3 = 3
+        val CARD_2 = 15
 
         fun getCardChar(i: Int): String {
             if (i in 3..10) {

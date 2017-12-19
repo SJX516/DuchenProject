@@ -1,4 +1,4 @@
-package com.duchen.poker.model.type
+package poker.model.type
 
 interface TypeChecker {
 

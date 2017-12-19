@@ -1,6 +1,6 @@
-package com.duchen.poker.model
+package poker.model
 
-import com.duchen.poker.CardLibrary
+import poker.CardLibrary
 
 import java.util.ArrayList
 import java.util.Arrays
@@ -9,7 +9,8 @@ class HandCardData {
 
     var handCardList: MutableList<Int> = ArrayList()
     var putCardGroup = CardGroup()
-    internal var handCardValue: HandCardValue? = null
+    var handCardValue = HandCardValue()
+    var handCardGroupList: MutableList<CardGroup> = ArrayList()
 
     fun noMoreCard(): Boolean {
         return handCardList.isEmpty()
@@ -17,6 +18,10 @@ class HandCardData {
 
     fun addCards(cards: List<Int>) {
         handCardList.addAll(cards)
+    }
+
+    fun setCardGroups(groups: MutableList<CardGroup>) {
+        handCardGroupList = groups
     }
 
     @JvmOverloads

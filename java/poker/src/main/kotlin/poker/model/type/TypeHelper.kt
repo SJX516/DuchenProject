@@ -1,9 +1,8 @@
-package com.duchen.poker.model.type
+package poker.model.type
 
-import com.duchen.poker.model.CardGroup
+import poker.model.CardGroup
 
 import java.util.ArrayList
-import java.util.Arrays
 
 class TypeHelper private constructor() {
 

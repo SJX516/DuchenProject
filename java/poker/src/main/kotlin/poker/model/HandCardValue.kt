@@ -1,4 +1,4 @@
-package com.duchen.poker.model
+package poker.model
 
 //手牌权值结构
 class HandCardValue {

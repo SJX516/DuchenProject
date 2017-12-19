@@ -1,6 +1,4 @@
-package com.duchen.poker.model.type
-
-import com.duchen.poker.model.TwoValue
+package poker.model.type
 
 import java.util.Arrays
 

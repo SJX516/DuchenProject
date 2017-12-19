@@ -1,7 +1,6 @@
-package com.duchen.poker.model.type
+package poker.model.type
 
-import com.duchen.poker.model.TwoValue
-
+import poker.model.TwoValue
 import java.util.Arrays
 
 class ThreeTakeTwoTypeChecker : TypeChecker {
