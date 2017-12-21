@@ -1,6 +1,5 @@
 package poker
 
-import java.util.ArrayList
 import java.util.Random
 
 class CardLibrary {
@@ -68,20 +67,45 @@ class CardLibrary {
         val CARD_ARR_SIZE = 18
 
         fun getCardChar(i: Int): String {
-            if (i in 3..10) {
+            if (i in 3..9) {
                 return i.toString() + ""
             } else {
                 when (i) {
+                    10 -> return "X"
                     11 -> return "J"
                     12 -> return "Q"
                     13 -> return "K"
                     14 -> return "A"
                     15 -> return "2"
-                    16 -> return "小王"
-                    17 -> return "大王"
+                    16 -> return "I"
+                    17 -> return "L"
                 }
             }
             return "ERROR" + i
+        }
+
+        fun getCardList(str: String): MutableList<Int> {
+            val list = ArrayList<Int>()
+            str.forEach {
+                when(it) {
+                    '3' -> list.add(3)
+                    '4' -> list.add(4)
+                    '5' -> list.add(5)
+                    '6' -> list.add(6)
+                    '7' -> list.add(7)
+                    '8' -> list.add(8)
+                    '9' -> list.add(9)
+                    'X' -> list.add(10)
+                    'J' -> list.add(11)
+                    'Q' -> list.add(12)
+                    'K' -> list.add(13)
+                    'A' -> list.add(14)
+                    '2' -> list.add(15)
+                    'I' -> list.add(16)
+                    'L' -> list.add(17)
+                }
+            }
+            return list
         }
     }
 

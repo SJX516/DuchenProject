@@ -1,5 +1,6 @@
 package poker
 
+import com.duchen.template.usage.Poker.PrintUtil
 import poker.logic.HandCardLogic
 import poker.model.Player
 
@@ -42,13 +43,7 @@ class Poker {
         for (i in 0 until PLAYER_NUM) {
             println(mPlayers[i].toString())
             val groups = logic.getCardGroupList(mPlayers[i].handCardData)
-            val sb = StringBuilder()
-            sb.append("||\n")
-            for (group in groups) {
-                sb.append("||  " + group + "\n")
-            }
-            sb.append("||\n||----------------------------------------------------\n")
-            println(sb.toString())
+            PrintUtil.printCardGroups(groups)
         }
 
 

@@ -57,10 +57,10 @@ class HandCardLogic {
 
         for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
             if (cardNumArr[i] == 4) {
-                cardGroups.add(getOneCardGroup(MutableList(4) { cardNumArr[i] }))
+                cardGroups.add(getOneCardGroup(MutableList(4) { i }))
                 cardNumArr[i] = 0
             } else if (cardNumArr[i] == 3) {
-                cardGroups.add(getOneCardGroup(MutableList(3) { cardNumArr[i] }))
+                cardGroups.add(getOneCardGroup(MutableList(3) { i }))
                 cardNumArr[i] = 0
             }
         }
@@ -72,7 +72,7 @@ class HandCardLogic {
                     lineCount++
                     if (lineCount == 5) {
                         lineCount = 0
-                        cardGroups.add(getOneCardGroup(MutableList(5) { cardNumArr[i-it] }))
+                        cardGroups.add(getOneCardGroup(MutableList(5) { i-it }))
                         cardNumArr.forEachIndexed { index, _ ->
                             if (index <= i && index > i - 5) {
                                 cardNumArr[index]--
@@ -96,7 +96,7 @@ class HandCardLogic {
         var singleLines = cardGroups.filter { it.cardGroupType === CardGroupType.SINGLE_LINE }
 
         threeCards.forEach { cardNumArr[it] += 3 }
-        cardGroups.removeIf { it.cardGroupType === CardGroupType.THREE }
+        cardGroups.removeAll { it.cardGroupType === CardGroupType.THREE }
 
         for (singleGroup in singleLines) {
             var useThreeTypeCards = ArrayList<Int>()
@@ -129,7 +129,7 @@ class HandCardLogic {
 
         for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
             if (cardNumArr[i] == 3) {
-                cardGroups.add(getOneCardGroup(MutableList(3) { cardNumArr[i] }))
+                cardGroups.add(getOneCardGroup(MutableList(3) { i }))
                 cardNumArr[i] = 0
             }
         }
@@ -140,7 +140,7 @@ class HandCardLogic {
             if (cardNumArr[i] == 2) {
                 lineCount++
                 if (i == CardLibrary.CARD_A && lineCount >= 3) {
-                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { cardNumArr[i- it % lineCount] }))
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i- it % lineCount }))
                     cardNumArr.forEachIndexed { index, _ ->
                         if (index <= i && index > i - lineCount) {
                             cardNumArr[index] -= 2
@@ -149,7 +149,7 @@ class HandCardLogic {
                 }
             } else {
                 if (lineCount >= 3) {
-                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { cardNumArr[i- it % lineCount] }))
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i- it % lineCount }))
                     cardNumArr.forEachIndexed { index, _ ->
                         if (index <= i && index > i - lineCount) {
                             cardNumArr[index] -= 2
@@ -161,17 +161,17 @@ class HandCardLogic {
         }
 
         //取对子
-        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
             if (cardNumArr[i] == 2) {
-                cardGroups.add(getOneCardGroup(MutableList(2) { cardNumArr[i] }))
+                cardGroups.add(getOneCardGroup(MutableList(2) { i }))
                 cardNumArr[i] -= 2
             }
         }
 
         //取单牌
-        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+        for (i in CardLibrary.CARD_3..CardLibrary.JOKER2) {
             if (cardNumArr[i] == 1) {
-                cardGroups.add(getOneCardGroup(MutableList(1) { cardNumArr[i] }))
+                cardGroups.add(getOneCardGroup(MutableList(1) { i }))
                 cardNumArr[i] -= 1
             }
         }

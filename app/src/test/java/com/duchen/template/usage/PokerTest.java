@@ -1,11 +1,14 @@
 package com.duchen.template.usage;
 
 
+import com.duchen.template.usage.Poker.PrintUtil;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import poker.CardLibrary;
 import poker.Poker;
 import poker.logic.HandCardLogic;
 
@@ -19,6 +22,13 @@ public class PokerTest {
     public void testPoker() throws Exception {
         Poker poker = new Poker();
         poker.startNewGame();
+    }
+
+    //3344556789XQKKA2L
+    @Test
+    public void testGetCardGroup() {
+        HandCardLogic logic = new HandCardLogic();
+        PrintUtil.Companion.printCardGroups(logic.getCardGroupList(CardLibrary.Companion.getCardList("33555789XXJJQKKA2")));
     }
 
     @Test
