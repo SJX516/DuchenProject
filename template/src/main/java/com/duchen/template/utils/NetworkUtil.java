@@ -1,9 +1,16 @@
 package com.duchen.template.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 
 public class NetworkUtil {
@@ -18,6 +25,14 @@ public class NetworkUtil {
     public static final int NETWORK_4G = 4;
     public static final int NETWORK_MOBILE = 5;
 
+    /**
+     * 网络状况变化监听器
+     *
+     */
+    public interface NetworkChangeListener {
+        void onNetworkChange(Intent intent, NetworkInfo info);
+    }
+
     private static NetworkInfo getActiveNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
@@ -26,6 +41,24 @@ public class NetworkUtil {
     public static boolean isAvailable(Context context) {
         NetworkInfo info = getActiveNetworkInfo(context);
         return info != null && info.isAvailable();
+    }
+
+    public static String getIpAddressString() {
+        try {
+            for (Enumeration<NetworkInterface> enNetI = NetworkInterface.getNetworkInterfaces(); enNetI.hasMoreElements(); ) {
+                NetworkInterface netI = enNetI.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = netI
+                        .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (inetAddress instanceof Inet4Address && !inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     /**

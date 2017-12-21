@@ -123,7 +123,7 @@ public class FileUtil {
      * 根据指定文件过期时间删除临时文件
      */
     public static boolean autoDeleteCacheFile(File file, long expiredDuration) {
-        if (SDCardUtil.isSDCardMounted()) {
+        if (StorageUtil.isSDCardMounted()) {
             if (file.exists() && file.isDirectory()) {
                 try {
                     File[] files = file.listFiles();
@@ -152,10 +152,10 @@ public class FileUtil {
 
         File file = new File(filepath);
 
-        if ((SDCardUtil.isSDCardMounted() || SDCardUtil.isSDCardMountedReadOnly()) && file.exists()) {
+        if ((StorageUtil.isSDCardMounted() || StorageUtil.isSDCardMountedReadOnly()) && file.exists()) {
             return true;
         } else {
-            if (SDCardUtil.isSDCardMounted()) {
+            if (StorageUtil.isSDCardMounted()) {
                 return file.mkdirs();
             } else return false;
 
@@ -166,7 +166,7 @@ public class FileUtil {
      * 删除指定文件
      */
     public static void delFile(String strFileName) {
-        if (SDCardUtil.isSDCardMounted()) {
+        if (StorageUtil.isSDCardMounted()) {
             try {
                 File myFile = new File(strFileName);
                 if (myFile.exists()) {
@@ -185,7 +185,7 @@ public class FileUtil {
     public static String readDataFromFile(String filepath, String filename) {
 
         String realfilename = filepath + filename;
-        if (SDCardUtil.isSDCardMounted() || SDCardUtil.isSDCardMountedReadOnly()) {
+        if (StorageUtil.isSDCardMounted() || StorageUtil.isSDCardMountedReadOnly()) {
             if (isFileExits(realfilename)) {
 
                 StringBuffer sb = new StringBuffer();

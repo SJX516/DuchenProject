@@ -37,10 +37,14 @@ class HandCardLogic {
         handCardData.setCardGroups(cardGroups)
     }
 
-    // http://blog.csdn.net/xdx2ct1314/article/details/18798263 这里计算轮数的思路
     fun getCardGroupList(handCardData: HandCardData): MutableList<CardGroup> {
+        return getCardGroupList(handCardData.handCardList)
+    }
+
+    // http://blog.csdn.net/xdx2ct1314/article/details/18798263 这里计算轮数的思路
+    fun getCardGroupList(handCardList: MutableList<Int>): MutableList<CardGroup> {
         val cardNumArr = IntArray(CardLibrary.CARD_ARR_SIZE)
-        for (card in handCardData.handCardList) {
+        for (card in handCardList) {
             cardNumArr[card]++
         }
 
@@ -50,6 +54,7 @@ class HandCardLogic {
             cardNumArr[CardLibrary.JOKER1] = 0
             cardNumArr[CardLibrary.JOKER2] = 0
         }
+
         for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
             if (cardNumArr[i] == 4) {
                 cardGroups.add(getOneCardGroup(MutableList(4) { cardNumArr[i] }))
@@ -62,26 +67,116 @@ class HandCardLogic {
 
         var lineCount = 0
         while (lineCount == 0) {
-            for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
+            for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
                 if (cardNumArr[i] > 0) {
                     lineCount++
                     if (lineCount == 5) {
                         lineCount = 0
                         cardGroups.add(getOneCardGroup(MutableList(5) { cardNumArr[i-it] }))
                         cardNumArr.forEachIndexed { index, _ ->
-                            if (index <= i && index >= i - 4) {
+                            if (index <= i && index > i - 5) {
                                 cardNumArr[index]--
                             }
                         }
                         break
                     }
                 } else {
-                    if (lineCount != 0) {
+                    if (i == CardLibrary.CARD_A) {
+                        lineCount = 1
                         break
+                    } else {
+                        lineCount = 0
                     }
                 }
             }
         }
+
+        //寻找剩余的牌加三条是否能组成新的单顺，这个单顺能使用到更多的单牌，没找到的话，需要恢复三条
+        var threeCards = cardGroups.filter { it.cardGroupType === CardGroupType.THREE }.map { it.maxCard }
+        var singleLines = cardGroups.filter { it.cardGroupType === CardGroupType.SINGLE_LINE }
+
+        threeCards.forEach { cardNumArr[it] += 3 }
+        cardGroups.removeIf { it.cardGroupType === CardGroupType.THREE }
+
+        for (singleGroup in singleLines) {
+            var useThreeTypeCards = ArrayList<Int>()
+            var helpSingleCards = ArrayList<Int>()
+            var index = CardLibrary.CARD_3
+            while (index <= CardLibrary.CARD_A) {
+                if (cardNumArr[index] > 0 && singleGroup.appendCardToSingleLine(index)) {
+                    cardNumArr[index]--
+                    if (threeCards.contains(index)) {
+                        useThreeTypeCards.add(index)
+                    } else {
+                        helpSingleCards.add(index)
+                    }
+                    index = CardLibrary.CARD_3
+                } else {
+                    index++
+                }
+            }
+            if (helpSingleCards.size <= useThreeTypeCards.size) {
+                useThreeTypeCards.forEach {
+                    cardNumArr[it]++
+                    singleGroup.removeCardFromSingleLine(it)
+                }
+                helpSingleCards.forEach {
+                    cardNumArr[it]++
+                    singleGroup.removeCardFromSingleLine(it)
+                }
+            }
+        }
+
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
+            if (cardNumArr[i] == 3) {
+                cardGroups.add(getOneCardGroup(MutableList(3) { cardNumArr[i] }))
+                cardNumArr[i] = 0
+            }
+        }
+
+        //取双顺
+        lineCount = 0
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+            if (cardNumArr[i] == 2) {
+                lineCount++
+                if (i == CardLibrary.CARD_A && lineCount >= 3) {
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { cardNumArr[i- it % lineCount] }))
+                    cardNumArr.forEachIndexed { index, _ ->
+                        if (index <= i && index > i - lineCount) {
+                            cardNumArr[index] -= 2
+                        }
+                    }
+                }
+            } else {
+                if (lineCount >= 3) {
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { cardNumArr[i- it % lineCount] }))
+                    cardNumArr.forEachIndexed { index, _ ->
+                        if (index <= i && index > i - lineCount) {
+                            cardNumArr[index] -= 2
+                        }
+                    }
+                }
+                lineCount = 0
+            }
+        }
+
+        //取对子
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+            if (cardNumArr[i] == 2) {
+                cardGroups.add(getOneCardGroup(MutableList(2) { cardNumArr[i] }))
+                cardNumArr[i] -= 2
+            }
+        }
+
+        //取单牌
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+            if (cardNumArr[i] == 1) {
+                cardGroups.add(getOneCardGroup(MutableList(1) { cardNumArr[i] }))
+                cardNumArr[i] -= 1
+            }
+        }
+
+        return cardGroups
     }
 
     fun getHandCardValue(handCardData: HandCardData): HandCardValue {

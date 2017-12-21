@@ -33,7 +33,7 @@ class TypeHelper private constructor() {
                 val maxCard = checker.getMaxCardIfIsMyType(cards)
                 if (maxCard >= 0) {
                     val group = CardGroup()
-                    group.cardList = cards.sorted()
+                    group.cardList = cards.apply { sort() }
                     group.cardGroupType = checker.type
                     group.maxCard = maxCard
                     return group
@@ -42,7 +42,7 @@ class TypeHelper private constructor() {
         }
         val error = CardGroup()
         error.cardGroupType = CardGroupType.ERROR
-        error.cardList = cards.sorted()
+        error.cardList = cards.apply { sort() }
         return error
     }
 

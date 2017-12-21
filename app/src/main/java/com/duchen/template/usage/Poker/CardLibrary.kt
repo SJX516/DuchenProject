@@ -60,11 +60,12 @@ class CardLibrary {
     }
 
     companion object {
-        val CARD_ARR_SIZE = 18
+        val CARD_3 = 3
+        val CARD_A = 14
+        val CARD_2 = 15
         val JOKER1 = 16
         val JOKER2 = 17
-        val CARD_3 = 3
-        val CARD_2 = 15
+        val CARD_ARR_SIZE = 18
 
         fun getCardChar(i: Int): String {
             if (i in 3..10) {

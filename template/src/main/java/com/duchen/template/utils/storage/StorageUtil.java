@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.os.StatFs;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
@@ -28,9 +29,59 @@ import java.util.List;
  * sdcard是否可用<br>
  * sdcard是否只读<br>
  */
-public class SDCardUtil {
+public class StorageUtil {
 
-    private final static String TAG = "SDCardUtil";
+    private final static String TAG = "StorageUtil";
+
+    public static long getAvailableInternalMemorySize() {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSizeLong();
+        long availableBlocks = stat.getAvailableBlocksLong();
+        return blockSize * availableBlocks;
+    }
+
+    public static long getAvailableExternalMemorySize() {
+        if (hasStorage()) {
+            File path = Environment.getExternalStorageDirectory();
+
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = stat.getBlockSizeLong();
+            long availableBlocks = stat.getAvailableBlocksLong();
+            return availableBlocks*blockSize;
+        }
+        return -1;
+    }
+
+    public static boolean hasStorage() {
+        return hasStorage(null);
+    }
+
+    public static boolean hasStorage(String testWritePath) {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            if (testWritePath != null) {
+                return checkFsWritable(testWritePath);
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 检查文件系统是否可写
+     */
+    private static boolean checkFsWritable(String testWritePath) {
+        File directory = new File(testWritePath);
+        if (!directory.isDirectory()) {
+            if (!directory.mkdirs()) {
+                return false;
+            }
+        }
+
+        return directory.canWrite();
+    }
 
     /**
      * 获取所有SD卡根路径列表

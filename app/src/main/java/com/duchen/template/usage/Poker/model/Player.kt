@@ -5,7 +5,7 @@ import java.util.*
 class Player {
 
     var role : Role
-    internal var handCardData: HandCardData
+    var handCardData: HandCardData
 
     enum class Role {
         BOSS, FARMER_NEXT, FARMER_PRE

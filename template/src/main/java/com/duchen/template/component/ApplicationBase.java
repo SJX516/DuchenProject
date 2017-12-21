@@ -7,9 +7,9 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
 import com.duchen.template.component.helper.ActivityLifecycle;
-import com.duchen.template.component.helper.NetworkHelper.NetworkChangeListener;
 import com.duchen.template.concept.ExceptionBase;
 import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.NetworkUtil.NetworkChangeListener;
 import com.duchen.template.utils.PlatformUtil;
 
 import java.lang.ref.WeakReference;

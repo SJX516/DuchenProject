@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.duchen.template.component.helper.NetworkHelper;
 import com.duchen.template.component.request.RequestManager;
 import com.duchen.template.utils.encryption.MD5;
 
@@ -32,11 +31,12 @@ public class SimpleFileDownloader {
 
     public interface DownloadFileListener {
         void onSuccess(String filePath, FileInfo info);
+
         void onFail(String reason, FileInfo info);
     }
 
     public SimpleFileDownloader(FileInfo info) {
-        if (info != null){
+        if (info != null) {
             mFileInfo = info;
             mFilePath = info.getLocalPath();
             mDownloadUrl = info.getDownloadUrl();
@@ -83,25 +83,21 @@ public class SimpleFileDownloader {
     }
 
     private void downloadFile() {
-        if (NetworkHelper.getInstance().hasNetworkConnection()) {
-            mDownloadCount++;
-            int reqId = RequestManager.getInstance().downloadFile(mDownloadUrl, mFilePath, new Response.Listener<File>() {
-                @Override
-                public void onResponse(File file) {
-                    if (file.getAbsolutePath().equals(mFilePath)) {
-                        loadActualFile();
-                    }
+        mDownloadCount++;
+        int reqId = RequestManager.getInstance().downloadFile(mDownloadUrl, mFilePath, new Response.Listener<File>() {
+            @Override
+            public void onResponse(File file) {
+                if (file.getAbsolutePath().equals(mFilePath)) {
+                    loadActualFile();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError volleyError) {
-                    notifyFail("Download failed! " + volleyError.getMessage());
-                }
-            });
-            mRequestIds.add(reqId);
-        } else {
-            notifyFail("No Cache And No Network!");
-        }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                notifyFail("Download failed! " + volleyError.getMessage());
+            }
+        });
+        mRequestIds.add(reqId);
     }
 
     private void notifyFail(String reason) {
