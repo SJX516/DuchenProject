@@ -24,11 +24,22 @@ public class PokerTest {
         poker.startNewGame();
     }
 
-    //3344556789XQKKA2L
+
     @Test
     public void testGetCardGroup() {
         HandCardLogic logic = new HandCardLogic();
-        PrintUtil.Companion.printCardGroups(logic.getCardGroupList(CardLibrary.Companion.getCardList("33555789XXJJQKKA2")));
+        testGetCard(logic, "334555678899XJQKAA22");
+        testGetCard(logic, "3455667789XJJKKAAI");
+        testGetCard(logic, "4567899XXJJQQKA2I");
+        testGetCard(logic, "34566677789XJJKKAAI");
+
+        testGetCard(logic, "334466778XJQKKA2L");
+        testGetCard(logic, "3344556789XQKKA2L");
+        testGetCard(logic, "34567899XXJJKKAAI");
+    }
+
+    void testGetCard(HandCardLogic logic, String cards) {
+        PrintUtil.Companion.printCardGroups(CardLibrary.Companion.getCardList(cards), logic.getCardGroupList(CardLibrary.Companion.getCardList(cards)));
     }
 
     @Test

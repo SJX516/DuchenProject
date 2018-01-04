@@ -43,7 +43,7 @@ class Poker {
         for (i in 0 until PLAYER_NUM) {
             println(mPlayers[i].toString())
             val groups = logic.getCardGroupList(mPlayers[i].handCardData)
-            PrintUtil.printCardGroups(groups)
+            PrintUtil.printCardGroups(mPlayers[i].handCardData.handCardList, groups)
         }
 
 

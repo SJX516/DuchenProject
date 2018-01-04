@@ -15,7 +15,7 @@ class CardGroup {
 
     fun appendCardToSingleLine(card: Int): Boolean {
         if (cardGroupType === CardGroupType.SINGLE_LINE) {
-            if (card == (maxCard + 1) || card == (maxCard - cardList.size - 1)) {
+            if (card == (maxCard + 1) || card == (maxCard - cardList.size)) {
                 cardList.add(card)
                 maxCard = if (card > maxCard) card else maxCard
                 return true
@@ -39,7 +39,7 @@ class CardGroup {
     override fun toString(): String {
         val sb = StringBuilder()
         sb.append(cardGroupType).append(" ")
-        for (card in cardList) {
+        for (card in cardList.sorted()) {
             sb.append(CardLibrary.Companion.getCardChar(card))
         }
         sb.append("  maxCard: ").append(maxCard).append("  value: ").append(value)

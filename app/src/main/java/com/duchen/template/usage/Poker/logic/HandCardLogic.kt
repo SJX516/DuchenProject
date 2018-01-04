@@ -1,5 +1,6 @@
 package poker.logic
 
+import com.duchen.template.usage.Poker.model.TempSingleCardGroup
 import poker.CardLibrary
 import poker.model.CardGroup
 import poker.model.type.CardGroupType
@@ -37,6 +38,7 @@ class HandCardLogic {
         handCardData.setCardGroups(cardGroups)
     }
 
+    //将这些牌按照最合理的方法进行分组
     fun getCardGroupList(handCardData: HandCardData): MutableList<CardGroup> {
         return getCardGroupList(handCardData.handCardList)
     }
@@ -47,7 +49,7 @@ class HandCardLogic {
         for (card in handCardList) {
             cardNumArr[card]++
         }
-
+        var lineCount = 0
         val cardGroups = ArrayList<CardGroup>()
         if (cardNumArr[CardLibrary.JOKER1] != 0 && cardNumArr[CardLibrary.JOKER2] != 0) {
             cardGroups.add(getOneCardGroup(arrayListOf(CardLibrary.JOKER1, CardLibrary.JOKER2)))
@@ -55,6 +57,7 @@ class HandCardLogic {
             cardNumArr[CardLibrary.JOKER2] = 0
         }
 
+        //找到炸弹和三对
         for (i in CardLibrary.CARD_3..CardLibrary.CARD_2) {
             if (cardNumArr[i] == 4) {
                 cardGroups.add(getOneCardGroup(MutableList(4) { i }))
@@ -65,7 +68,38 @@ class HandCardLogic {
             }
         }
 
-        var lineCount = 0
+        //取对子
+        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+            if (cardNumArr[i] == 2) {
+                cardGroups.add(getOneCardGroup(MutableList(2) { i }))
+                cardNumArr[i] = 0
+            }
+        }
+
+//        //取连对
+//        lineCount = 0
+//        for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+//            if (cardNumArr[i] == 2) {
+//                lineCount++
+//                if (i == CardLibrary.CARD_A && lineCount >= 3) {
+//                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i-it%lineCount }))
+//                    for (j in i+1-lineCount..i) {
+//                        cardNumArr[j] -= 2
+//                    }
+//                }
+//            } else {
+//                if (lineCount >= 3) {
+//                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i-1-it%lineCount }))
+//                    for (j in i-lineCount until i) {
+//                        cardNumArr[j] -= 2
+//                    }
+//                }
+//                lineCount = 0
+//            }
+//        }
+
+        //找到单顺
+        lineCount = 0
         while (lineCount == 0) {
             for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
                 if (cardNumArr[i] > 0) {
@@ -82,6 +116,7 @@ class HandCardLogic {
                     }
                 } else {
                     if (i == CardLibrary.CARD_A) {
+                        //退出单顺的寻找
                         lineCount = 1
                         break
                     } else {
@@ -91,38 +126,141 @@ class HandCardLogic {
             }
         }
 
-        //寻找剩余的牌加三条是否能组成新的单顺，这个单顺能使用到更多的单牌，没找到的话，需要恢复三条
+        //将三条和连对恢复回去
         var threeCards = cardGroups.filter { it.cardGroupType === CardGroupType.THREE }.map { it.maxCard }
+//        var doubleLineCards = cardGroups.filter { it.cardGroupType === CardGroupType.DOUBLE_LINE }.flatMap {
+//            doubleGroup -> MutableList(doubleGroup.cardList.size / 2) {
+//                doubleGroup.maxCard - it
+//            }
+//        }
+        var doubleCards = cardGroups.filter { it.cardGroupType === CardGroupType.DOUBLE }.map { it.maxCard }
         var singleLines = cardGroups.filter { it.cardGroupType === CardGroupType.SINGLE_LINE }
 
         threeCards.forEach { cardNumArr[it] += 3 }
+        doubleCards.forEach { cardNumArr[it] += 2 }
         cardGroups.removeAll { it.cardGroupType === CardGroupType.THREE }
+        cardGroups.removeAll { it.cardGroupType === CardGroupType.DOUBLE }
 
+        //无中生有（通过三条或连对来组成单顺）
+        lineCount = 0
+        var tempSingleCardGroups = ArrayList<TempSingleCardGroup>()
+        while (lineCount == 0) {
+            var tempCardGroup : TempSingleCardGroup
+            for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
+                if (cardNumArr[i] > 0) {
+                    lineCount++
+                    if (lineCount >= 5) {
+                        //如果后面是3个或2个的，则一直连成单顺
+                        if (cardNumArr[i + 1] >= 2) {
+                            continue
+                        } else {
+                            tempCardGroup = TempSingleCardGroup()
+                            tempCardGroup.cardGroup = getOneCardGroup(MutableList(lineCount) { i-it })
+                            cardNumArr.forEachIndexed { index, _ ->
+                                if (index <= i && index > i - lineCount) {
+                                    if (threeCards.contains(index)) {
+                                        tempCardGroup.useThreeTypeCards.add(index)
+                                    } else if (doubleCards.contains(index)) {
+                                        tempCardGroup.useDoubleLineTypeCards.add(index)
+                                    } else {
+                                        tempCardGroup.helpSingleCards.add(index)
+                                    }
+
+                                    cardNumArr[index]--
+                                }
+                            }
+                            tempSingleCardGroups.add(tempCardGroup)
+                            lineCount = 0
+                            break
+                        }
+                    }
+                } else {
+                    if (i == CardLibrary.CARD_A) {
+                        lineCount = 1
+                        break
+                    } else {
+                        lineCount = 0
+                    }
+                }
+            }
+        }
+
+        //告诉其他单顺，他们之间已经用了的牌
+        if (tempSingleCardGroups.size > 1) {
+            for (i in 0 until tempSingleCardGroups.size) {
+                for (j in 0 until tempSingleCardGroups.size) {
+                    if (i != j) {
+                        tempSingleCardGroups[i].initAlsoValue(tempSingleCardGroups[j])
+                    }
+                }
+            }
+        }
+
+        //todo 无中生有的顺子也要扩展
+        //寻找剩余的牌加三条是否能组成新的单顺，这个单顺能使用到更多的单牌，没找到的话，需要恢复三条
         for (singleGroup in singleLines) {
-            var useThreeTypeCards = ArrayList<Int>()
-            var helpSingleCards = ArrayList<Int>()
+            var tempCardGroup = TempSingleCardGroup()
+            tempCardGroup.cardGroup = singleGroup
             var index = CardLibrary.CARD_3
             while (index <= CardLibrary.CARD_A) {
-                if (cardNumArr[index] > 0 && singleGroup.appendCardToSingleLine(index)) {
+                if (cardNumArr[index] > 0 && tempCardGroup.appendCardToSingleLine(index)) {
                     cardNumArr[index]--
                     if (threeCards.contains(index)) {
-                        useThreeTypeCards.add(index)
+                        tempCardGroup.hasUseOtherType = true
+                        tempCardGroup.useThreeTypeCards.add(index)
+                    } else if (doubleCards.contains(index)) {
+                        tempCardGroup.hasUseOtherType = true
+                        tempCardGroup.useDoubleLineTypeCards.add(index)
                     } else {
-                        helpSingleCards.add(index)
+                        if (tempCardGroup.hasUseOtherType) {
+                            tempCardGroup.helpSingleCards.add(index)
+                        }
                     }
                     index = CardLibrary.CARD_3
                 } else {
                     index++
                 }
             }
-            if (helpSingleCards.size <= useThreeTypeCards.size) {
-                useThreeTypeCards.forEach {
-                    cardNumArr[it]++
-                    singleGroup.removeCardFromSingleLine(it)
+
+            //告诉当前单顺，公用了哪些牌
+            for (i in 0 until tempSingleCardGroups.size) {
+                tempCardGroup.initAlsoValue(tempSingleCardGroups[i])
+            }
+
+            if (tempCardGroup.canHelp()) {
+                //告诉其他单顺，已经有人用了这些牌了
+                for (card in tempSingleCardGroups) {
+                    card.initAlsoValue(tempCardGroup)
                 }
-                helpSingleCards.forEach {
+            } else {
+                tempCardGroup.useThreeTypeCards.forEach {
                     cardNumArr[it]++
-                    singleGroup.removeCardFromSingleLine(it)
+                    tempCardGroup.removeCardFromSingleLine(it)
+                }
+                tempCardGroup.useDoubleLineTypeCards.forEach {
+                    cardNumArr[it]++
+                    tempCardGroup.removeCardFromSingleLine(it)
+                }
+                tempCardGroup.helpSingleCards.forEach {
+                    cardNumArr[it]++
+                    tempCardGroup.removeCardFromSingleLine(it)
+                }
+            }
+        }
+
+        //判断无中生有的单顺是否可行
+        for (card in tempSingleCardGroups) {
+            if (card.canHelp()) {
+                cardGroups.add(card.cardGroup)
+            } else {
+                card.useThreeTypeCards.forEach {
+                    cardNumArr[it]++
+                }
+                card.useDoubleLineTypeCards.forEach {
+                    cardNumArr[it]++
+                }
+                card.helpSingleCards.forEach {
+                    cardNumArr[it]++
                 }
             }
         }
@@ -134,26 +272,22 @@ class HandCardLogic {
             }
         }
 
-        //取双顺
+        //取连对
         lineCount = 0
         for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
             if (cardNumArr[i] == 2) {
                 lineCount++
                 if (i == CardLibrary.CARD_A && lineCount >= 3) {
-                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i- it % lineCount }))
-                    cardNumArr.forEachIndexed { index, _ ->
-                        if (index <= i && index > i - lineCount) {
-                            cardNumArr[index] -= 2
-                        }
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i-it%lineCount }))
+                    for (j in i+1-lineCount..i) {
+                        cardNumArr[j] -= 2
                     }
                 }
             } else {
                 if (lineCount >= 3) {
-                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i- it % lineCount }))
-                    cardNumArr.forEachIndexed { index, _ ->
-                        if (index <= i && index > i - lineCount) {
-                            cardNumArr[index] -= 2
-                        }
+                    cardGroups.add(getOneCardGroup(MutableList(lineCount*2) { i-1-it%lineCount }))
+                    for (j in i-lineCount until i) {
+                        cardNumArr[j] -= 2
                     }
                 }
                 lineCount = 0
@@ -177,6 +311,10 @@ class HandCardLogic {
         }
 
         return cardGroups
+    }
+
+    private fun canHelp(singleCard : TempSingleCardGroup) : Boolean {
+        return singleCard.helpSingleCards.size > singleCard.useThreeTypeCards.size + singleCard.useDoubleLineTypeCards.size
     }
 
     fun getHandCardValue(handCardData: HandCardData): HandCardValue {
