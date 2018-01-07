@@ -5,12 +5,17 @@ import poker.model.type.CardGroupType
 
 class TempSingleCardGroup {
 
+    var isLineFromNone = true
+
     var cardGroup = CardGroup()
     var useThreeTypeCards = ArrayList<Int>()
-    var useDoubleLineTypeCards = ArrayList<Int>()
-    var alsoUsedByOtherGroupCards = ArrayList<Int>()
+    var useDoubleTypeCards = ArrayList<Int>()
     var helpSingleCards = ArrayList<Int>()
-    var hasUseOtherType = false
+
+    var useThreeTypeCardsEXT = ArrayList<Int>()
+    var useDoubleTypeCardsEXT = ArrayList<Int>()
+    var helpSingleCardsEXT = ArrayList<Int>()
+    var hasUseOtherTypeEXT = false
 
     fun appendCardToSingleLine(card: Int): Boolean {
         if (cardGroup.cardGroupType === CardGroupType.SINGLE_LINE) {
@@ -35,21 +40,15 @@ class TempSingleCardGroup {
         }
     }
 
-    fun canHelp() : Boolean {
-        return helpSingleCards.size >= (useThreeTypeCards.size
-                + useDoubleLineTypeCards.size - alsoUsedByOtherGroupCards.size)
+    fun release() : ArrayList<Int> {
+        val list = ArrayList<Int>()
+        list.addAll(useThreeTypeCards)
+        list.addAll(useThreeTypeCardsEXT)
+        list.addAll(useDoubleTypeCardsEXT)
+        list.addAll(useDoubleTypeCards)
+        list.addAll(helpSingleCardsEXT)
+        list.addAll(helpSingleCards)
+        return list
     }
 
-    fun initAlsoValue(other : TempSingleCardGroup) {
-        for (two in other.useDoubleLineTypeCards) {
-            if (!alsoUsedByOtherGroupCards.contains(two) && useDoubleLineTypeCards.contains(two)) {
-                alsoUsedByOtherGroupCards.add(two)
-            }
-        }
-        for (three in other.useThreeTypeCards) {
-            if (!alsoUsedByOtherGroupCards.contains(three) && useThreeTypeCards.contains(three)) {
-                alsoUsedByOtherGroupCards.add(three)
-            }
-        }
-    }
 }

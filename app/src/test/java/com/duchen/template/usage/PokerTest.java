@@ -7,10 +7,12 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import poker.CardLibrary;
 import poker.Poker;
 import poker.logic.HandCardLogic;
+import poker.model.CardGroup;
 
 
 /**
@@ -28,18 +30,24 @@ public class PokerTest {
     @Test
     public void testGetCardGroup() {
         HandCardLogic logic = new HandCardLogic();
-        testGetCard(logic, "334555678899XJQKAA22");
-        testGetCard(logic, "3455667789XJJKKAAI");
-        testGetCard(logic, "4567899XXJJQQKA2I");
-        testGetCard(logic, "34566677789XJJKKAAI");
+        testGetCard(logic, "4567899XXJJQQKA2I", 4);
+        testGetCard(logic, "334555678899XJQKAA22", 6);
+        testGetCard(logic, "3455667789XJJKKAAI", 6);
+        testGetCard(logic, "34566677789XJJKKAAI", 8);
 
-        testGetCard(logic, "334466778XJQKKA2L");
-        testGetCard(logic, "3344556789XQKKA2L");
-        testGetCard(logic, "34567899XXJJKKAAI");
+        testGetCard(logic, "334466778XJQKKA2L", 9);
+        testGetCard(logic, "3344556789XQKKA2L", 7);
+        testGetCard(logic, "34567899XXJJKKAAI", 5);
     }
 
-    void testGetCard(HandCardLogic logic, String cards) {
-        PrintUtil.Companion.printCardGroups(CardLibrary.Companion.getCardList(cards), logic.getCardGroupList(CardLibrary.Companion.getCardList(cards)));
+    void testGetCard(HandCardLogic logic, String cards, int exceptRound) {
+        List<CardGroup> groups = logic.getCardGroupList(CardLibrary.Companion.getCardList(cards));
+        if (exceptRound == groups.size()) {
+            System.out.println("||--  " + "SUCC" + "  ----  EXCEPT ROUND " + exceptRound);
+        } else {
+            System.err.println("||--  " + "ERROR" + "  ----  EXCEPT ROUND " + exceptRound + "  " + cards);
+        }
+        PrintUtil.Companion.printCardGroups(CardLibrary.Companion.getCardList(cards), groups);
     }
 
     @Test

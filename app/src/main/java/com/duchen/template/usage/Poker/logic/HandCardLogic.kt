@@ -104,19 +104,28 @@ class HandCardLogic {
             for (i in CardLibrary.CARD_3..CardLibrary.CARD_A) {
                 if (cardNumArr[i] > 0) {
                     lineCount++
-                    if (lineCount == 5) {
-                        lineCount = 0
-                        cardGroups.add(getOneCardGroup(MutableList(5) { i-it }))
+                    if ( i == CardLibrary.CARD_A && lineCount >= 5) {
+                        cardGroups.add(getOneCardGroup(MutableList(lineCount) { i-it }))
                         cardNumArr.forEachIndexed { index, _ ->
-                            if (index <= i && index > i - 5) {
+                            if (index <= i && index > i-lineCount) {
                                 cardNumArr[index]--
                             }
                         }
+                        lineCount = 0
                         break
                     }
                 } else {
-                    if (i == CardLibrary.CARD_A) {
-                        //退出单顺的寻找
+                    if (lineCount >= 5) {
+                        cardGroups.add(getOneCardGroup(MutableList(lineCount) { i-1-it }))
+                        cardNumArr.forEachIndexed { index, _ ->
+                            if (index <= i - 1 && index > i - 1 - lineCount) {
+                                cardNumArr[index]--
+                            }
+                        }
+                        lineCount = 0
+                        break
+                    } else if (i == CardLibrary.CARD_A) {
+                        //遍历一遍，count不够时，直接退出
                         lineCount = 1
                         break
                     } else {
@@ -151,7 +160,7 @@ class HandCardLogic {
                     lineCount++
                     if (lineCount >= 5) {
                         //如果后面是3个或2个的，则一直连成单顺
-                        if (cardNumArr[i + 1] >= 2) {
+                        if (cardNumArr[i + 1] >= 2 && CardLibrary.CARD_A - i - 1 >= 5) {
                             continue
                         } else {
                             tempCardGroup = TempSingleCardGroup()
@@ -161,7 +170,7 @@ class HandCardLogic {
                                     if (threeCards.contains(index)) {
                                         tempCardGroup.useThreeTypeCards.add(index)
                                     } else if (doubleCards.contains(index)) {
-                                        tempCardGroup.useDoubleLineTypeCards.add(index)
+                                        tempCardGroup.useDoubleTypeCards.add(index)
                                     } else {
                                         tempCardGroup.helpSingleCards.add(index)
                                     }
@@ -185,34 +194,29 @@ class HandCardLogic {
             }
         }
 
-        //告诉其他单顺，他们之间已经用了的牌
-        if (tempSingleCardGroups.size > 1) {
-            for (i in 0 until tempSingleCardGroups.size) {
-                for (j in 0 until tempSingleCardGroups.size) {
-                    if (i != j) {
-                        tempSingleCardGroups[i].initAlsoValue(tempSingleCardGroups[j])
-                    }
-                }
-            }
-        }
-
-        //todo 无中生有的顺子也要扩展
-        //寻找剩余的牌加三条是否能组成新的单顺，这个单顺能使用到更多的单牌，没找到的话，需要恢复三条
-        for (singleGroup in singleLines) {
+        for(singleGroup in singleLines) {
             var tempCardGroup = TempSingleCardGroup()
             tempCardGroup.cardGroup = singleGroup
+            tempCardGroup.isLineFromNone = false
+            tempSingleCardGroups.add(tempCardGroup)
+        }
+
+        //寻找剩余的牌加三条是否能组成新的单顺，这个单顺能使用到更多的单牌，没找到的话，需要恢复三条
+        for (tempCardGroup in tempSingleCardGroups) {
             var index = CardLibrary.CARD_3
             while (index <= CardLibrary.CARD_A) {
                 if (cardNumArr[index] > 0 && tempCardGroup.appendCardToSingleLine(index)) {
                     cardNumArr[index]--
                     if (threeCards.contains(index)) {
-                        tempCardGroup.hasUseOtherType = true
-                        tempCardGroup.useThreeTypeCards.add(index)
+                        tempCardGroup.hasUseOtherTypeEXT = true
+                        tempCardGroup.useThreeTypeCardsEXT.add(index)
                     } else if (doubleCards.contains(index)) {
-                        tempCardGroup.hasUseOtherType = true
-                        tempCardGroup.useDoubleLineTypeCards.add(index)
+                        tempCardGroup.hasUseOtherTypeEXT = true
+                        tempCardGroup.useDoubleTypeCardsEXT.add(index)
                     } else {
-                        if (tempCardGroup.hasUseOtherType) {
+                        if (tempCardGroup.hasUseOtherTypeEXT) {
+                            tempCardGroup.helpSingleCardsEXT.add(index)
+                        } else {
                             tempCardGroup.helpSingleCards.add(index)
                         }
                     }
@@ -221,46 +225,88 @@ class HandCardLogic {
                     index++
                 }
             }
-
-            //告诉当前单顺，公用了哪些牌
-            for (i in 0 until tempSingleCardGroups.size) {
-                tempCardGroup.initAlsoValue(tempSingleCardGroups[i])
-            }
-
-            if (tempCardGroup.canHelp()) {
-                //告诉其他单顺，已经有人用了这些牌了
-                for (card in tempSingleCardGroups) {
-                    card.initAlsoValue(tempCardGroup)
-                }
-            } else {
-                tempCardGroup.useThreeTypeCards.forEach {
-                    cardNumArr[it]++
-                    tempCardGroup.removeCardFromSingleLine(it)
-                }
-                tempCardGroup.useDoubleLineTypeCards.forEach {
-                    cardNumArr[it]++
-                    tempCardGroup.removeCardFromSingleLine(it)
-                }
-                tempCardGroup.helpSingleCards.forEach {
-                    cardNumArr[it]++
-                    tempCardGroup.removeCardFromSingleLine(it)
-                }
-            }
         }
 
-        //判断无中生有的单顺是否可行
-        for (card in tempSingleCardGroups) {
-            if (card.canHelp()) {
-                cardGroups.add(card.cardGroup)
+        //检查无中生有是否有效
+        var totalUsedCardsWithNotCount = ArrayList<Int>()
+        var totalUsedCards = ArrayList<Int>()
+        var totalHelpedCards = ArrayList<Int>()
+        for (cardGroup in tempSingleCardGroups) {
+            for (threeCard in cardGroup.useThreeTypeCards) {
+                if (!totalUsedCards.contains(threeCard)) {
+                    totalUsedCardsWithNotCount.add(threeCard)
+                    totalUsedCards.add(threeCard)
+                }
+            }
+            for (twoCard in cardGroup.useDoubleTypeCards) {
+                if (!totalUsedCards.contains(twoCard)) {
+                    totalUsedCardsWithNotCount.add(twoCard)
+                    totalUsedCards.add(twoCard)
+                } else {
+                    totalUsedCards.remove(twoCard)
+                }
+            }
+            for (twoCard in cardGroup.useDoubleTypeCardsEXT) {
+                if (totalUsedCards.contains(twoCard)) {
+                    totalUsedCards.remove(twoCard)
+                }
+            }
+            totalHelpedCards.addAll(cardGroup.helpSingleCards)
+        }
+        var getLineFromNoneSucc = false
+        if (totalUsedCards.size < totalHelpedCards.size) {
+            //无中生有有效
+            getLineFromNoneSucc = true
+            for (cardGroup in tempSingleCardGroups) {
+                if (cardGroup.isLineFromNone) {
+                    cardGroups.add(cardGroup.cardGroup)
+                }
+            }
+        } else {
+            val removeCardGroups = ArrayList<TempSingleCardGroup>()
+            for (cardGroup in tempSingleCardGroups) {
+                if (cardGroup.isLineFromNone) {
+                    removeCardGroups.add(cardGroup)
+                    cardGroup.release().forEach {
+                        cardNumArr[it]++
+                    }
+                }
+            }
+            tempSingleCardGroups.removeAll(removeCardGroups)
+        }
+
+        //处理正常扩展的有效性
+        for (cardGroup in tempSingleCardGroups) {
+            var singleUsedCards = ArrayList<Int>()
+            if (getLineFromNoneSucc) {
+                for (threeCard in cardGroup.useThreeTypeCardsEXT) {
+                    if (!totalUsedCardsWithNotCount.contains(threeCard)) {
+                        singleUsedCards.add(threeCard)
+                    }
+                }
+                for (twoCard in cardGroup.useDoubleTypeCardsEXT) {
+                    if (!totalUsedCardsWithNotCount.contains(twoCard)) {
+                        singleUsedCards.add(twoCard)
+                    }
+                }
             } else {
-                card.useThreeTypeCards.forEach {
+                singleUsedCards.addAll(cardGroup.useThreeTypeCardsEXT)
+                singleUsedCards.addAll(cardGroup.useDoubleTypeCardsEXT)
+            }
+            if ((cardGroup.helpSingleCardsEXT.size > singleUsedCards.size) || singleUsedCards.size == 0) {
+                //扩展成功
+            } else {
+                cardGroup.useThreeTypeCardsEXT.forEach {
                     cardNumArr[it]++
+                    cardGroup.removeCardFromSingleLine(it)
                 }
-                card.useDoubleLineTypeCards.forEach {
+                cardGroup.useDoubleTypeCardsEXT.forEach {
                     cardNumArr[it]++
+                    cardGroup.removeCardFromSingleLine(it)
                 }
-                card.helpSingleCards.forEach {
+                cardGroup.helpSingleCardsEXT.forEach {
                     cardNumArr[it]++
+                    cardGroup.removeCardFromSingleLine(it)
                 }
             }
         }
@@ -314,7 +360,7 @@ class HandCardLogic {
     }
 
     private fun canHelp(singleCard : TempSingleCardGroup) : Boolean {
-        return singleCard.helpSingleCards.size > singleCard.useThreeTypeCards.size + singleCard.useDoubleLineTypeCards.size
+        return singleCard.helpSingleCards.size > singleCard.useThreeTypeCards.size + singleCard.useDoubleTypeCards.size
     }
 
     fun getHandCardValue(handCardData: HandCardData): HandCardValue {
