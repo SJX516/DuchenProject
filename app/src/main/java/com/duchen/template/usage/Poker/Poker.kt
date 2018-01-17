@@ -8,10 +8,14 @@ import java.util.Random
 
 class Poker {
 
-    var mPlayers = arrayListOf<Player>()
+    var mPlayers = ArrayList<Player>()
     var mCardLibrary = CardLibrary()
+    var mLogic = HandCardLogic()
     var mStartIndex = 0
     var mBossIndex = 0
+
+    val mLeftCardNumArr = IntArray(CardLibrary.CARD_ARR_SIZE)
+
 
     fun startNewGame() {
         mCardLibrary = CardLibrary()
@@ -22,40 +26,61 @@ class Poker {
         }
 
         for (i in 0 until 17) {
-            for (j in 0 until PLAYER_NUM) {
-                mPlayers[getActualIndex(j + mStartIndex)].addCard(mCardLibrary.oneCard)
+            mPlayers.forEachFromIndex(mStartIndex) {
+                it, _ ->
+                it.addCard(mCardLibrary.oneCard)
+                true
             }
         }
 
-        for (i in 0 until PLAYER_NUM) {
-            if (mPlayers[getActualIndex(i + mStartIndex)].askToBeBoss()) {
-                mBossIndex = getActualIndex(i + mStartIndex)
+        mPlayers.forEachFromIndex(mStartIndex) {
+            it, index ->
+            if (it.askToBeBoss()) {
+                mBossIndex = index
                 mPlayers[mBossIndex].role = Player.Role.BOSS
                 mPlayers[mBossIndex].addCards(mCardLibrary.roundTwoCard)
-                mPlayers[getActualIndex(mBossIndex + 1)].role = Player.Role.FARMER_NEXT
-                mPlayers[getActualIndex(mBossIndex - 1)].role = Player.Role.FARMER_PRE
-                break
+                mPlayers.getInLoop(mBossIndex + 1).role = Player.Role.FARMER_NEXT
+                mPlayers.getInLoop(mBossIndex - 1).role = Player.Role.FARMER_PRE
+                false
+            } else {
+                true
             }
         }
 
-        var logic = HandCardLogic()
         println()
-        for (i in 0 until PLAYER_NUM) {
-            println(mPlayers[i].toString())
-            val groups = logic.getCardGroupList(mPlayers[i].handCardData)
-            PrintUtil.printCardGroups(mPlayers[i].handCardData.handCardList, groups)
+        mPlayers.forEachFromIndex(mBossIndex) {
+            it, _ ->
+            println(it.toString())
+            val groups = mLogic.getCardGroupList(it.handCardData)
+            PrintUtil.printCardGroups(it.handCardData.handCardList.sorted(), groups)
+            true
         }
 
 
     }
 
-    private fun getActualIndex(i: Int): Int {
-        if (i < 0) {
-            return 0
+    fun <T> List<T>.forEachFromIndex(start : Int, action: (T, Int) -> Boolean) {
+        for (i in 0 until this.size) {
+            val index = this.getIndexInLoop(start + i)
+            if (!action(this[index], index)) {
+                break
+            }
         }
-        return if (i >= PLAYER_NUM) {
-            i % PLAYER_NUM
-        } else i
+    }
+
+    fun <T> List<T>.getInLoop(index : Int) : T {
+        return this[this.getIndexInLoop(index)]
+    }
+
+    fun <T> List<T>.getIndexInLoop(index : Int) : Int {
+        var realIndex = index
+        while (realIndex < 0) {
+            realIndex += this.size
+        }
+        if (realIndex >= this.size) {
+            realIndex %= this.size
+        }
+        return realIndex
     }
 
     companion object {

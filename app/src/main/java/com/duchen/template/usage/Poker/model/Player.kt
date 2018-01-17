@@ -1,5 +1,6 @@
 package poker.model
 
+import com.duchen.template.usage.Poker.model.PutCardDetail
 import java.util.*
 
 class Player {
@@ -18,6 +19,10 @@ class Player {
 
     fun askToBeBoss(): Boolean {
         return true
+    }
+
+    fun putCard(putStrategy: PutCardDetail.PutStrategy) : CardGroup {
+
     }
 
     fun setCards(cards: MutableList<Int>) {
