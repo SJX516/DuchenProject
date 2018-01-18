@@ -102,7 +102,7 @@ public class PlatformUtil {
                 imei += "_" + androidId;
             }
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         if (imei == null) {
@@ -199,7 +199,7 @@ public class PlatformUtil {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager
                     .GET_CONFIGURATIONS).versionName;
         } catch (NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return "";
         }
     }
@@ -272,7 +272,7 @@ public class PlatformUtil {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
         } catch (NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return 0;
         }
     }
@@ -284,7 +284,7 @@ public class PlatformUtil {
         try {
             return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return "";
         }
     }
@@ -298,7 +298,7 @@ public class PlatformUtil {
             str = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
             str = str.trim();
         } catch (NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         if (str != null && str.length() > 0) {
@@ -398,7 +398,7 @@ public class PlatformUtil {
                 }
             }
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return out;
     }
@@ -536,7 +536,7 @@ public class PlatformUtil {
                     width = (Integer) mGetRawW.invoke(display);
                     height = (Integer) mGetRawH.invoke(display);
                 } catch (Exception e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                 }
             }
 
@@ -696,7 +696,7 @@ public class PlatformUtil {
             try {
                 Thread.sleep(100L);
             } catch (InterruptedException ex) {
-                LogUtil.e(TAG, ex.getMessage());
+                DLog.e(TAG, ex.getMessage());
             }
         }
     }
@@ -740,7 +740,7 @@ public class PlatformUtil {
                 }
             }
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return bitmap;
     }
@@ -767,7 +767,7 @@ public class PlatformUtil {
                     break;
             }
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return rotate;
     }

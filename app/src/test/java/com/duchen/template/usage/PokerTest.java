@@ -29,19 +29,18 @@ public class PokerTest {
 
     @Test
     public void testGetCardGroup() {
-        HandCardLogic logic = new HandCardLogic();
-        testGetCard(logic, "4567899XXJJQQKA2I", 4);
-        testGetCard(logic, "334555678899XJQKAA22", 6);
-        testGetCard(logic, "3455667789XJJKKAAI", 6);
-        testGetCard(logic, "34566677789XJJKKAAI", 8);
+        testGetCard("4567899XXJJQQKA2I", 4);
+        testGetCard("334555678899XJQKAA22", 6);
+        testGetCard("3455667789XJJKKAAI", 6);
+        testGetCard("34566677789XJJKKAAI", 8);
 
-        testGetCard(logic, "334466778XJQKKA2L", 9);
-        testGetCard(logic, "3344556789XQKKA2L", 7);
-        testGetCard(logic, "34567899XXJJKKAAI", 5);
+        testGetCard("334466778XJQKKA2L", 9);
+        testGetCard("3344556789XQKKA2L", 7);
+        testGetCard("34567899XXJJKKAAI", 5);
     }
 
-    void testGetCard(HandCardLogic logic, String cards, int exceptRound) {
-        List<CardGroup> groups = logic.getCardGroupList(CardLibrary.Companion.getCardList(cards));
+    void testGetCard(String cards, int exceptRound) {
+        List<CardGroup> groups = HandCardLogic.Companion.getCardGroupList(CardLibrary.Companion.getCardList(cards));
         if (exceptRound == groups.size()) {
             System.out.println("||--  " + "SUCC" + "  ----  EXCEPT ROUND " + exceptRound);
         } else {
@@ -52,22 +51,25 @@ public class PokerTest {
 
     @Test
     public void testCheckGroup() {
-        HandCardLogic logic = new HandCardLogic();
-        System.out.println(logic.getOneCardGroup(Arrays.asList(10)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(14, 14)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(12, 12, 12)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 4, 5, 6, 7)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(12, 10, 12, 10, 11, 11)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 3, 4, 4, 4, 6, 6, 6, 5, 5, 5)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(11, 11, 3, 11)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(8, 3, 3, 8, 8)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 3, 11, 4, 4, 11, 4, 5, 6, 5, 8, 5, 6, 8)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 3, 4, 4, 9, 4, 5, 6, 5, 8, 5)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 3, 3)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 3, 5, 3)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(3, 3, 4, 3, 4, 3)));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(16, 17)));
-        System.out.println(logic.getOneCardGroup(new ArrayList<Integer>()));
-        System.out.println(logic.getOneCardGroup(Arrays.asList(12, 12, 11, 11)));
+        printOneCardGroup(10);
+        printOneCardGroup(14, 14);
+        printOneCardGroup(12, 12, 12);
+        printOneCardGroup(3, 4, 5, 6, 7);
+        printOneCardGroup(12, 10, 12, 10, 11, 11);
+        printOneCardGroup(3, 3, 3, 4, 4, 4, 6, 6, 6, 5, 5, 5);
+        printOneCardGroup(11, 11, 3, 11);
+        printOneCardGroup(8, 3, 3, 8, 8);
+        printOneCardGroup(3, 3, 3, 11, 4, 4, 11, 4, 5, 6, 5, 8, 5, 6, 8);
+        printOneCardGroup(3, 3, 3, 4, 4, 9, 4, 5, 6, 5, 8, 5);
+        printOneCardGroup(3, 3, 3, 3);
+        printOneCardGroup(3, 3, 3, 5, 3);
+        printOneCardGroup(3, 3, 4, 3, 4, 3);
+        printOneCardGroup(16, 17);
+        printOneCardGroup(12, 12, 11, 11);
+        System.out.println(HandCardLogic.Companion.getOneCardGroup(new ArrayList<Integer>()));
+    }
+
+    void printOneCardGroup(Integer... data) {
+        System.out.println(HandCardLogic.Companion.getOneCardGroup(Arrays.asList(data)));
     }
 }

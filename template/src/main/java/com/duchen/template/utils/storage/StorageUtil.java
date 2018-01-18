@@ -9,7 +9,7 @@ import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
 import com.duchen.template.component.ApplicationBase;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 import com.duchen.template.utils.PermissionUtil;
 import com.duchen.template.utils.PlatformUtil;
 
@@ -94,7 +94,7 @@ public class StorageUtil {
 
         if (pathList.isEmpty()) {
             if (!TextUtils.isEmpty(defaultPath)) {
-                LogUtil.e(TAG, "getSDCardRootPathList defaultPath = " + defaultPath);
+                DLog.e(TAG, "getSDCardRootPathList defaultPath = " + defaultPath);
                 pathList.add(defaultPath);
             }
         }
@@ -117,7 +117,7 @@ public class StorageUtil {
                 }
             }
         } else {
-            LogUtil.e(TAG, "getDefaultSDCardRootPath file is NULL");
+            DLog.e(TAG, "getDefaultSDCardRootPath file is NULL");
             if (Environment.getExternalStorageDirectory() == null) {
                 return "";
             } else {
@@ -139,7 +139,7 @@ public class StorageUtil {
             paths = (String[]) sm.getClass().getMethod("getVolumePaths", new Class[0]).invoke(sm, new Object[]{});
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException |
                 NoSuchMethodException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         List<String> writablePaths = new ArrayList<String>();
@@ -212,7 +212,7 @@ public class StorageUtil {
                     return "";
             }
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return info;
     }
@@ -232,7 +232,7 @@ public class StorageUtil {
             long nTotalBlock = statfs.getBlockCount();
             return (nTotalBlock*nBlocSize);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return 0;
     }
@@ -253,7 +253,7 @@ public class StorageUtil {
             // 计算 SDCard 剩余大小B
             return (nAvailaBlock*nBlocSize);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return 0;
     }

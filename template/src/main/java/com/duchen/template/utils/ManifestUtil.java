@@ -19,7 +19,7 @@ public class ManifestUtil {
             PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             version = pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return version;
     }
@@ -33,7 +33,7 @@ public class ManifestUtil {
             PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             code = pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return code;
     }
@@ -47,7 +47,7 @@ public class ManifestUtil {
             PackageInfo pi = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             name = context.getString(pi.applicationInfo.labelRes);
         } catch (PackageManager.NameNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return name;
     }

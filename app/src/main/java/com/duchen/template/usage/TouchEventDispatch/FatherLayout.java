@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 
 public class FatherLayout extends FrameLayout {
@@ -28,10 +28,10 @@ public class FatherLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.d("--------------FATHER dispatchTouchEvent : " + LogUtil.eventToString(ev.getAction()));
+        DLog.d("--------------FATHER dispatchTouchEvent : " + DLog.eventToString(ev.getAction()));
         boolean returnVale = super.dispatchTouchEvent(ev);
-        LogUtil.d("--------------FATHER dispatchTouchEvent return : " + returnVale);
-        LogUtil.d("--");
+        DLog.d("--------------FATHER dispatchTouchEvent return : " + returnVale);
+        DLog.d("--");
         return returnVale;
     }
 
@@ -44,7 +44,7 @@ public class FatherLayout extends FrameLayout {
         } else {
             returnVale = true;
         }
-        LogUtil.d("FATHER onInterceptTouchEvent return : " + returnVale);
+        DLog.d("FATHER onInterceptTouchEvent return : " + returnVale);
         return returnVale;
     }
 
@@ -52,7 +52,7 @@ public class FatherLayout extends FrameLayout {
     public boolean onTouchEvent(MotionEvent event) {
         boolean returnVale = false;
 
-        LogUtil.d("FATHER onTouchEvent return : " + returnVale);
+        DLog.d("FATHER onTouchEvent return : " + returnVale);
         return returnVale;
     }
 

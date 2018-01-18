@@ -1,6 +1,6 @@
 package com.duchen.template.utils.datahelper;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 /**
  * 数据类型转换帮助类
@@ -14,9 +14,9 @@ public class DataTypeCastUtil {
         try {
             return Long.valueOf(string);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (Error e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return 0;
     }
@@ -26,9 +26,9 @@ public class DataTypeCastUtil {
         try {
             return Float.valueOf(string);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (Error e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return 0f;
     }
@@ -38,9 +38,9 @@ public class DataTypeCastUtil {
         try {
             return Integer.valueOf(string);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (Error e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return 0;
     }

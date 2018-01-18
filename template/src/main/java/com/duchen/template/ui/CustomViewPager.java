@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Gallery;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 public class CustomViewPager extends ViewPager {
 
@@ -94,7 +94,7 @@ public class CustomViewPager extends ViewPager {
 				return false;
 			}
 		} catch (Exception e) {
-			LogUtil.e(TAG, e.getMessage());
+			DLog.e(TAG, e.getMessage());
 		}
 		return false;
 	}

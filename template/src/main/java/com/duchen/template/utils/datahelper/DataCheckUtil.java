@@ -3,7 +3,7 @@ package com.duchen.template.utils.datahelper;
 import android.support.annotation.NonNull;
 
 import com.duchen.template.component.model.LegalModel;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -34,14 +34,14 @@ public class DataCheckUtil {
             if (field.getAnnotation(NonNull.class) != null) {
                 try {
                     if (field.get(object) == null) {
-                        LogUtil.e(TAG, "Data check failed " + classType.getName() + "." + field.getName() + " is null");
+                        DLog.e(TAG, "Data check failed " + classType.getName() + "." + field.getName() + " is null");
                         return false;
                     }
                 } catch (IllegalAccessException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                     return false;
                 } catch (IllegalArgumentException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                     return false;
                 }
             }

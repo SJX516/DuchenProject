@@ -1,6 +1,8 @@
 package poker.model
 
+import com.duchen.template.usage.Poker.GameStatus
 import com.duchen.template.usage.Poker.model.PutCardDetail
+import poker.logic.HandCardLogic
 import java.util.*
 
 class Player {
@@ -21,8 +23,15 @@ class Player {
         return true
     }
 
-    fun putCard(putStrategy: PutCardDetail.PutStrategy) : CardGroup {
+    fun putCard(putStrategy: PutCardDetail.PutStrategy, gameStatus: GameStatus) : CardGroup {
+        if (handCardData.handCardGroupList.size == 0) {
+            HandCardLogic.initHandCardData(handCardData)
+        }
+        return handCardData.handCardGroupList.removeAt(0)
+    }
 
+    fun noMoreCards(): Boolean {
+        return handCardData.handCardGroupList.size == 0
     }
 
     fun setCards(cards: MutableList<Int>) {

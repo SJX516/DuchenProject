@@ -1,6 +1,5 @@
 package com.duchen.template.utils;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,11 +16,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.renderscript.Allocation;
-import android.renderscript.Element;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -194,7 +188,7 @@ public class ImageUtil {
                     bitmap = getThumImage(bitmap, width, height);
                 } catch (OutOfMemoryError e) {
                     options.inSampleSize = options.inSampleSize*2;
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                 }
 
             }
@@ -414,13 +408,13 @@ public class ImageUtil {
                 try {
                     file.createNewFile();
                 } catch (IOException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                     return false;
                 }
             }
             stream = new FileOutputStream(path);
         } catch (FileNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return false;
         }
 
@@ -453,9 +447,9 @@ public class ImageUtil {
             ret = bmp.compress(format, quality, stream);
             stream.close();
         } catch (FileNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (IOException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return ret;
     }
@@ -499,7 +493,7 @@ public class ImageUtil {
                 break;
             } catch (OutOfMemoryError e) {
                 options.inSampleSize++;
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         }
         return bm;
@@ -542,7 +536,7 @@ public class ImageUtil {
                 break;
             } catch (OutOfMemoryError e) {
                 options.inSampleSize++;
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         }
         return bm;
@@ -580,7 +574,7 @@ public class ImageUtil {
                 break;
             } catch (OutOfMemoryError e) {
                 options.inSampleSize++;
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         }
         return bm;
@@ -600,7 +594,7 @@ public class ImageUtil {
         try {
             in = context.getContentResolver().openInputStream(uri);
         } catch (FileNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return null;
         }
 
@@ -616,7 +610,7 @@ public class ImageUtil {
             try {
                 in.close();
             } catch (IOException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
 
             float blW = (float) options.outWidth/max;
@@ -635,7 +629,7 @@ public class ImageUtil {
                 try {
                     in = context.getContentResolver().openInputStream(uri);
                 } catch (FileNotFoundException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                     return null;
                 }
 
@@ -643,13 +637,13 @@ public class ImageUtil {
                 break;
             } catch (OutOfMemoryError e) {
                 options.inSampleSize++;
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } finally {
                 if (in != null) {
                     try {
                         in.close();
                     } catch (IOException e) {
-                        LogUtil.e(TAG, e.getMessage());
+                        DLog.e(TAG, e.getMessage());
                     }
                 }
             }
@@ -675,7 +669,7 @@ public class ImageUtil {
                     b = b2;
                 }
             } catch (OutOfMemoryError ex) {
-                LogUtil.e(TAG, ex.getMessage());
+                DLog.e(TAG, ex.getMessage());
             }
         }
         return b;
@@ -713,10 +707,10 @@ public class ImageUtil {
         try {
             bm = BitmapFactory.decodeFile(file, options);
         } catch (OutOfMemoryError e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return null;
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
             return null;
         }
         return bm;

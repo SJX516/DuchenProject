@@ -1,6 +1,6 @@
 package com.duchen.template.component.model;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -25,7 +25,7 @@ public class ModelParser {
             if (json == null) return null;
             t = mGson.fromJson(json, classOfT);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return t;
     }
@@ -35,7 +35,7 @@ public class ModelParser {
         try {
             t = mGson.fromJson(json, typeOfT);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return t;
     }
@@ -45,7 +45,7 @@ public class ModelParser {
         try {
             t = mGson.fromJson(jsonElement, type);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return t;
     }
@@ -55,7 +55,7 @@ public class ModelParser {
         try {
             jsonString = mGson.toJson(src);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return jsonString;
     }
@@ -65,7 +65,7 @@ public class ModelParser {
         try {
             jsonString = mGson.toJson(src, typeOfSrc);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return jsonString;
     }
@@ -75,7 +75,7 @@ public class ModelParser {
         try {
             jsonString = mGson.toJson(jsonElement);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return jsonString;
     }

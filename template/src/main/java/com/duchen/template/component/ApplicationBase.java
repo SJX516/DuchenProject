@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 
 import com.duchen.template.component.helper.ActivityLifecycle;
 import com.duchen.template.concept.ExceptionBase;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 import com.duchen.template.utils.NetworkUtil.NetworkChangeListener;
 import com.duchen.template.utils.PlatformUtil;
 
@@ -29,7 +29,7 @@ public abstract class ApplicationBase extends Application {
 
     public static <T extends ApplicationBase> T getInstance() {
         if (sBaseApp == null) {
-            LogUtil.e(TAG, "sBaseApp not create or be terminated!");
+            DLog.e(TAG, "sBaseApp not create or be terminated!");
         }
         return (T) sBaseApp;
     }
@@ -71,7 +71,7 @@ public abstract class ApplicationBase extends Application {
             try {
                 listenToNetworkStatusChange();
             } catch (ExceptionBase e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         }
     }

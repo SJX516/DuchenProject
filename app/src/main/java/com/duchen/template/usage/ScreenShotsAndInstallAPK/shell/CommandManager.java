@@ -10,7 +10,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.duchen.template.usage.ScreenShotsAndInstallAPK.PackageUtil;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 public class CommandManager {
 
@@ -117,12 +117,12 @@ public class CommandManager {
         protected void onPostExecute(CommandResult commandResult) {
             boolean isSuccess = false;
             if (!TextUtils.isEmpty(commandResult.successMsg) || commandResult.result == 0) {
-                LogUtil.d(mCommand + "  ---SUCC---   " + commandResult.result);
-                LogUtil.d(commandResult.successMsg);
+                DLog.d(mCommand + "  ---SUCC---   " + commandResult.result);
+                DLog.d(commandResult.successMsg);
                 isSuccess = true;
             } else {
-                LogUtil.d(mCommand + "  ---ERROR---   " + commandResult.result);
-                LogUtil.d(commandResult.errorMsg);
+                DLog.d(mCommand + "  ---ERROR---   " + commandResult.result);
+                DLog.d(commandResult.errorMsg);
                 isSuccess = false;
             }
 

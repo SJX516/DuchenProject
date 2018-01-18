@@ -2,7 +2,7 @@ package com.duchen.template.utils.datahelper;
 
 import android.text.TextUtils;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -131,7 +131,7 @@ public class TimeUtil {
         try {
             dateRes = getInputDateFormat().parse(dateCreated);
         } catch (ParseException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         if (dateRes == null) return 0;
         else return dateRes.getTime();

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.duchen.template.concept.ILogic;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.lang.ref.WeakReference;
 
@@ -68,7 +68,7 @@ public abstract class LogicBase implements ILogic {
             return;
         }
         removeMessages();
-        LogUtil.d(TAG, "release");
+        DLog.d(TAG, "release");
         mHandlerHost.clear();
     }
 }

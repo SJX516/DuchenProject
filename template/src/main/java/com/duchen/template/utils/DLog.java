@@ -3,7 +3,7 @@ package com.duchen.template.utils;
 import android.util.Log;
 import android.view.MotionEvent;
 
-public class LogUtil {
+public class DLog {
 
     public final static String TAG_MODEL_CHECK = "LegalModelCheck";
 

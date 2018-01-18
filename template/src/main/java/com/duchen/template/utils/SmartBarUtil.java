@@ -40,18 +40,18 @@ public class SmartBarUtil {
             try {
                 method.invoke(actionbar, showAtBottom);
             } catch (IllegalArgumentException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (IllegalAccessException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (InvocationTargetException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         } catch (SecurityException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (NoSuchMethodException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (ClassNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
     }
 
@@ -79,18 +79,18 @@ public class SmartBarUtil {
             try {
                 method.invoke(actionbar, collapsable);
             } catch (IllegalArgumentException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (IllegalAccessException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (InvocationTargetException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         } catch (SecurityException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (NoSuchMethodException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (ClassNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
     }
 
@@ -114,18 +114,18 @@ public class SmartBarUtil {
             try {
                 method.invoke(actionbar, hidden);
             } catch (IllegalArgumentException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (IllegalAccessException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             } catch (InvocationTargetException e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         } catch (SecurityException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (NoSuchMethodException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (ClassNotFoundException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
     }
 
@@ -147,13 +147,13 @@ public class SmartBarUtil {
             setTabsShowAtBottom = ActionBarClass.getMethod("setTabsShowAtBottom", Boolean.TYPE);
             setTabsShowAtBottom.invoke(activity.getActionBar(), true);
         } catch (NoSuchMethodException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (IllegalArgumentException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (IllegalAccessException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         } catch (InvocationTargetException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
     }
 
@@ -182,12 +182,12 @@ public class SmartBarUtil {
             try {
                 arrayOfObject[0] = localField.get(null);
             } catch (Exception e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
             localMethod.invoke(decorView, arrayOfObject);
             return;
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
     }
 
@@ -230,7 +230,7 @@ public class SmartBarUtil {
             Method method = Class.forName("android.os.Build").getMethod("hasSmartBar");
             return ((Boolean) method.invoke(null)).booleanValue();
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         if (Build.DEVICE.equals("mx2")) {

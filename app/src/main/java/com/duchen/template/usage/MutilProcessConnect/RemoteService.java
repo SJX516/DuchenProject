@@ -7,7 +7,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.duchen.template.usage.IShop;
-import com.duchen.template.utils.LogUtil;
 
 public class RemoteService extends Service {
 

@@ -46,7 +46,7 @@ class CardLibrary {
         }
 
     init {
-        mCards = IntArray(18)
+        mCards = IntArray(CARD_ARR_SIZE)
         for (i in 3..15) {
             mCards[i] = 4
         }

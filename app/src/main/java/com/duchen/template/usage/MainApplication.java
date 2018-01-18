@@ -8,7 +8,7 @@ import com.duchen.template.usage.UseModule.ModuleFactory;
 import com.duchen.template.module.TemplateScope;
 import com.duchen.template.usage.UseModule.TemplateConfigImpl;
 import com.duchen.template.usage.UseModule.TemplateScopeImpl;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 
 public class MainApplication extends ApplicationBase {
@@ -23,25 +23,25 @@ public class MainApplication extends ApplicationBase {
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        LogUtil.d("onTrimMemory");
+        DLog.d("onTrimMemory");
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        LogUtil.d("onLowMemory");
+        DLog.d("onLowMemory");
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        LogUtil.d("onConfigurationChanged");
+        DLog.d("onConfigurationChanged");
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtil.d("onCreate");
+        DLog.d("onCreate");
         initModuleConfigs();
         initModuleFactory();
     }
@@ -67,7 +67,7 @@ public class MainApplication extends ApplicationBase {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        LogUtil.d("onTerminate");
+        DLog.d("onTerminate");
     }
 
     public boolean isMainActivityDestroyed() {

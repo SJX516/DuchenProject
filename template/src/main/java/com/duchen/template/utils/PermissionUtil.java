@@ -45,7 +45,7 @@ public class PermissionUtil {
                     .PERMISSION_GRANTED;
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         return granted;

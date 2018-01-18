@@ -12,7 +12,7 @@ import com.duchen.template.component.ApplicationBase;
 import com.duchen.template.component.request.error.ErrorFactory;
 import com.duchen.template.component.request.error.ErrorListener;
 import com.duchen.template.component.model.LegalModelParser;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 import com.duchen.template.utils.ManifestUtil;
 import com.duchen.template.utils.PlatformUtil;
 
@@ -69,7 +69,7 @@ public abstract class RequestBase<T> extends Request<ResponseDataBase> {
         } catch (UnsupportedEncodingException e) {
             parsed = new String(response.data);
         }
-        LogUtil.d("response", parsed);
+        DLog.d("response", parsed);
         ResponseDataBase brd = mParser.fromJson(parsed, ResponseDataBase.class);
         if (brd != null) {
             brd.setSequence(getSequence());
@@ -78,8 +78,8 @@ public abstract class RequestBase<T> extends Request<ResponseDataBase> {
             try {
                 brd.data = mParser.fromJson(brd.results, type);
             } catch (Error e) {
-                LogUtil.e(TAG, e.getMessage());
-                LogUtil.e(TAG, "Request type = " + this.getClass().getName() + ", error message = " + e.getMessage() +
+                DLog.e(TAG, e.getMessage());
+                DLog.e(TAG, "Request type = " + this.getClass().getName() + ", error message = " + e.getMessage() +
                         ", response = " + parsed);
             }
 

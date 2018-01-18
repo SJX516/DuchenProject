@@ -13,7 +13,7 @@ import com.duchen.template.component.helper.FrameworkActivityManager;
 import com.duchen.template.component.model.LegalModelParser;
 import com.duchen.template.concept.IActivity;
 import com.duchen.template.module.TemplateInstance;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public abstract class ActivityBase extends AppCompatActivity implements IActivit
         handleIntent(getIntent());
         prepareLogic();
         super.onCreate(savedInstanceState);
-        LogUtil.d(this.getClass().getSimpleName(), "onCreate task id = " + this.getTaskId());
+        DLog.d(this.getClass().getSimpleName(), "onCreate task id = " + this.getTaskId());
         mIsDestroyStatus = false;
         FrameworkActivityManager.getInstance().addActivity(this);
 

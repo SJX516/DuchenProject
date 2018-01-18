@@ -1,7 +1,10 @@
 package poker
 
+import com.duchen.template.usage.Poker.GameStatus
 import com.duchen.template.usage.Poker.PrintUtil
+import com.duchen.template.usage.Poker.model.PutCardDetail
 import poker.logic.HandCardLogic
+import poker.model.CardGroup
 import poker.model.Player
 
 import java.util.Random
@@ -10,21 +13,21 @@ class Poker {
 
     var mPlayers = ArrayList<Player>()
     var mCardLibrary = CardLibrary()
-    var mLogic = HandCardLogic()
+    var mGameStatus = GameStatus()
     var mStartIndex = 0
     var mBossIndex = 0
-
-    val mLeftCardNumArr = IntArray(CardLibrary.CARD_ARR_SIZE)
 
 
     fun startNewGame() {
         mCardLibrary = CardLibrary()
+        mGameStatus = GameStatus()
         mStartIndex = Random().nextInt(PLAYER_NUM)
 
         for (i in 0 until PLAYER_NUM) {
             mPlayers.add(Player())
         }
 
+        //每人17张牌
         for (i in 0 until 17) {
             mPlayers.forEachFromIndex(mStartIndex) {
                 it, _ ->
@@ -33,6 +36,7 @@ class Poker {
             }
         }
 
+        //叫地主，叫完之后分配角色，摸牌
         mPlayers.forEachFromIndex(mStartIndex) {
             it, index ->
             if (it.askToBeBoss()) {
@@ -51,11 +55,35 @@ class Poker {
         mPlayers.forEachFromIndex(mBossIndex) {
             it, _ ->
             println(it.toString())
-            val groups = mLogic.getCardGroupList(it.handCardData)
+            val groups = HandCardLogic.getCardGroupList(it.handCardData)
             PrintUtil.printCardGroups(it.handCardData.handCardList.sorted(), groups)
             true
         }
 
+        var currentRound = 0
+        var noWinner = true
+        while (noWinner) {
+            mPlayers.forEachFromIndex(mBossIndex) {
+                it, _ ->
+                val putStrategy = mGameStatus.getCurrentPutStrategy()
+                if (putStrategy === PutCardDetail.PutStrategy.INITIATIVE) {
+                    currentRound++
+                    PrintUtil.printNewRound(currentRound)
+                }
+                val group = it.putCard(putStrategy, mGameStatus)
+                val cardDetail = PutCardDetail(currentRound, it.role,
+                        group, putStrategy)
+                mGameStatus.put(cardDetail)
+                PrintUtil.printPutCard(cardDetail)
+                if (it.noMoreCards()) {
+                    PrintUtil.win(it)
+                    noWinner = false
+                    false
+                } else {
+                    true
+                }
+            }
+        }
 
     }
 

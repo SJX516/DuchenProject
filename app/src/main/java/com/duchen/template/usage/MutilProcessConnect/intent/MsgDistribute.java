@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -47,24 +47,24 @@ public class MsgDistribute {
                         intent.setPackage(context.getPackageName());
                     }
 
-                    LogUtil.i("MsgDistribute", "distribute msg: " + msg);
+                    DLog.i("MsgDistribute", "distribute msg: " + msg);
 
                     if (TextUtils.isEmpty(msg)) {
                         return;
                     } else {
                         if (ConnectClient.getInstance().getReceiver() == null) {
-                            LogUtil.e("MsgDistribute", "receiver is null");
+                            DLog.e("MsgDistribute", "receiver is null");
                         } else {
-                            LogUtil.i("MsgDistribute", "distribute msg to " + ConnectClient.getInstance().getReceiver().getClass().getName());
+                            DLog.i("MsgDistribute", "distribute msg to " + ConnectClient.getInstance().getReceiver().getClass().getName());
                             intent.setClassName(context, ConnectClient.getInstance().getReceiver().getClass().getName());
                             context.startService(intent);
                         }
                     }
                 } else {
-                    LogUtil.e("MsgDistribute", "action error " + action);
+                    DLog.e("MsgDistribute", "action error " + action);
                 }
             } catch (Throwable e) {
-                LogUtil.e("MsgDistribute", "distributeMessage error : " + e);
+                DLog.e("MsgDistribute", "distributeMessage error : " + e);
             }
 
         }

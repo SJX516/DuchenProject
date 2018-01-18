@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.duchen.template.usage.AppActivityBase;
 import com.duchen.template.usage.R;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class LifeCircleActivityA extends AppActivityBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtil.d(this.toString() + "  onCreate()");
+        DLog.d(this.toString() + "  onCreate()");
     }
 
     @Override
@@ -51,19 +51,19 @@ public class LifeCircleActivityA extends AppActivityBase {
     @Override
     protected void onStart() {
         super.onStart();
-        LogUtil.d(this.toString() + "  onStart()");
+        DLog.d(this.toString() + "  onStart()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtil.d(this.toString() + "  onStop()");
+        DLog.d(this.toString() + "  onStop()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.d(this.toString() + "  onDestroy()");
+        DLog.d(this.toString() + "  onDestroy()");
     }
 
 }

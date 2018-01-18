@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;
 import android.os.Bundle;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 
 public class ActivityLifecycle implements ActivityLifecycleCallbacks {
@@ -29,39 +29,39 @@ public class ActivityLifecycle implements ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        LogUtil.d(TAG, "onActivityCreated : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityCreated : " + activity.getLocalClassName());
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        LogUtil.d(TAG, "onActivityStarted : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityStarted : " + activity.getLocalClassName());
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-        LogUtil.d(TAG, "onActivityResumed : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityResumed : " + activity.getLocalClassName());
         isActivityVisible = true;
         mCurrentActivity = activity;
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        LogUtil.d(TAG, "onActivityPaused : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityPaused : " + activity.getLocalClassName());
         isActivityVisible = false;
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        LogUtil.d(TAG, "onActivityStopped : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityStopped : " + activity.getLocalClassName());
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        LogUtil.d(TAG, "onActivitySaveInstanceState : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivitySaveInstanceState : " + activity.getLocalClassName());
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        LogUtil.d(TAG, "onActivityDestroyed : " + activity.getLocalClassName());
+        DLog.d(TAG, "onActivityDestroyed : " + activity.getLocalClassName());
     }
 }

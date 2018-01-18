@@ -10,14 +10,15 @@ class PutCardDetail {
     var cardGroup : CardGroup
     var putStrategy : PutStrategy
 
+    constructor(round: Int, role: Player.Role, cardGroup: CardGroup, putStrategy: PutStrategy) {
+        this.round = round
+        this.role = role
+        this.cardGroup = cardGroup
+        this.putStrategy = putStrategy
+    }
+
     enum class PutStrategy {
         INITIATIVE, PASSIVE
     }
 
-    init {
-        round = 0
-        role = Player.Role.BOSS
-        cardGroup = CardGroup()
-        putStrategy = PutStrategy.INITIATIVE
-    }
 }

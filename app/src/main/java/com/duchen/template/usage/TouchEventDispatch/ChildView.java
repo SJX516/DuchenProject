@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 
 public class ChildView extends TextView {
@@ -29,7 +29,7 @@ public class ChildView extends TextView {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         boolean returnVale = super.dispatchTouchEvent(ev);
-        LogUtil.d("CHILD dispatchTouchEvent return : " + returnVale);
+        DLog.d("CHILD dispatchTouchEvent return : " + returnVale);
         return returnVale;
     }
 
@@ -37,7 +37,7 @@ public class ChildView extends TextView {
     public boolean onTouchEvent(MotionEvent event) {
         boolean returnVale;
         returnVale = true;
-        LogUtil.d("CHILD onTouchEvent return : " + returnVale);
+        DLog.d("CHILD onTouchEvent return : " + returnVale);
         return returnVale;
     }
 

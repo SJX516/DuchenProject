@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -54,7 +54,7 @@ public class FileUtil {
             fis.close();
         } else {
             f.createNewFile();
-            LogUtil.e(TAG, "文件不存!");
+            DLog.e(TAG, "文件不存!");
         }
         return s;
     }
@@ -104,7 +104,7 @@ public class FileUtil {
             File file = new File(filename);
             s = file.exists();
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return s;
     }
@@ -134,7 +134,7 @@ public class FileUtil {
                         }
                     }
                 } catch (Exception e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                     return false;
                 }
                 return true;
@@ -173,7 +173,7 @@ public class FileUtil {
                     myFile.delete();
                 }
             } catch (Exception e) {
-                LogUtil.e(TAG, e.getMessage());
+                DLog.e(TAG, e.getMessage());
             }
         }
 
@@ -204,16 +204,16 @@ public class FileUtil {
                     }
 
                 } catch (FileNotFoundException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
 
                 } catch (IOException e) {
-                    LogUtil.e(TAG, e.getMessage());
+                    DLog.e(TAG, e.getMessage());
                 } finally {
                     if (br != null) {
                         try {
                             br.close();
                         } catch (IOException e) {
-                            LogUtil.e(TAG, e.getMessage());
+                            DLog.e(TAG, e.getMessage());
                         }
                     }
                 }
@@ -297,7 +297,7 @@ public class FileUtil {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
     }
@@ -442,7 +442,7 @@ public class FileUtil {
 
             ret = true;
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
 
         return ret;
@@ -498,7 +498,7 @@ public class FileUtil {
                 }
             }
         } catch (IOException e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return out;
     }
@@ -516,7 +516,7 @@ public class FileUtil {
             inputStream.close();
             content = new String(buffer);
         } catch (Exception e) {
-            LogUtil.e(TAG, e.getMessage());
+            DLog.e(TAG, e.getMessage());
         }
         return content;
     }

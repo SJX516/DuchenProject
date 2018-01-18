@@ -2,7 +2,7 @@ package com.duchen.template.component;
 
 import com.duchen.template.component.request.RequestManager;
 import com.duchen.template.concept.IDataSource;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public abstract class DataSourceBase implements IDataSource {
     @Override
     public void release() {
         mIsReleased = true;
-        LogUtil.d(TAG, "release");
+        DLog.d(TAG, "release");
         cancelAllRequest();
     }
 

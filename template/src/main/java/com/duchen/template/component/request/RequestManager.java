@@ -10,7 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.FileRequest;
 import com.android.volley.toolbox.Volley;
 import com.duchen.template.component.ApplicationBase;
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.io.File;
 
@@ -79,7 +79,7 @@ public class RequestManager {
     }
 
     public void cancelAll() {
-        LogUtil.d(TAG, "cancelAll");
+        DLog.d(TAG, "cancelAll");
         mRequestQueue.stop();
         mRequestQueue.cancelAll(new RequestFilter() {
             @Override

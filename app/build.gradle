@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: '../scripts/version.gradle'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    compileSdkVersion versions.compile_version
+    buildToolsVersion versions.tools_version
 
     defaultConfig {
         applicationId "com.duchen.template.usage"
         minSdkVersion 19
-        targetSdkVersion 21
+        targetSdkVersion versions.target_version
         versionCode 2
         versionName "2.0"
     }
@@ -41,10 +42,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile deps.support
     compile project(':template')
     compile project(':annotation')
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
     compile 'io.reactivex:rxandroid:1.2.0'

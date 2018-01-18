@@ -1,6 +1,6 @@
 package com.duchen.template.component.model;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 import com.duchen.template.utils.datahelper.DataCheckUtil;
 import com.google.gson.JsonElement;
 
@@ -20,7 +20,7 @@ public class LegalModelParser extends ModelParser {
         if (DataCheckUtil.check(t)) {
             return t;
         } else {
-            LogUtil.d(TAG, t.getClass().getName() + " data check failed, detail json : " + json);
+            DLog.d(TAG, t.getClass().getName() + " data check failed, detail json : " + json);
             return null;
         }
     }
@@ -32,7 +32,7 @@ public class LegalModelParser extends ModelParser {
         if (DataCheckUtil.check(t)) {
             return t;
         } else {
-            LogUtil.d(TAG, t.getClass().getName() + " data check failed, detail json : " + json);
+            DLog.d(TAG, t.getClass().getName() + " data check failed, detail json : " + json);
             return null;
         }
     }
@@ -45,7 +45,7 @@ public class LegalModelParser extends ModelParser {
         if (DataCheckUtil.check(t)) {
             return t;
         } else {
-            LogUtil.d(TAG, t.getClass().getName() + " data check failed, detail json : " + jsonElement.toString());
+            DLog.d(TAG, t.getClass().getName() + " data check failed, detail json : " + jsonElement.toString());
             return null;
         }
     }

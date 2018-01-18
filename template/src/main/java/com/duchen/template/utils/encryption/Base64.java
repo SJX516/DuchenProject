@@ -1,6 +1,6 @@
 package com.duchen.template.utils.encryption;
 
-import com.duchen.template.utils.LogUtil;
+import com.duchen.template.utils.DLog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -96,7 +96,7 @@ public class Base64 {
             bos.close();
             bos = null;
         } catch (IOException ex) {
-            LogUtil.e(TAG, "Error while decoding BASE64: " + ex.toString());
+            DLog.e(TAG, "Error while decoding BASE64: " + ex.toString());
         }
         return decodedBytes;
     }
