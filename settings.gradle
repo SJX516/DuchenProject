@@ -1,4 +1,4 @@
-include ':app', ':app-google'
+include ':app'
 include ':template'
 include ':exchange'
 include ':annotation-processer'
