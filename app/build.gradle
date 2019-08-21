@@ -45,8 +45,7 @@ dependencies {
     compile deps.support
     compile project(':template')
     compile project(':annotation')
-    compile "org.jetbrains.anko:anko-common:$anko_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.anko:anko-common:0.8.2"
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
     testCompile 'junit:junit:4.12'

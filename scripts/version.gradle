@@ -1,10 +1,10 @@
 def supportLibVersion = '26.0.0'
 
 def versions = [
-        compile_version : 26,
-        tools_version : '26.0.2',
-        target_version : 26,
-        min_sdk : 19
+        compile_version : 28,
+        tools_version : '28.0.3',
+        target_version : 28,
+        min_sdk : 19,
 ]
 
 def supportGroup = [
@@ -15,7 +15,7 @@ def supportGroup = [
 ]
 
 def deps = [
-        support : supportGroup,
+        support         :  supportGroup,
 ]
 
 ext.deps = deps
